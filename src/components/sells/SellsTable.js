@@ -1,11 +1,14 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
 
 const SellsTable = () => {
-  const { sellData } = useGlobalContext();
+  const { sellData, fetchSells } = useGlobalContext();
   const data = useMemo(() => [...sellData], [sellData]);
+  useEffect(() => {
+    fetchSells();
+  }, []);
   const columns = useMemo(
     () =>
       sellData && [

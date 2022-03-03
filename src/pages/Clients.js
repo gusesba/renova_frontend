@@ -1,10 +1,11 @@
 import Table from "../components/clients/ClientsTable";
-import { AiFillPlusSquare, AiFillDelete } from "react-icons/ai";
+import { AiFillPlusSquare, AiFillDelete, AiFillUpCircle } from "react-icons/ai";
 import AddClientsModal from "../components/clients/AddClientsModal";
 import { useGlobalContext } from "../context";
 
 const Clients = () => {
-  const { setShowAddClientModal, deleteClient } = useGlobalContext();
+  const { setShowAddClientModal, deleteClient, goToClientPage } =
+    useGlobalContext();
   return (
     <main>
       <AddClientsModal />
@@ -14,6 +15,7 @@ const Clients = () => {
           onClick={() => setShowAddClientModal(true)}
         />
         <AiFillDelete className="delete-btn" onClick={() => deleteClient()} />
+        <AiFillUpCircle onClick={() => goToClientPage()} />
       </div>
       <Table />
     </main>

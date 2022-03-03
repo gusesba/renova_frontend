@@ -1,69 +1,70 @@
-import { useMemo, useEffect } from "react";
-import { useTable, useRowSelect } from "react-table";
+import { useMemo, useEffect, useState } from "react";
 import { useGlobalContext } from "../../context";
+import { useTable } from "react-table";
 import Table from "react-bootstrap/Table";
-import { Checkbox } from "../Checkbox";
 
-const ClientsTable = () => {
-  const { clientsData, setClientRows, fetchClients } = useGlobalContext();
+const ClientTable = () => {
+  const { clientData } = useGlobalContext();
 
   useEffect(() => {
-    fetchClients();
-    console.log("teste");
-  }, []);
+    console.log(clientData.product);
+  }, [clientData]);
 
-  const data = useMemo(() => [...clientsData], [clientsData]);
+  const data = useMemo(() => [...clientData.product], [clientData.product]);
 
   const columns = useMemo(
     () =>
-      clientsData && [
+      clientData.product && [
         {
           Header: "ID",
           accessor: "id", // accessor is the "key" in the data
         },
         {
-          Header: "Nome",
-          accessor: "name",
+          Header: "Preço",
+          accessor: "price",
         },
         {
-          Header: "Telefone",
-          accessor: "phone",
+          Header: "Roupa",
+          accessor: "type",
+        },
+        {
+          Header: "Marca",
+          accessor: "brand",
+        },
+        {
+          Header: "Tamanho",
+          accessor: "size",
+        },
+        {
+          Header: "Cor",
+          accessor: "color",
+        },
+        {
+          Header: "Fornecedor",
+          accessor: "provider.name",
+        },
+        {
+          Header: "Descrição",
+          accessor: "description",
         },
       ],
-    [clientsData]
+    [clientData.product]
   );
 
-  const tableInstance = useTable({ columns, data }, useRowSelect, (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        {
-          id: "selection",
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          ),
-          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
-        },
-        ...columns,
-      ];
-    });
-  });
+  const tableInstance = useTable({ columns, data });
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    selectedFlatRows,
-  } = tableInstance;
-
-  useEffect(() => {
-    setClientRows(selectedFlatRows);
-  }, [selectedFlatRows, setClientRows]);
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+    tableInstance;
 
   return (
     <>
-      <Table striped bordered hover {...getTableProps()}>
+      <Table
+        style={{ marginTop: "20px" }}
+        striped
+        bordered
+        hover
+        {...getTableProps()}
+      >
         <thead>
           {
             // Loop over the header rows
@@ -120,4 +121,4 @@ const ClientsTable = () => {
   );
 };
 
-export default ClientsTable;
+export default ClientTable;

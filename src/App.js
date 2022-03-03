@@ -4,6 +4,7 @@ import Sidebar from "./components/Sidebar";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Products from "./pages/Products";
 import Clients from "./pages/Clients";
+import Client from "./pages/Client";
 import Sells from "./pages/Sells";
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/products" exact element={<Products />} />
-            <Route path="/clients" exact element={<Clients />} />
             <Route path="/sells" exact element={<Sells />} />
+            <Route path="/clients" exact element={<Clients />} />
+            <Route path="/client/:id" exact element={<Client />} />
           </Routes>
         </BrowserRouter>
       </div>

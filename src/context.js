@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 
 const AppContext = React.createContext();
@@ -6,9 +6,10 @@ const AppContext = React.createContext();
 const AppProvider = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
 
-  const [clientData, setClientData] = useState([]);
+  const [clientsData, setClientsData] = useState([]);
   const [showAddClientModal, setShowAddClientModal] = useState(false);
   const [clientRows, setClientRows] = useState([]);
+  const [clientData, setClientData] = useState({ product: [] });
 
   const [productData, setProductData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -17,9 +18,6 @@ const AppProvider = ({ children }) => {
   const [showAddSellModal, setShowAddSellModal] = useState(false);
 
   //Clients
-  useEffect(() => {
-    fetchClients();
-  }, []);
 
   const fetchClients = async () => {
     axios({
@@ -27,7 +25,7 @@ const AppProvider = ({ children }) => {
       url: "http://localhost:5000/api/v1/clients",
     })
       .then(function (response) {
-        setClientData(response.data);
+        setClientsData(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -42,6 +40,17 @@ const AppProvider = ({ children }) => {
     })
       .then(() => {
         fetchClients();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const fetchClient = async (id) => {
+    axios({
+      method: "get",
+      url: `http://localhost:5000/api/v1/clients/${id}`,
+    })
+      .then((response) => {
+        setClientData(response.data);
       })
       .catch((err) => console.log(err));
   };
@@ -62,11 +71,13 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  //Products
+  const goToClientPage = () => {
+    if (clientRows.length === 1) {
+      window.location = "/client/".concat(clientRows[0].original.id);
+    }
+  };
 
-  useEffect(() => {
-    fetchProducts();
-  }, []);
+  //Products
 
   const fetchProducts = async () => {
     axios({
@@ -94,9 +105,6 @@ const AppProvider = ({ children }) => {
   };
 
   // Sells
-  useEffect(() => {
-    fetchSells();
-  }, []);
 
   const fetchSells = async () => {
     axios({
@@ -130,7 +138,7 @@ const AppProvider = ({ children }) => {
         isSidebarCollapsed,
         setIsSidebarCollapsed,
         fetchClients,
-        clientData,
+        clientsData,
         showAddClientModal,
         setShowAddClientModal,
         addClient,
@@ -144,6 +152,11 @@ const AppProvider = ({ children }) => {
         addSell,
         setClientRows,
         deleteClient,
+        clientData,
+        fetchClient,
+        goToClientPage,
+        fetchSells,
+        fetchProducts,
       }}
     >
       {children}

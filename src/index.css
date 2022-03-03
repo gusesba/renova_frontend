@@ -88,3 +88,55 @@ main {
   width: 1000px;
   margin: 10px;
 }
+
+.card-client {
+  background-color: #f1f1f1;
+  width: 275px;
+  height: 100px;
+  box-shadow: 0 0 10px #ccc;
+  border-radius: 15px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  transition: 0.2s;
+}
+
+.card-client:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card-inside {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-description {
+  color: #999;
+}
+
+.client-btn-group {
+  margin-top: 20px;
+  display: flex;
+}
+
+.client-btn-group .btn {
+  margin-right: 20px;
+  border-radius: 10px;
+  width: 100px;
+  height: 40px;
+  box-shadow: 0 0 10px #ccc;
+  transition: 0.3s;
+}
+
+.client-btn-group .btn:hover {
+  margin-right: 20px;
+  border-radius: 10px;
+  transform: scale(1.1);
+}

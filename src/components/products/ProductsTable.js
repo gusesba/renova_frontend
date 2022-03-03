@@ -1,10 +1,15 @@
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import { useTable } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
 
 const ProductsTable = () => {
-  const { productData } = useGlobalContext();
+  const { productData, fetchProducts } = useGlobalContext();
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
   const data = useMemo(() => [...productData], [productData]);
   const columns = useMemo(
     () =>
