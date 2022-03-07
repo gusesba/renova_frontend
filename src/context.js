@@ -10,6 +10,7 @@ const AppProvider = ({ children }) => {
   const [showAddClientModal, setShowAddClientModal] = useState(false);
   const [clientRows, setClientRows] = useState([]);
   const [clientData, setClientData] = useState({ product: [] });
+  const [actualTableUsage, setActualTableUsage] = useState("total");
 
   const [productData, setProductData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -157,6 +158,8 @@ const AppProvider = ({ children }) => {
         goToClientPage,
         fetchSells,
         fetchProducts,
+        actualTableUsage,
+        setActualTableUsage,
       }}
     >
       {children}

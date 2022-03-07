@@ -6,26 +6,44 @@ import ClientTable from "../components/client/ClientTable";
 import Button from "react-bootstrap/Button";
 
 const Client = () => {
-  const { fetchClient } = useGlobalContext();
+  const { fetchClient, setActualTableUsage } = useGlobalContext();
   const { id } = useParams();
 
   useEffect(() => {
     fetchClient(id);
-    console.log(id);
   }, [id]);
 
   return (
     <main>
       <Cards />
       <div className="client-btn-group">
-        <Button className="btn" variant="light">
-          Light
+        <Button
+          onClick={() => setActualTableUsage("total")}
+          className="btn"
+          variant="light"
+        >
+          Fornecidos
         </Button>
-        <Button className="btn" variant="light">
-          Light
+        <Button
+          onClick={() => setActualTableUsage("sold")}
+          className="btn"
+          variant="light"
+        >
+          Vendidos
         </Button>
-        <Button className="btn" variant="light">
-          Light
+        <Button
+          onClick={() => setActualTableUsage("inventory")}
+          className="btn"
+          variant="light"
+        >
+          Estoque
+        </Button>
+        <Button
+          onClick={() => setActualTableUsage("bought")}
+          className="btn"
+          variant="light"
+        >
+          Comprados
         </Button>
       </div>
       <ClientTable />

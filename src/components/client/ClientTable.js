@@ -4,17 +4,42 @@ import { useTable } from "react-table";
 import Table from "react-bootstrap/Table";
 
 const ClientTable = () => {
-  const { clientData } = useGlobalContext();
+  const { clientData, actualTableUsage } = useGlobalContext();
+  const [tableData, setTableData] = useState([1, 2]);
 
   useEffect(() => {
-    console.log(clientData.product);
-  }, [clientData]);
+    if (actualTableUsage === "total") {
+      setTableData(clientData.product);
+    } else if (actualTableUsage === "sold") {
+      setTableData(
+        clientData.product.filter((product) => product.sell !== null)
+      );
+      console.log(
+        clientData.product.filter((product) => product.sell !== null)
+      );
+    } else if (actualTableUsage === "inventory") {
+      setTableData(
+        clientData.product.filter((product) => product.sell === null)
+      );
+    } else {
+      setTableData(
+        clientData.buyer.map((buyer) => {
+          return buyer.product;
+        })
+      );
+      console.log(
+        clientData.buyer.map((buyer) => {
+          return buyer.product;
+        })
+      );
+    }
+  }, [actualTableUsage, clientData]);
 
-  const data = useMemo(() => [...clientData.product], [clientData.product]);
+  const data = useMemo(() => [...tableData], [tableData]);
 
   const columns = useMemo(
     () =>
-      clientData.product && [
+      tableData && [
         {
           Header: "ID",
           accessor: "id", // accessor is the "key" in the data
@@ -48,7 +73,7 @@ const ClientTable = () => {
           accessor: "description",
         },
       ],
-    [clientData.product]
+    [tableData]
   );
 
   const tableInstance = useTable({ columns, data });
