@@ -106,6 +106,23 @@ const AppProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
+  const deleteProduct = async (data) => {
+    if (productRows.length === 1) {
+      const url = "http://localhost:5000/api/v1/products/".concat(
+        productRows[0].original.id
+      );
+      axios({
+        method: "delete",
+        url: url,
+      })
+        .then(() => {
+          console.log("teste");
+          fetchProducts();
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
   // Sells
 
   const fetchSells = async () => {
@@ -162,6 +179,7 @@ const AppProvider = ({ children }) => {
         actualTableUsage,
         setActualTableUsage,
         setProductRows,
+        deleteProduct,
       }}
     >
       {children}
