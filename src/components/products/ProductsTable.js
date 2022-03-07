@@ -1,10 +1,11 @@
 import { useMemo, useEffect } from "react";
-import { useTable } from "react-table";
+import { useTable, useRowSelect } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
+import { Checkbox } from "../Checkbox";
 
 const ProductsTable = () => {
-  const { productData, fetchProducts } = useGlobalContext();
+  const { productData, fetchProducts, setProductRows } = useGlobalContext();
 
   useEffect(() => {
     fetchProducts();
@@ -50,10 +51,33 @@ const ProductsTable = () => {
     [productData]
   );
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data }, useRowSelect, (hooks) => {
+    hooks.visibleColumns.push((columns) => {
+      return [
+        {
+          id: "selection",
+          Header: ({ getToggleAllRowsSelectedProps }) => (
+            <Checkbox {...getToggleAllRowsSelectedProps()} />
+          ),
+          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
+        },
+        ...columns,
+      ];
+    });
+  });
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    selectedFlatRows,
+  } = tableInstance;
+
+  useEffect(() => {
+    setProductRows(selectedFlatRows);
+  }, [selectedFlatRows, setProductRows]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>

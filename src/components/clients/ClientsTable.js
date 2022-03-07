@@ -9,7 +9,6 @@ const ClientsTable = () => {
 
   useEffect(() => {
     fetchClients();
-    console.log("teste");
   }, []);
 
   const data = useMemo(() => [...clientsData], [clientsData]);

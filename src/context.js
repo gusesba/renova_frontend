@@ -14,6 +14,7 @@ const AppProvider = ({ children }) => {
 
   const [productData, setProductData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [productRows, setProductRows] = useState([]);
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
@@ -160,6 +161,7 @@ const AppProvider = ({ children }) => {
         fetchProducts,
         actualTableUsage,
         setActualTableUsage,
+        setProductRows,
       }}
     >
       {children}
