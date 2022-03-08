@@ -5,16 +5,16 @@ import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 
 const ProductsTable = () => {
-  const { productData, fetchProducts, setProductRows } = useGlobalContext();
+  const { productsData, fetchProducts, setProductRows } = useGlobalContext();
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
-  const data = useMemo(() => [...productData], [productData]);
+  const data = useMemo(() => [...productsData], [productsData]);
   const columns = useMemo(
     () =>
-      productData && [
+      productsData && [
         {
           Header: "ID",
           accessor: "id", // accessor is the "key" in the data
@@ -48,7 +48,7 @@ const ProductsTable = () => {
           accessor: "description",
         },
       ],
-    [productData]
+    [productsData]
   );
 
   const tableInstance = useTable({ columns, data }, useRowSelect, (hooks) => {

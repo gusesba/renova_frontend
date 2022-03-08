@@ -15,7 +15,10 @@ const Clients = () => {
           onClick={() => setShowAddClientModal(true)}
         />
         <AiFillDelete className="delete-btn" onClick={() => deleteClient()} />
-        <AiFillUpCircle onClick={() => goToClientPage()} />
+        <AiFillUpCircle
+          className="gotopage-btn"
+          onClick={() => goToClientPage()}
+        />
       </div>
       <Table />
     </main>

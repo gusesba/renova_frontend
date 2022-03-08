@@ -12,9 +12,10 @@ const AppProvider = ({ children }) => {
   const [clientData, setClientData] = useState({ product: [] });
   const [actualTableUsage, setActualTableUsage] = useState("total");
 
-  const [productData, setProductData] = useState([]);
+  const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [productRows, setProductRows] = useState([]);
+  const [productData, setProductData] = useState({});
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
@@ -69,7 +70,7 @@ const AppProvider = ({ children }) => {
         .then(() => {
           fetchClients();
         })
-        .catch((err) => console.log(err));
+        .catch((err) => alert("Falha ao excluir cliente!"));
     }
   };
 
@@ -87,7 +88,7 @@ const AppProvider = ({ children }) => {
       url: "http://localhost:5000/api/v1/products",
     })
       .then(function (response) {
-        setProductData(response.data);
+        setProductsData(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -116,11 +117,27 @@ const AppProvider = ({ children }) => {
         url: url,
       })
         .then(() => {
-          console.log("teste");
           fetchProducts();
         })
         .catch((err) => console.log(err));
     }
+  };
+
+  const goToProductPage = () => {
+    if (productRows.length === 1) {
+      window.location = "/product/".concat(productRows[0].original.id);
+    }
+  };
+
+  const fetchProduct = async (id) => {
+    axios({
+      method: "get",
+      url: `http://localhost:5000/api/v1/products/${id}`,
+    })
+      .then((response) => {
+        setProductData(response.data);
+      })
+      .catch((err) => console.log(err));
   };
 
   // Sells
@@ -161,7 +178,7 @@ const AppProvider = ({ children }) => {
         showAddClientModal,
         setShowAddClientModal,
         addClient,
-        productData,
+        productsData,
         showAddProductModal,
         setShowAddProductModal,
         addProduct,
@@ -180,6 +197,9 @@ const AppProvider = ({ children }) => {
         setActualTableUsage,
         setProductRows,
         deleteProduct,
+        goToProductPage,
+        productData,
+        fetchProduct,
       }}
     >
       {children}

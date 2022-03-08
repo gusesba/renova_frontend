@@ -1,9 +1,15 @@
 import ProductsTable from "../components/products/ProductsTable";
-import { AiFillPlusSquare, AiFillDelete } from "react-icons/ai";
+import {
+  AiFillPlusSquare,
+  AiFillDelete,
+  AiFillUpCircle,
+  AiFillDollarCircle,
+} from "react-icons/ai";
 import { useGlobalContext } from "../context";
 import AddProductsModal from "../components/products/AddProductsModal";
 const Products = () => {
-  const { setShowAddProductModal, deleteProduct } = useGlobalContext();
+  const { setShowAddProductModal, deleteProduct, goToProductPage } =
+    useGlobalContext();
   return (
     <main>
       <AddProductsModal />
@@ -13,6 +19,11 @@ const Products = () => {
           className="add-btn"
         />
         <AiFillDelete className="delete-btn" onClick={() => deleteProduct()} />
+        <AiFillUpCircle
+          className="gotopage-btn"
+          onClick={() => goToProductPage()}
+        />
+        <AiFillDollarCircle className="sell-btn" />
       </div>
       <ProductsTable />
     </main>

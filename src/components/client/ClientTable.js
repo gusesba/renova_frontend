@@ -14,20 +14,12 @@ const ClientTable = () => {
       setTableData(
         clientData.product.filter((product) => product.sell !== null)
       );
-      console.log(
-        clientData.product.filter((product) => product.sell !== null)
-      );
     } else if (actualTableUsage === "inventory") {
       setTableData(
         clientData.product.filter((product) => product.sell === null)
       );
     } else {
       setTableData(
-        clientData.buyer.map((buyer) => {
-          return buyer.product;
-        })
-      );
-      console.log(
         clientData.buyer.map((buyer) => {
           return buyer.product;
         })

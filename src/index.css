@@ -100,6 +100,7 @@ main {
   flex-direction: column;
   justify-content: space-around;
   transition: 0.2s;
+  margin-bottom: 20px;
 }
 
 .card-client:hover {
@@ -139,4 +140,28 @@ main {
   margin-right: 20px;
   border-radius: 10px;
   transform: scale(1.1);
+}
+
+.sell-btn {
+  font-size: 40px;
+  color: #3edd46;
+  transition: 0.2s;
+}
+
+.sell-btn:hover {
+  color: #00ff0d;
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+.gotopage-btn {
+  color: #dfe241;
+  font-size: 40px;
+  transition: 0.5s;
+}
+
+.gotopage-btn:hover {
+  color: #f8fc04;
+  cursor: pointer;
+  transform: scale(1.15) rotate(90deg);
 }
