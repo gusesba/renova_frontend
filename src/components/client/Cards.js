@@ -42,6 +42,12 @@ const Cards = () => {
             <span className="card-description">Valor Vendido</span>
           </div>
         </div>
+        <div className="card-client">
+          <div className="card-inside">
+            <h3>R$ {clientData.boughtValue}</h3>
+            <span className="card-description">Valor Comprado</span>
+          </div>
+        </div>
       </div>
     </>
   );

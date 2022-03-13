@@ -54,6 +54,8 @@ const AppProvider = ({ children }) => {
     })
       .then((response) => {
         response.data.client.income = response.data.income[0].grossIncome;
+        response.data.client.boughtValue =
+          response.data.boughtValue[0].grossIncome;
         setClientData(response.data.client);
       })
       .catch((err) => console.log(err));
