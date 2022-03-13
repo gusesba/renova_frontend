@@ -53,7 +53,8 @@ const AppProvider = ({ children }) => {
       url: `http://localhost:5000/api/v1/clients/${id}`,
     })
       .then((response) => {
-        setClientData(response.data);
+        response.data.client.income = response.data.income[0].grossIncome;
+        setClientData(response.data.client);
       })
       .catch((err) => console.log(err));
   };

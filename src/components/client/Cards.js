@@ -35,6 +35,14 @@ const Cards = () => {
           </div>
         </div>
       </div>
+      <div className="cards">
+        <div className="card-client">
+          <div className="card-inside">
+            <h3>R$ {clientData.income}</h3>
+            <span className="card-description">Valor Vendido</span>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
