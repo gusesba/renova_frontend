@@ -20,6 +20,10 @@ const AppProvider = ({ children }) => {
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
 
+  const [sellFrontProducts, setSellFrontProducts] = useState([]);
+  const [sellFrontRows, setSellFrontRows] = useState([]);
+  const [showSellFrontModal, setShowSellFrontModal] = useState(false);
+
   //Clients
 
   const fetchClients = async () => {
@@ -132,13 +136,17 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const fetchProduct = async (id) => {
+  const fetchProduct = async (id, page) => {
     axios({
       method: "get",
       url: `http://localhost:5000/api/v1/products/${id}`,
     })
       .then((response) => {
-        setProductData(response.data);
+        if (page === "sell_front") {
+          setSellFrontProducts([...sellFrontProducts, response.data]);
+        } else {
+          setProductData(response.data);
+        }
       })
       .catch((err) => console.log(err));
   };
@@ -169,6 +177,18 @@ const AppProvider = ({ children }) => {
         fetchSells();
       })
       .catch((err) => console.log(err));
+  };
+
+  //SellFront
+
+  const deleteLine = () => {
+    if (sellFrontRows.length === 1) {
+      setSellFrontProducts(
+        sellFrontProducts.filter(
+          (product) => product.id !== sellFrontRows[0].original.id
+        )
+      );
+    }
   };
 
   return (
@@ -203,6 +223,12 @@ const AppProvider = ({ children }) => {
         goToProductPage,
         productData,
         fetchProduct,
+        sellFrontProducts,
+        setSellFrontRows,
+        setSellFrontProducts,
+        setShowSellFrontModal,
+        showSellFrontModal,
+        deleteLine,
       }}
     >
       {children}

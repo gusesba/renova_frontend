@@ -1,5 +1,10 @@
 import Table from "../components/clients/ClientsTable";
-import { AiFillPlusSquare, AiFillDelete, AiFillUpCircle } from "react-icons/ai";
+import {
+  AiFillPlusSquare,
+  AiFillDelete,
+  AiFillUpCircle,
+  AiFillDollarCircle,
+} from "react-icons/ai";
 import AddClientsModal from "../components/clients/AddClientsModal";
 import { useGlobalContext } from "../context";
 
@@ -19,6 +24,7 @@ const Clients = () => {
           className="gotopage-btn"
           onClick={() => goToClientPage()}
         />
+        <AiFillDollarCircle className="sell-btn" />
       </div>
       <Table />
     </main>

@@ -165,3 +165,22 @@ main {
   cursor: pointer;
   transform: scale(1.15) rotate(90deg);
 }
+
+.sellfront-card-left {
+  margin-top: 20px;
+}
+
+.sellfront-card-left > div {
+  margin-bottom: 30px;
+  height: 60px;
+  width: 170px;
+}
+
+.sellfront-table {
+  margin: 10px 40px;
+}
+
+.sellfront-buttons {
+  display: flex;
+  flex-direction: column;
+}

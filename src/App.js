@@ -7,6 +7,7 @@ import Clients from "./pages/Clients";
 import Client from "./pages/Client";
 import Sells from "./pages/Sells";
 import Product from "./pages/Product";
+import SellFront from "./pages/SellFront";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="/clients" exact element={<Clients />} />
             <Route path="/client/:id" exact element={<Client />} />
             <Route path="/product/:id" exact element={<Product />} />
+            <Route path="/sell/:id" exact element={<SellFront />} />
           </Routes>
         </BrowserRouter>
       </div>
