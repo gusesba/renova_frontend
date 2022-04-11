@@ -230,3 +230,8 @@ main {
   width: 500px !important;
   margin-top: -8px;
 }
+
+.page-name {
+  position: absolute;
+  left: 45vw;
+}

@@ -1,4 +1,5 @@
 import ProductsTable from "../components/products/ProductsTable";
+import { useEffect } from "react";
 import {
   AiFillPlusSquare,
   AiFillDelete,
@@ -18,7 +19,12 @@ const Products = () => {
     printEtiqueta,
     productPageOptions,
     productFilter,
+    setPageName,
   } = useGlobalContext();
+
+  useEffect(() => {
+    setPageName("Produtos");
+  }, []);
 
   return (
     <main>
@@ -46,7 +52,7 @@ const Products = () => {
           <GlobalFilter
             filter={productFilter.state && productFilter.state.globalFilter}
             setFilter={productFilter.setGlobalFilter}
-            placeholder="Adidas"
+            placeholder="Busca"
           />
         </div>
         <div>

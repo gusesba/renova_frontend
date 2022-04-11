@@ -1,10 +1,22 @@
 import { useMemo, useEffect } from "react";
-import { useTable } from "react-table";
+import {
+  useTable,
+  useRowSelect,
+  usePagination,
+  useGlobalFilter,
+} from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
+import { Checkbox } from "../Checkbox";
 
 const SellsTable = () => {
-  const { sellData, fetchSells } = useGlobalContext();
+  const {
+    sellData,
+    fetchSells,
+    setSellRows,
+    setSellPageOptions,
+    setSellFilter,
+  } = useGlobalContext();
   const data = useMemo(() => [...sellData], [sellData]);
   useEffect(() => {
     fetchSells();
@@ -52,10 +64,72 @@ const SellsTable = () => {
     [sellData]
   );
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable(
+    { columns, data },
+    useGlobalFilter,
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            ),
+          },
+          ...columns,
+        ];
+      });
+    }
+  );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+    setGlobalFilter,
+    prepareRow,
+    selectedFlatRows,
+  } = tableInstance;
+
+  useEffect(() => {
+    setSellRows(selectedFlatRows);
+  }, [selectedFlatRows]);
+
+  useEffect(() => {
+    setSellPageOptions({
+      page,
+      nextPage,
+      previousPage,
+      canNextPage,
+      canPreviousPage,
+      pageOptions,
+      state,
+    });
+  }, [
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+  ]);
+
+  useEffect(() => {
+    setSellFilter({ state, setGlobalFilter });
+  }, [state, setGlobalFilter]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>
@@ -85,7 +159,7 @@ const SellsTable = () => {
       <tbody {...getTableBodyProps()}>
         {
           // Loop over the table rows
-          rows.map((row) => {
+          page.map((row) => {
             // Prepare the row for display
             prepareRow(row);
             return (

@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import * as qz from "qz-tray";
-
+import { useNavigate } from "react-router-dom";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
+  const [pageName, setPageName] = useState("Home");
 
   const [clientsData, setClientsData] = useState([]);
   const [showAddClientModal, setShowAddClientModal] = useState(false);
@@ -24,6 +25,9 @@ const AppProvider = ({ children }) => {
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
+  const [sellRows, setSellRows] = useState([]);
+  const [sellPageOptions, setSellPageOptions] = useState({});
+  const [sellFilter, setSellFilter] = useState({});
 
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
@@ -681,6 +685,14 @@ const AppProvider = ({ children }) => {
         setProductPageOptions,
         productFilter,
         setProductFilter,
+        pageName,
+        setPageName,
+        sellRows,
+        setSellRows,
+        sellPageOptions,
+        setSellPageOptions,
+        sellFilter,
+        setSellFilter,
       }}
     >
       {children}

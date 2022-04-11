@@ -10,6 +10,7 @@ import {
 import AddClientsModal from "../components/clients/AddClientsModal";
 import GlobalFilter from "../components/clients/GlobalFilter";
 import { useGlobalContext } from "../context";
+import { useEffect } from "react";
 
 const Clients = () => {
   const {
@@ -19,7 +20,12 @@ const Clients = () => {
     goToSellFrontPage,
     pageOptions,
     clientFilter,
+    setPageName,
   } = useGlobalContext();
+
+  useEffect(() => {
+    setPageName("Clientes");
+  }, []);
   return (
     <main>
       <AddClientsModal />
@@ -43,7 +49,7 @@ const Clients = () => {
           <GlobalFilter
             filter={clientFilter.state && clientFilter.state.globalFilter}
             setFilter={clientFilter.setGlobalFilter}
-            placeholder="Gustavo Esmanhotto Bareta"
+            placeholder="Busca"
           />
         </div>
         <div>
