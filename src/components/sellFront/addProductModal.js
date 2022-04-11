@@ -9,7 +9,8 @@ const AddProductModal = () => {
     useGlobalContext();
   const [id, setId] = useState(0);
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
     fetchProduct(id, "sell_front");
   };
 
@@ -22,7 +23,7 @@ const AddProductModal = () => {
         <Modal.Title>Novo Produto</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form onSubmit={handleSubmit} id="sellFrontAdd">
           <Form.Group controlId="formId">
             <Form.Control
               type="number"
@@ -41,7 +42,7 @@ const AddProductModal = () => {
         >
           Cancelar
         </Button>
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button variant="primary" type="submit" form="sellFrontAdd">
           Adicionar
         </Button>
       </Modal.Footer>

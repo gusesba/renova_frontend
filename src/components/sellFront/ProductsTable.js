@@ -40,10 +40,7 @@ const ProductsTable = () => {
           Header: "Cor",
           accessor: "color",
         },
-        {
-          Header: "Fornecedor",
-          accessor: "provider.name",
-        },
+
         {
           Header: "Descrição",
           accessor: "description",

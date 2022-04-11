@@ -1,11 +1,17 @@
 import { useMemo, useEffect } from "react";
-import { useTable, useRowSelect } from "react-table";
+import {
+  useTable,
+  useRowSelect,
+  usePagination,
+  useGlobalFilter,
+} from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 
 const ClientsTable = () => {
-  const { clientsData, setClientRows, fetchClients } = useGlobalContext();
+  const { clientsData, setClientRows, fetchClients, setPageOptions } =
+    useGlobalContext();
 
   useEffect(() => {
     fetchClients();
@@ -32,33 +38,66 @@ const ClientsTable = () => {
     [clientsData]
   );
 
-  const tableInstance = useTable({ columns, data }, useRowSelect, (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        {
-          id: "selection",
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          ),
-          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
-        },
-        ...columns,
-      ];
-    });
-  });
+  const tableInstance = useTable(
+    { columns, data },
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            ),
+          },
+          ...columns,
+        ];
+      });
+    }
+  );
 
   const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
     prepareRow,
     selectedFlatRows,
   } = tableInstance;
 
   useEffect(() => {
     setClientRows(selectedFlatRows);
-  }, [selectedFlatRows, setClientRows]);
+  }, [selectedFlatRows]);
+
+  useEffect(() => {
+    setPageOptions({
+      page,
+      nextPage,
+      previousPage,
+      canNextPage,
+      canPreviousPage,
+      pageOptions,
+      state,
+    });
+  }, [
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+  ]);
 
   return (
     <>
@@ -89,7 +128,7 @@ const ClientsTable = () => {
         <tbody {...getTableBodyProps()}>
           {
             // Loop over the table rows
-            rows.map((row) => {
+            page.map((row) => {
               // Prepare the row for display
               prepareRow(row);
               return (

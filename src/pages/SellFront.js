@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
 import { useParams } from "react-router-dom";
-import { AiFillPlusSquare, AiFillDelete } from "react-icons/ai";
+import {
+  AiFillPlusSquare,
+  AiFillDelete,
+  AiOutlineArrowRight,
+} from "react-icons/ai";
 import ProductsTable from "../components/sellFront/ProductsTable";
 import AddProductModal from "../components/sellFront/addProductModal";
 
@@ -12,6 +16,7 @@ const SellFront = () => {
     setShowSellFrontModal,
     sellFrontProducts,
     deleteLine,
+    finishSell,
   } = useGlobalContext();
   const { id } = useParams();
   const [total, setTotal] = useState(0);
@@ -61,7 +66,7 @@ const SellFront = () => {
           </div>
           <div className="card-client">
             <div className="card-inside">
-              <h4>{total}</h4>
+              <h4>{total.toFixed(2)}</h4>
               <span className="card-description">Total</span>
             </div>
           </div>
@@ -75,6 +80,10 @@ const SellFront = () => {
             className="add-btn"
           />
           <AiFillDelete onClick={deleteLine} className="delete-btn" />
+          <AiOutlineArrowRight
+            className="sell-btn"
+            onClick={() => finishSell(id)}
+          />
         </div>
       </div>
     </main>

@@ -184,3 +184,47 @@ main {
   display: flex;
   flex-direction: column;
 }
+
+.print-btn {
+  font-size: 40px;
+  color: #fa8920;
+  transition: 0.2s;
+}
+
+.print-btn:hover {
+  color: #ff7d04;
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+.client-table-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pagination-arrow {
+}
+
+.pagination-arrow {
+  font-size: 30px;
+  background-color: #20bae9;
+  transition: 0.2s;
+  color: white;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.pagination-arrow:hover {
+  background-color: #00c3ff;
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+.pagination-arrow-disabled {
+  font-size: 30px;
+  background-color: #e44040;
+  color: white;
+  transition: 0.2s;
+  border-radius: 5px;
+  margin-left: 10px;
+}

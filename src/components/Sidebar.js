@@ -7,6 +7,7 @@ import {
   SidebarContent,
 } from "react-pro-sidebar";
 import { FaGem } from "react-icons/fa";
+import { AiFillTag } from "react-icons/ai";
 import "react-pro-sidebar/dist/css/styles.css";
 import { useGlobalContext } from "../context";
 
@@ -58,6 +59,14 @@ const Sidebar = () => {
             >
               {" "}
               Vendas
+            </MenuItem>
+
+            <MenuItem
+              onClick={() => (window.location = "/borrows")}
+              icon={<AiFillTag />}
+            >
+              {" "}
+              Emprestados
             </MenuItem>
           </Menu>
         </SidebarContent>
