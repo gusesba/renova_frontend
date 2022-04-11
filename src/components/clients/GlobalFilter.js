@@ -1,8 +1,8 @@
-const GlobalFilterClients = ({ filter, setFilter }) => {
+const GlobalFilter = ({ filter, setFilter, placeholder }) => {
   return (
     <span>
       <input
-        placeholder="Gustavo Esmanhotto Bareta"
+        placeholder={placeholder}
         className="form-control global-filter"
         value={filter || ""}
         onChange={(e) => setFilter(e.target.value)}
@@ -11,4 +11,4 @@ const GlobalFilterClients = ({ filter, setFilter }) => {
   );
 };
 
-export default GlobalFilterClients;
+export default GlobalFilter;

@@ -19,6 +19,8 @@ const AppProvider = ({ children }) => {
   const [showAddProductModal, setShowAddProductModal] = useState(false);
   const [productRows, setProductRows] = useState([]);
   const [productData, setProductData] = useState({});
+  const [productPageOptions, setProductPageOptions] = useState({});
+  const [productFilter, setProductFilter] = useState({});
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
@@ -675,6 +677,10 @@ const AppProvider = ({ children }) => {
         setPageOptions,
         clientFilter,
         setClientFilter,
+        productPageOptions,
+        setProductPageOptions,
+        productFilter,
+        setProductFilter,
       }}
     >
       {children}

@@ -8,7 +8,7 @@ import {
   AiOutlineRight,
 } from "react-icons/ai";
 import AddClientsModal from "../components/clients/AddClientsModal";
-import GlobalFilterClients from "../components/clients/GlobalFilterClients";
+import GlobalFilter from "../components/clients/GlobalFilter";
 import { useGlobalContext } from "../context";
 
 const Clients = () => {
@@ -23,7 +23,7 @@ const Clients = () => {
   return (
     <main>
       <AddClientsModal />
-      <div className="client-table-header">
+      <div className="table-header">
         <div>
           <AiFillPlusSquare
             className="add-btn"
@@ -40,9 +40,10 @@ const Clients = () => {
           />
         </div>
         <div>
-          <GlobalFilterClients
+          <GlobalFilter
             filter={clientFilter.state && clientFilter.state.globalFilter}
             setFilter={clientFilter.setGlobalFilter}
+            placeholder="Gustavo Esmanhotto Bareta"
           />
         </div>
         <div>

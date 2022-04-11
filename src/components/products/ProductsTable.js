@@ -1,11 +1,22 @@
 import { useMemo, useEffect } from "react";
-import { useTable, useRowSelect } from "react-table";
+import {
+  useTable,
+  useRowSelect,
+  usePagination,
+  useGlobalFilter,
+} from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 
 const ProductsTable = () => {
-  const { productsData, fetchProducts, setProductRows } = useGlobalContext();
+  const {
+    productsData,
+    fetchProducts,
+    setProductRows,
+    setProductPageOptions,
+    setProductFilter,
+  } = useGlobalContext();
 
   useEffect(() => {
     fetchProducts();
@@ -51,20 +62,28 @@ const ProductsTable = () => {
     [productsData]
   );
 
-  const tableInstance = useTable({ columns, data }, useRowSelect, (hooks) => {
-    hooks.visibleColumns.push((columns) => {
-      return [
-        {
-          id: "selection",
-          Header: ({ getToggleAllRowsSelectedProps }) => (
-            <Checkbox {...getToggleAllRowsSelectedProps()} />
-          ),
-          Cell: ({ row }) => <Checkbox {...row.getToggleRowSelectedProps()} />,
-        },
-        ...columns,
-      ];
-    });
-  });
+  const tableInstance = useTable(
+    { columns, data },
+    useGlobalFilter,
+    usePagination,
+    useRowSelect,
+    (hooks) => {
+      hooks.visibleColumns.push((columns) => {
+        return [
+          {
+            id: "selection",
+            Header: ({ getToggleAllRowsSelectedProps }) => (
+              <Checkbox {...getToggleAllRowsSelectedProps()} />
+            ),
+            Cell: ({ row }) => (
+              <Checkbox {...row.getToggleRowSelectedProps()} />
+            ),
+          },
+          ...columns,
+        ];
+      });
+    }
+  );
 
   const {
     getTableProps,
@@ -73,11 +92,43 @@ const ProductsTable = () => {
     rows,
     prepareRow,
     selectedFlatRows,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+    setGlobalFilter,
   } = tableInstance;
 
   useEffect(() => {
     setProductRows(selectedFlatRows);
-  }, [selectedFlatRows, setProductRows]);
+  }, [selectedFlatRows]);
+
+  useEffect(() => {
+    setProductFilter({ state, setGlobalFilter });
+  }, [state, setGlobalFilter]);
+
+  useEffect(() => {
+    setProductPageOptions({
+      page,
+      nextPage,
+      previousPage,
+      canNextPage,
+      canPreviousPage,
+      pageOptions,
+      state,
+    });
+  }, [
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+  ]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>
