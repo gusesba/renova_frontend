@@ -8,6 +8,7 @@ import {
   AiOutlineRight,
 } from "react-icons/ai";
 import AddClientsModal from "../components/clients/AddClientsModal";
+import GlobalFilterClients from "../components/clients/GlobalFilterClients";
 import { useGlobalContext } from "../context";
 
 const Clients = () => {
@@ -17,6 +18,7 @@ const Clients = () => {
     goToClientPage,
     goToSellFrontPage,
     pageOptions,
+    clientFilter,
   } = useGlobalContext();
   return (
     <main>
@@ -38,6 +40,12 @@ const Clients = () => {
           />
         </div>
         <div>
+          <GlobalFilterClients
+            filter={clientFilter.state && clientFilter.state.globalFilter}
+            setFilter={clientFilter.setGlobalFilter}
+          />
+        </div>
+        <div>
           <AiOutlineLeft
             className={
               pageOptions.canPreviousPage
@@ -50,8 +58,8 @@ const Clients = () => {
             {" "}
             Page{" "}
             <strong>
-              {pageOptions.state.pageIndex + 1} of{" "}
-              {pageOptions.pageOptions.length}
+              {pageOptions.state && pageOptions.state.pageIndex + 1} of{" "}
+              {pageOptions.pageOptions && pageOptions.pageOptions.length}
             </strong>
           </span>
           <AiOutlineRight

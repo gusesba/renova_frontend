@@ -13,6 +13,7 @@ const AppProvider = ({ children }) => {
   const [clientData, setClientData] = useState({ product: [] });
   const [actualTableUsage, setActualTableUsage] = useState("total");
   const [pageOptions, setPageOptions] = useState({});
+  const [clientFilter, setClientFilter] = useState({});
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -25,8 +26,6 @@ const AppProvider = ({ children }) => {
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
-
-  const [printer, setPrinter] = useState({});
 
   //Clients
 
@@ -674,6 +673,8 @@ const AppProvider = ({ children }) => {
         printEtiqueta,
         pageOptions,
         setPageOptions,
+        clientFilter,
+        setClientFilter,
       }}
     >
       {children}

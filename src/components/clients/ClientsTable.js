@@ -10,8 +10,13 @@ import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 
 const ClientsTable = () => {
-  const { clientsData, setClientRows, fetchClients, setPageOptions } =
-    useGlobalContext();
+  const {
+    clientsData,
+    setClientRows,
+    fetchClients,
+    setPageOptions,
+    setClientFilter,
+  } = useGlobalContext();
 
   useEffect(() => {
     fetchClients();
@@ -40,6 +45,7 @@ const ClientsTable = () => {
 
   const tableInstance = useTable(
     { columns, data },
+    useGlobalFilter,
     usePagination,
     useRowSelect,
     (hooks) => {
@@ -71,6 +77,7 @@ const ClientsTable = () => {
     canPreviousPage,
     pageOptions,
     state,
+    setGlobalFilter,
     prepareRow,
     selectedFlatRows,
   } = tableInstance;
@@ -98,6 +105,10 @@ const ClientsTable = () => {
     pageOptions,
     state,
   ]);
+
+  useEffect(() => {
+    setClientFilter({ state, setGlobalFilter });
+  }, [state, setGlobalFilter]);
 
   return (
     <>

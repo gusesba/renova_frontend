@@ -1,8 +1,12 @@
 const GlobalFilterClients = ({ filter, setFilter }) => {
   return (
     <span>
-      Search:{" "}
-      <input value={filter || ""} onChange={(e) => setFilter(e.target.value)} />
+      <input
+        placeholder="Gustavo Esmanhotto Bareta"
+        className="form-control global-filter"
+        value={filter || ""}
+        onChange={(e) => setFilter(e.target.value)}
+      />
     </span>
   );
 };

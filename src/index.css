@@ -228,3 +228,8 @@ main {
   border-radius: 5px;
   margin-left: 10px;
 }
+
+.global-filter {
+  width: 500px !important;
+  margin-top: -8px;
+}
