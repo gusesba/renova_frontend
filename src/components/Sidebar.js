@@ -6,8 +6,13 @@ import {
   SidebarFooter,
   SidebarContent,
 } from "react-pro-sidebar";
-import { FaGem } from "react-icons/fa";
-import { AiFillTag } from "react-icons/ai";
+import {
+  FaShoppingBag,
+  FaUserAlt,
+  FaTshirt,
+  FaShoppingCart,
+} from "react-icons/fa";
+
 import "react-pro-sidebar/dist/css/styles.css";
 import { useGlobalContext } from "../context";
 
@@ -42,20 +47,20 @@ const Sidebar = () => {
           <Menu iconShape="circle">
             <MenuItem
               onClick={() => (window.location = "/products")}
-              icon={<FaGem />}
+              icon={<FaTshirt />}
             >
               Produtos
             </MenuItem>
             <MenuItem
               onClick={() => (window.location = "/clients")}
-              icon={<FaGem />}
+              icon={<FaUserAlt />}
             >
               {" "}
               Clientes
             </MenuItem>
             <MenuItem
               onClick={() => (window.location = "/sells")}
-              icon={<FaGem />}
+              icon={<FaShoppingCart />}
             >
               {" "}
               Vendas
@@ -63,7 +68,7 @@ const Sidebar = () => {
 
             <MenuItem
               onClick={() => (window.location = "/borrows")}
-              icon={<AiFillTag />}
+              icon={<FaShoppingBag />}
             >
               {" "}
               Emprestados

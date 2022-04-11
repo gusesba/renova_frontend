@@ -1,10 +1,8 @@
 import ProductsTable from "../components/products/ProductsTable";
-import { useEffect } from "react";
 import {
   AiFillPlusSquare,
   AiFillDelete,
   AiFillUpCircle,
-  AiFillDollarCircle,
   AiFillPrinter,
   AiOutlineLeft,
   AiOutlineRight,
@@ -39,7 +37,6 @@ const Products = () => {
             className="gotopage-btn"
             onClick={() => goToProductPage()}
           />
-          <AiFillDollarCircle className="sell-btn" />
           <AiFillPrinter
             onClick={() => printEtiqueta()}
             className="print-btn"
