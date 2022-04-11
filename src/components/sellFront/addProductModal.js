@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -7,12 +7,20 @@ import { useGlobalContext } from "../../context";
 const AddProductModal = () => {
   const { showSellFrontModal, setShowSellFrontModal, fetchProduct } =
     useGlobalContext();
-  const [id, setId] = useState(0);
+  const [id, setId] = useState();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     fetchProduct(id, "sell_front");
+    setId("");
+    document.getElementById("formId").focus();
   };
+
+  useEffect(() => {
+    if (showSellFrontModal) {
+      document.getElementById("formId").focus();
+    }
+  }, [showSellFrontModal]);
 
   return (
     <Modal
