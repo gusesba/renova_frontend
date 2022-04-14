@@ -11,8 +11,13 @@ import { useGlobalContext } from "../context";
 import GlobalFilter from "../components/clients/GlobalFilter";
 
 const Sells = () => {
-  const { setShowAddSellModal, setPageName, sellPageOptions, sellFilter } =
-    useGlobalContext();
+  const {
+    setShowAddSellModal,
+    setPageName,
+    sellPageOptions,
+    sellFilter,
+    deleteSell,
+  } = useGlobalContext();
 
   useEffect(() => {
     setPageName("Vendas");
@@ -26,7 +31,7 @@ const Sells = () => {
             onClick={() => setShowAddSellModal(true)}
             className="add-btn"
           />
-          <AiFillDelete className="delete-btn" />
+          <AiFillDelete onClick={deleteSell} className="delete-btn" />
         </div>
         <div>
           <GlobalFilter

@@ -29,6 +29,12 @@ const AppProvider = ({ children }) => {
   const [sellPageOptions, setSellPageOptions] = useState({});
   const [sellFilter, setSellFilter] = useState({});
 
+  const [borrowData, setBorrowData] = useState([]);
+  const [showAddBorrowModal, setShowAddBorrowModal] = useState(false);
+  const [borrowRows, setBorrowRows] = useState([]);
+  const [borrowPageOptions, setBorrowPageOptions] = useState({});
+  const [borrowFilter, setBorrowFilter] = useState({});
+
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
@@ -196,6 +202,66 @@ const AppProvider = ({ children }) => {
         fetchSells();
       })
       .catch((err) => console.log(err));
+  };
+
+  const deleteSell = async (data) => {
+    if (sellRows.length === 1) {
+      const url = "http://localhost:5000/api/v1/sells/".concat(
+        sellRows[0].original.id
+      );
+      axios({
+        method: "delete",
+        url: url,
+      })
+        .then(() => {
+          fetchSells();
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  // Borrows
+
+  const fetchBorrows = async () => {
+    axios({
+      method: "get",
+      url: "http://localhost:5000/api/v1/sells/borrows",
+    })
+      .then(function (response) {
+        setBorrowData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const addBorrow = async (data) => {
+    console.log(data);
+    axios({
+      method: "post",
+      url: "http://localhost:5000/api/v1/sells/borrows",
+      data,
+    })
+      .then(() => {
+        fetchBorrows();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteBorrow = async (data) => {
+    if (borrowRows.length === 1) {
+      const url = "http://localhost:5000/api/v1/sells/".concat(
+        borrowRows[0].original.id
+      );
+      axios({
+        method: "delete",
+        url: url,
+      })
+        .then(() => {
+          fetchBorrows();
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   //SellFront
@@ -693,6 +759,20 @@ const AppProvider = ({ children }) => {
         setSellPageOptions,
         sellFilter,
         setSellFilter,
+        deleteSell,
+        borrowData,
+        setBorrowData,
+        showAddBorrowModal,
+        setShowAddBorrowModal,
+        borrowRows,
+        setBorrowRows,
+        borrowPageOptions,
+        setBorrowPageOptions,
+        borrowFilter,
+        setBorrowFilter,
+        fetchBorrows,
+        addBorrow,
+        deleteBorrow,
       }}
     >
       {children}

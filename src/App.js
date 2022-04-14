@@ -8,6 +8,7 @@ import Client from "./pages/Client";
 import Sells from "./pages/Sells";
 import Product from "./pages/Product";
 import SellFront from "./pages/SellFront";
+import Borrows from "./pages/Borrows";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
             <Route path="/client/:id" exact element={<Client />} />
             <Route path="/product/:id" exact element={<Product />} />
             <Route path="/sell/:id" exact element={<SellFront />} />
+            <Route path="/borrows" exact element={<Borrows />} />
           </Routes>
         </BrowserRouter>
       </div>
