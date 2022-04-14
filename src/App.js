@@ -9,13 +9,15 @@ import Sells from "./pages/Sells";
 import Product from "./pages/Product";
 import SellFront from "./pages/SellFront";
 import Borrows from "./pages/Borrows";
+import BottomAlert from "./components/BottomAlert";
 
 function App() {
   return (
     <div style={{ height: "92vh" }}>
       <Topbar />
-      <div style={{ height: "100%", display: "flex" }}>
+      <div style={{ height: "100%", display: "flex", position: "relative" }}>
         <Sidebar />
+        <BottomAlert />
         <BrowserRouter>
           <Routes>
             <Route path="/products" exact element={<Products />} />

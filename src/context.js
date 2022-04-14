@@ -39,6 +39,12 @@ const AppProvider = ({ children }) => {
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
 
+  const [alert, setAlert] = useState({
+    show: false,
+    message: "Produto já cadastrado",
+    variant: "success",
+  });
+
   //Clients
 
   const fetchClients = async () => {
@@ -192,13 +198,19 @@ const AppProvider = ({ children }) => {
   };
 
   const addSell = async (data) => {
-    console.log(data);
     axios({
       method: "post",
       url: "http://localhost:5000/api/v1/sells",
       data,
     })
-      .then(() => {
+      .then((response) => {
+        if (response.data.error === "SequelizeUniqueConstraintError") {
+          setAlert({
+            show: true,
+            message: "Produto já vendido",
+            variant: "danger",
+          });
+        }
         fetchSells();
       })
       .catch((err) => console.log(err));
@@ -773,6 +785,8 @@ const AppProvider = ({ children }) => {
         fetchBorrows,
         addBorrow,
         deleteBorrow,
+        alert,
+        setAlert,
       }}
     >
       {children}

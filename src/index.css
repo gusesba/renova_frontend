@@ -235,3 +235,18 @@ main {
   position: absolute;
   left: 45vw;
 }
+
+.alert {
+  position: absolute !important;
+  width: 200px;
+  height: 40px;
+  bottom: 0px;
+  right: 20px;
+  display: flex;
+  transition: 0.3s;
+  justify-content: space-around;
+}
+
+.alert > p {
+  margin-top: -10px;
+}
