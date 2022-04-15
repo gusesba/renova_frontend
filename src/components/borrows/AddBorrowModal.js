@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { useGlobalContext } from "../../context";
 
 const AddBorrowsModal = () => {
-  const { showAddBorrowModal, setShowAddBorrowModal, addBorrow } =
+  const { showAddBorrowModal, setShowAddBorrowModal, addBorrow, setAlert } =
     useGlobalContext();
   const [values, setValues] = useState({ buyerId: "", productId: "" });
 
@@ -17,12 +17,16 @@ const AddBorrowsModal = () => {
   };
 
   const handleSubmit = () => {
-    if (true) {
+    if (values.buyerId && values.productId) {
       addBorrow(values);
       setShowAddBorrowModal(false);
       setValues({ buyerId: "", productId: "" });
     } else {
-      alert("Preencha os campos obrigatórios");
+      setAlert({
+        show: true,
+        message: "Preencha os campos obrigatórios",
+        variant: "danger",
+      });
     }
   };
 

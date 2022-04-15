@@ -238,13 +238,13 @@ main {
 
 .alert {
   position: absolute !important;
-  width: 200px;
   height: 40px;
   bottom: 0px;
   right: 20px;
   display: flex;
   transition: 0.3s;
   justify-content: space-around;
+  z-index: 1055 !important;
 }
 
 .alert > p {

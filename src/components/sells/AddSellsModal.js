@@ -5,7 +5,8 @@ import Form from "react-bootstrap/Form";
 import { useGlobalContext } from "../../context";
 
 const AddSellsModal = () => {
-  const { showAddSellModal, setShowAddSellModal, addSell } = useGlobalContext();
+  const { showAddSellModal, setShowAddSellModal, addSell, setAlert } =
+    useGlobalContext();
   const [values, setValues] = useState({ buyerId: "", productId: "" });
 
   const onChange = (ev) => {
@@ -16,12 +17,16 @@ const AddSellsModal = () => {
   };
 
   const handleSubmit = () => {
-    if (true) {
+    if (values.buyerId && values.productId) {
       addSell(values);
       setShowAddSellModal(false);
       setValues({ buyerId: "", productId: "" });
     } else {
-      alert("Preencha os campos obrigatórios");
+      setAlert({
+        show: true,
+        message: "Preencha os campos obrigatórios",
+        variant: "danger",
+      });
     }
   };
 

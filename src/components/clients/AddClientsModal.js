@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import { useGlobalContext } from "../../context";
 
 const AddClientsModal = () => {
-  const { showAddClientModal, setShowAddClientModal, addClient } =
+  const { showAddClientModal, setShowAddClientModal, addClient, setAlert } =
     useGlobalContext();
   const [values, setValues] = useState({ name: "", phone: "" });
 
@@ -22,7 +22,11 @@ const AddClientsModal = () => {
       setShowAddClientModal(false);
       setValues({ name: "", phone: "" });
     } else {
-      alert("Preencha os campos obrigatórios");
+      setAlert({
+        show: true,
+        message: "Preencha os Campos",
+        variant: "danger",
+      });
     }
   };
 

@@ -1,7 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import * as qz from "qz-tray";
-import { useNavigate } from "react-router-dom";
 const AppContext = React.createContext();
 
 const AppProvider = ({ children }) => {
@@ -56,6 +55,11 @@ const AppProvider = ({ children }) => {
         setClientsData(response.data);
       })
       .catch((err) => {
+        setAlert({
+          show: true,
+          message: "Erro ao listar clientes",
+          variant: "danger",
+        });
         console.log(err);
       });
   };
@@ -68,8 +72,20 @@ const AppProvider = ({ children }) => {
     })
       .then(() => {
         fetchClients();
+        setAlert({
+          show: true,
+          message: "Cliente Adicionado",
+          variant: "success",
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        setAlert({
+          show: true,
+          message: "Erro ao adicionar cliente",
+          variant: "danger",
+        });
+        console.log(err);
+      });
   };
 
   const fetchClient = async (id) => {
@@ -96,21 +112,44 @@ const AppProvider = ({ children }) => {
         url: url,
       })
         .then(() => {
+          setAlert({
+            show: true,
+            message: "Cliente Deletado",
+            variant: "success",
+          });
           fetchClients();
         })
         .catch((err) => alert("Falha ao excluir cliente!"));
+    } else {
+      setAlert({
+        show: true,
+        message: "Deletar 1 Cliente por vez",
+        variant: "danger",
+      });
     }
   };
 
   const goToClientPage = () => {
     if (clientRows.length === 1) {
       window.location = "/client/".concat(clientRows[0].original.id);
+    } else {
+      setAlert({
+        show: true,
+        message: "Selecionar apenas 1 Cliente",
+        variant: "danger",
+      });
     }
   };
 
   const goToSellFrontPage = () => {
     if (clientRows.length === 1) {
       window.location = "/sell/".concat(clientRows[0].original.id);
+    } else {
+      setAlert({
+        show: true,
+        message: "Selecionar apenas 1 Cliente",
+        variant: "danger",
+      });
     }
   };
 
@@ -125,6 +164,11 @@ const AppProvider = ({ children }) => {
         setProductsData(response.data);
       })
       .catch((err) => {
+        setAlert({
+          show: true,
+          message: "Erro ao listar produtos",
+          variant: "danger",
+        });
         console.log(err);
       });
   };
@@ -135,7 +179,14 @@ const AppProvider = ({ children }) => {
       url: "http://localhost:5000/api/v1/products",
       data,
     })
-      .then(() => {
+      .then((res) => {
+        if (res.data.error === "User not found") {
+          setAlert({
+            show: true,
+            message: "Fornecedor Inválido",
+            variant: "danger",
+          });
+        }
         fetchProducts();
       })
       .catch((err) => console.log(err));
@@ -154,12 +205,24 @@ const AppProvider = ({ children }) => {
           fetchProducts();
         })
         .catch((err) => console.log(err));
+    } else {
+      setAlert({
+        show: true,
+        message: "Deletar 1 produto por vez",
+        variant: "danger",
+      });
     }
   };
 
   const goToProductPage = () => {
     if (productRows.length === 1) {
       window.location = "/product/".concat(productRows[0].original.id);
+    } else {
+      setAlert({
+        show: true,
+        message: "Selecionar 1 produto",
+        variant: "danger",
+      });
     }
   };
 
@@ -171,9 +234,26 @@ const AppProvider = ({ children }) => {
       .then((response) => {
         if (page === "sell_front") {
           if (response.data.sell === null) {
-            setSellFrontProducts([...sellFrontProducts, response.data]);
+            let controll = true;
+            sellFrontProducts.forEach((data) => {
+              if (data.id === response.data.id) {
+                setAlert({
+                  show: true,
+                  message: "Produto Já Selecionado",
+                  variant: "danger",
+                });
+                controll = false;
+              }
+            });
+            if (controll) {
+              setSellFrontProducts([...sellFrontProducts, response.data]);
+            }
           } else {
-            alert("produto ja vendido");
+            setAlert({
+              show: true,
+              message: "Produto já vendido",
+              variant: "danger",
+            });
           }
         } else {
           setProductData(response.data);
@@ -193,6 +273,11 @@ const AppProvider = ({ children }) => {
         setSellData(response.data);
       })
       .catch((err) => {
+        setAlert({
+          show: true,
+          message: "Erro ao listar vendas",
+          variant: "danger",
+        });
         console.log(err);
       });
   };
@@ -208,6 +293,18 @@ const AppProvider = ({ children }) => {
           setAlert({
             show: true,
             message: "Produto já vendido",
+            variant: "danger",
+          });
+        } else if (response.data.error === "Product not found") {
+          setAlert({
+            show: true,
+            message: "Produto Inválido",
+            variant: "danger",
+          });
+        } else if (response.data.error === "Buyer not found") {
+          setAlert({
+            show: true,
+            message: "Cliente Inválido",
             variant: "danger",
           });
         }
@@ -229,6 +326,12 @@ const AppProvider = ({ children }) => {
           fetchSells();
         })
         .catch((err) => console.log(err));
+    } else {
+      setAlert({
+        show: true,
+        message: "Deletar 1 produto por vez",
+        variant: "danger",
+      });
     }
   };
 
@@ -273,6 +376,12 @@ const AppProvider = ({ children }) => {
           fetchBorrows();
         })
         .catch((err) => console.log(err));
+    } else {
+      setAlert({
+        show: true,
+        message: "Deletar 1 produto por vez",
+        variant: "danger",
+      });
     }
   };
 

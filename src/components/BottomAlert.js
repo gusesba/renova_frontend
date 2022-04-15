@@ -10,7 +10,7 @@ const BottomAlert = () => {
   };
 
   const dismissAlert = async () => {
-    await sleep(3000);
+    await sleep(2000);
     setAlert({ show: false });
   };
 
