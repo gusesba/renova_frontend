@@ -21,6 +21,7 @@ const AppProvider = ({ children }) => {
   const [productData, setProductData] = useState({});
   const [productPageOptions, setProductPageOptions] = useState({});
   const [productFilter, setProductFilter] = useState({});
+  const [options, setOptions] = useState([]);
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
@@ -111,12 +112,20 @@ const AppProvider = ({ children }) => {
         method: "delete",
         url: url,
       })
-        .then(() => {
-          setAlert({
-            show: true,
-            message: "Cliente Deletado",
-            variant: "success",
-          });
+        .then((err) => {
+          if (err.data.error === "SequelizeForeignKeyConstraintError") {
+            setAlert({
+              show: true,
+              message: "Cliente atrelado a produto",
+              variant: "danger",
+            });
+          } else {
+            setAlert({
+              show: true,
+              message: "Cliente Deletado",
+              variant: "success",
+            });
+          }
           fetchClients();
         })
         .catch((err) => alert("Falha ao excluir cliente!"));
@@ -896,6 +905,8 @@ const AppProvider = ({ children }) => {
         deleteBorrow,
         alert,
         setAlert,
+        options,
+        setOptions,
       }}
     >
       {children}

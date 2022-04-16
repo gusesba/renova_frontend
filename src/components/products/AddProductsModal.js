@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Select from "react-select";
 import { useGlobalContext } from "../../context";
 
 const AddProductsModal = () => {
-  const { showAddProductModal, setShowAddProductModal, addProduct, setAlert } =
-    useGlobalContext();
+  const {
+    showAddProductModal,
+    setShowAddProductModal,
+    addProduct,
+    setAlert,
+    options,
+  } = useGlobalContext();
+
   const [values, setValues] = useState({
     price: "",
     type: "",
@@ -122,13 +129,7 @@ const AddProductsModal = () => {
             </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formProviderId">
               <Form.Label>Fornecedor</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Fornecedor"
-                name="providerId"
-                value={values.providerId}
-                onChange={onChange}
-              />
+              <Select onChange={onChange} options={options} />
             </Form.Group>
           </div>
           <div className="div-large-form">

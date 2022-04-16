@@ -1,3 +1,4 @@
+import React from "react";
 import ProductsTable from "../components/products/ProductsTable";
 import { useEffect } from "react";
 import {
@@ -20,7 +21,29 @@ const Products = () => {
     productPageOptions,
     productFilter,
     setPageName,
+    fetchClients,
+    setOptions,
+    clientsData,
   } = useGlobalContext();
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
+
+  useEffect(() => {
+    setOptions(
+      clientsData.map((item) => {
+        return {
+          value: item.id,
+          label: item.name,
+          target: {
+            name: "providerId",
+            value: item.id,
+          },
+        };
+      })
+    );
+  }, [clientsData]);
 
   useEffect(() => {
     setPageName("Produtos");
