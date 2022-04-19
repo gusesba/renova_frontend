@@ -125,6 +125,7 @@ main {
 .client-btn-group {
   margin-top: 20px;
   display: flex;
+  justify-content: space-between;
 }
 
 .client-btn-group .btn {

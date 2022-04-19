@@ -73,21 +73,15 @@ const AddProductsModal = () => {
       <Modal.Body>
         <Form>
           <div className="div-large-form">
-            <Form.Group className="mb-3 form-group" controlId="formPrice">
-              <Form.Label>Preço</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Preço"
-                name="price"
-                value={values.price}
-                onChange={onChange}
-              />
+            <Form.Group className="mb-3 form-group" controlId="formProviderId">
+              <Form.Label>Fornecedor</Form.Label>
+              <Select onChange={onChange} options={options} />
             </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formtype">
-              <Form.Label>Roupa</Form.Label>
+              <Form.Label>Produto</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Roupa"
+                placeholder="Produto"
                 name="type"
                 value={values.type}
                 onChange={onChange}
@@ -127,9 +121,15 @@ const AddProductsModal = () => {
                 onChange={onChange}
               />
             </Form.Group>
-            <Form.Group className="mb-3 form-group" controlId="formProviderId">
-              <Form.Label>Fornecedor</Form.Label>
-              <Select onChange={onChange} options={options} />
+            <Form.Group className="mb-3 form-group" controlId="formPrice">
+              <Form.Label>Preço</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Preço"
+                name="price"
+                value={values.price}
+                onChange={onChange}
+              />
             </Form.Group>
           </div>
           <div className="div-large-form">

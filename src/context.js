@@ -14,6 +14,7 @@ const AppProvider = ({ children }) => {
   const [actualTableUsage, setActualTableUsage] = useState("total");
   const [pageOptions, setPageOptions] = useState({});
   const [clientFilter, setClientFilter] = useState({});
+  const [clientPageOptions, setClientPageOptions] = useState({});
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -907,6 +908,8 @@ const AppProvider = ({ children }) => {
         setAlert,
         options,
         setOptions,
+        clientPageOptions,
+        setClientPageOptions,
       }}
     >
       {children}

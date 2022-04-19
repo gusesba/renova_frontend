@@ -1,10 +1,11 @@
 import { useMemo, useEffect, useState } from "react";
 import { useGlobalContext } from "../../context";
-import { useTable } from "react-table";
+import { useTable, usePagination } from "react-table";
 import Table from "react-bootstrap/Table";
 
 const ClientTable = () => {
-  const { clientData, actualTableUsage } = useGlobalContext();
+  const { clientData, actualTableUsage, setClientPageOptions } =
+    useGlobalContext();
   const [tableData, setTableData] = useState([1, 2]);
 
   useEffect(() => {
@@ -68,10 +69,42 @@ const ClientTable = () => {
     [tableData]
   );
 
-  const tableInstance = useTable({ columns, data });
+  const tableInstance = useTable({ columns, data }, usePagination);
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    tableInstance;
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+  } = tableInstance;
+
+  useEffect(() => {
+    setClientPageOptions({
+      page,
+      nextPage,
+      previousPage,
+      canNextPage,
+      canPreviousPage,
+      pageOptions,
+      state,
+    });
+  }, [
+    page,
+    nextPage,
+    previousPage,
+    canNextPage,
+    canPreviousPage,
+    pageOptions,
+    state,
+  ]);
 
   return (
     <>
@@ -108,7 +141,7 @@ const ClientTable = () => {
         <tbody {...getTableBodyProps()}>
           {
             // Loop over the table rows
-            rows.map((row) => {
+            page.map((row) => {
               // Prepare the row for display
               prepareRow(row);
               return (
