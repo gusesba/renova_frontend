@@ -4,10 +4,12 @@ import {
   useRowSelect,
   usePagination,
   useGlobalFilter,
+  useFilters,
 } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
+import ColumnFilter from "../ColumnFilter";
 
 const SellsTable = () => {
   const {
@@ -27,38 +29,47 @@ const SellsTable = () => {
         {
           Header: "ID",
           accessor: "product.id", // accessor is the "key" in the data
+          Filter: ColumnFilter,
         },
         {
           Header: "Preço",
           accessor: "product.price",
+          Filter: ColumnFilter,
         },
         {
           Header: "Produto",
           accessor: "product.type",
+          Filter: ColumnFilter,
         },
         {
           Header: "Marca",
           accessor: "product.brand",
+          Filter: ColumnFilter,
         },
         {
           Header: "Tamanho",
           accessor: "product.size",
+          Filter: ColumnFilter,
         },
         {
           Header: "Cor",
           accessor: "product.color",
+          Filter: ColumnFilter,
         },
         {
           Header: "Fornecedor",
           accessor: "product.provider.name",
+          Filter: ColumnFilter,
         },
         {
           Header: "Descrição",
           accessor: "product.description",
+          Filter: ColumnFilter,
         },
         {
           Header: "Comprador",
           accessor: "buyer.name",
+          Filter: ColumnFilter,
         },
       ],
     [sellData]
@@ -66,6 +77,7 @@ const SellsTable = () => {
 
   const tableInstance = useTable(
     { columns, data },
+    useFilters,
     useGlobalFilter,
     usePagination,
     useRowSelect,
@@ -148,6 +160,9 @@ const SellsTable = () => {
                       // Render the header
                       column.render("Header")
                     }
+                    <div>
+                      {column.canFilter ? column.render("Filter") : null}{" "}
+                    </div>
                   </th>
                 ))
               }
