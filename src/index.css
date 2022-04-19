@@ -251,3 +251,7 @@ main {
 .alert > p {
   margin-top: -10px;
 }
+
+.column_filter {
+  height: 20px;
+}

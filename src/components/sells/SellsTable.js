@@ -33,7 +33,7 @@ const SellsTable = () => {
           accessor: "product.price",
         },
         {
-          Header: "Roupa",
+          Header: "Produto",
           accessor: "product.type",
         },
         {

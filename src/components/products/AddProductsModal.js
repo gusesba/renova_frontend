@@ -38,8 +38,7 @@ const AddProductsModal = () => {
       values.brand &&
       values.size &&
       values.color &&
-      values.providerId &&
-      values.description
+      values.providerId
     ) {
       addProduct(values);
       setShowAddProductModal(false);

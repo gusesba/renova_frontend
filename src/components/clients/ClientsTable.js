@@ -4,10 +4,12 @@ import {
   useRowSelect,
   usePagination,
   useGlobalFilter,
+  useFilters,
 } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
+import ColumnFilter from "../ColumnFilter";
 
 const ClientsTable = () => {
   const {
@@ -30,14 +32,17 @@ const ClientsTable = () => {
         {
           Header: "ID",
           accessor: "id", // accessor is the "key" in the data
+          Filter: ColumnFilter,
         },
         {
           Header: "Nome",
           accessor: "name",
+          Filter: ColumnFilter,
         },
         {
           Header: "Telefone",
           accessor: "phone",
+          Filter: ColumnFilter,
         },
       ],
     [clientsData]
@@ -45,6 +50,7 @@ const ClientsTable = () => {
 
   const tableInstance = useTable(
     { columns, data },
+    useFilters,
     useGlobalFilter,
     usePagination,
     useRowSelect,
@@ -128,6 +134,9 @@ const ClientsTable = () => {
                         // Render the header
                         column.render("Header")
                       }
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}{" "}
+                      </div>
                     </th>
                   ))
                 }
