@@ -6,6 +6,7 @@ import {
   AiFillDelete,
   AiOutlineArrowRight,
 } from "react-icons/ai";
+import { GiCardJoker } from "react-icons/gi";
 import ProductsTable from "../components/sellFront/ProductsTable";
 import AddProductModal from "../components/sellFront/addProductModal";
 
@@ -17,6 +18,7 @@ const SellFront = () => {
     sellFrontProducts,
     deleteLine,
     finishSell,
+    addJoker,
   } = useGlobalContext();
   const { id } = useParams();
   const [total, setTotal] = useState(0);
@@ -79,6 +81,7 @@ const SellFront = () => {
             onClick={() => setShowSellFrontModal(true)}
             className="add-btn"
           />
+          <GiCardJoker className="joker-btn" onClick={addJoker} />
           <AiFillDelete onClick={deleteLine} className="delete-btn" />
           <AiOutlineArrowRight
             className="sell-btn"

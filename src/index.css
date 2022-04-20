@@ -255,3 +255,16 @@ main {
 .column_filter {
   height: 20px;
 }
+
+.joker-btn {
+  font-size: 40px;
+  color: #e2752c;
+  transition: 0.2s;
+  margin-left: -4px;
+}
+
+.joker-btn:hover {
+  color: #ff6600;
+  cursor: pointer;
+  transform: scale(1.15);
+}

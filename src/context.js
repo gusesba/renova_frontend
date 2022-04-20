@@ -413,6 +413,26 @@ const AppProvider = ({ children }) => {
     });
   };
 
+  const addJoker = async () => {
+    const data = {
+      price: 0,
+      type: "x",
+      providerId: 1,
+      brand: "x",
+      size: "x",
+      color: "x",
+    };
+    axios({
+      method: "post",
+      url: "http://localhost:5000/api/v1/products",
+      data,
+    })
+      .then((res) => {
+        fetchProduct(res.data.id, "sell_front");
+      })
+      .catch((err) => console.log(err));
+  };
+
   //Impressora
 
   const printEtiqueta2 = () => {
@@ -910,6 +930,7 @@ const AppProvider = ({ children }) => {
         setOptions,
         clientPageOptions,
         setClientPageOptions,
+        addJoker,
       }}
     >
       {children}
