@@ -25,6 +25,7 @@ const ClientTable = () => {
           return buyer.product;
         })
       );
+      console.log(tableData);
     }
   }, [actualTableUsage, clientData]);
 
@@ -41,6 +42,7 @@ const ClientTable = () => {
           Header: "Preço",
           accessor: "price",
         },
+        { Header: "Venda", accessor: "sell.sellPrice" },
         {
           Header: "Roupa",
           accessor: "type",

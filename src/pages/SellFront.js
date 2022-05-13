@@ -5,20 +5,24 @@ import {
   AiFillPlusSquare,
   AiFillDelete,
   AiOutlineArrowRight,
+  AiFillEdit,
 } from "react-icons/ai";
 import { GiCardJoker } from "react-icons/gi";
 import ProductsTable from "../components/sellFront/ProductsTable";
 import AddProductModal from "../components/sellFront/addProductModal";
+import EditPriceModal from "../components/sellFront/editPriceModal";
 
 const SellFront = () => {
   const {
     fetchClient,
     clientData,
     setShowSellFrontModal,
+    setShowEditPriceModal,
     sellFrontProducts,
     deleteLine,
     finishSell,
     addJoker,
+    editSellFrontProductPrice,
   } = useGlobalContext();
   const { id } = useParams();
   const [total, setTotal] = useState(0);
@@ -38,6 +42,7 @@ const SellFront = () => {
   return (
     <main>
       <AddProductModal />
+      <EditPriceModal />
       <div className="cards">
         <div className="card-client">
           <div className="card-inside">
@@ -82,6 +87,10 @@ const SellFront = () => {
             className="add-btn"
           />
           <GiCardJoker className="joker-btn" onClick={addJoker} />
+          <AiFillEdit
+            className="edit-btn"
+            onClick={() => setShowEditPriceModal(true)}
+          />
           <AiFillDelete onClick={deleteLine} className="delete-btn" />
           <AiOutlineArrowRight
             className="sell-btn"

@@ -145,12 +145,12 @@ main {
 
 .sell-btn {
   font-size: 40px;
-  color: #3edd46;
+  color: #3ecbdd;
   transition: 0.2s;
 }
 
 .sell-btn:hover {
-  color: #00ff0d;
+  color: #00e1ff;
   cursor: pointer;
   transform: scale(1.15);
 }
@@ -265,6 +265,18 @@ main {
 
 .joker-btn:hover {
   color: #ff6600;
+  cursor: pointer;
+  transform: scale(1.15);
+}
+.edit-btn {
+  font-size: 40px;
+  color: #43e451;
+  transition: 0.2s;
+  margin-left: -4px;
+}
+
+.edit-btn:hover {
+  color: #00fc15;
   cursor: pointer;
   transform: scale(1.15);
 }

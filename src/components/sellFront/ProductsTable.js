@@ -45,6 +45,10 @@ const ProductsTable = () => {
           Header: "Descrição",
           accessor: "description",
         },
+        {
+          Header: "Preço Venda",
+          accessor: "sellPrice",
+        },
       ],
     [sellFrontProducts]
   );

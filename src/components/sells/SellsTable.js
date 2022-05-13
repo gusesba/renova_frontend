@@ -37,6 +37,11 @@ const SellsTable = () => {
           Filter: ColumnFilter,
         },
         {
+          Header: "Venda",
+          accessor: "sellPrice",
+          Filter: ColumnFilter,
+        },
+        {
           Header: "Produto",
           accessor: "product.type",
           Filter: ColumnFilter,

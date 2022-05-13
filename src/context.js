@@ -39,6 +39,7 @@ const AppProvider = ({ children }) => {
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
+  const [showEditPriceModal, setShowEditPriceModal] = useState(false);
 
   const [alert, setAlert] = useState({
     show: false,
@@ -256,7 +257,10 @@ const AppProvider = ({ children }) => {
               }
             });
             if (controll) {
-              setSellFrontProducts([...sellFrontProducts, response.data]);
+              setSellFrontProducts([
+                ...sellFrontProducts,
+                { ...response.data, sellPrice: response.data.price },
+              ]);
             }
           } else {
             setAlert({
@@ -409,7 +413,12 @@ const AppProvider = ({ children }) => {
 
   const finishSell = (clientId) => {
     sellFrontProducts.forEach((product) => {
-      addSell({ buyerId: clientId, productId: product.id });
+      console.log(product);
+      addSell({
+        buyerId: clientId,
+        productId: product.id,
+        sellPrice: product.sellPrice,
+      });
     });
   };
 
@@ -431,6 +440,19 @@ const AppProvider = ({ children }) => {
         fetchProduct(res.data.id, "sell_front");
       })
       .catch((err) => console.log(err));
+  };
+
+  const editSellFrontProductPrice = (price) => {
+    if (sellFrontRows.length === 1) {
+      setSellFrontProducts(
+        sellFrontProducts.map((product) => {
+          if (product.id === sellFrontRows[0].original.id) {
+            product.sellPrice = price;
+          }
+          return product;
+        })
+      );
+    }
   };
 
   //Impressora
@@ -470,7 +492,9 @@ const AppProvider = ({ children }) => {
               "000" + // pattern
               "0065" + //row bottom to top - max 200
               "0110" + // collumn left to right - max 400
-              productRows[i * 3].original.description + // data
+              productRows[i * 3].original.type +
+              productRows[i * 3].original.color +
+              productRows[i * 3].original.brand + // data
               "\n",
             // Data
             "3" + // rotation
@@ -524,7 +548,9 @@ const AppProvider = ({ children }) => {
               "000" + // pattern
               "0065" + //row bottom to top - max 200
               "0245" + // collumn left to right - max 400
-              productRows[i * 3 + 1].original.description + // data
+              productRows[i * 3 + 1].original.type +
+              productRows[i * 3 + 1].original.color +
+              productRows[i * 3 + 1].original.brand + // data
               "\n",
             // Data
             "3" + // rotation
@@ -580,7 +606,9 @@ const AppProvider = ({ children }) => {
               "000" + // pattern
               "0065" + //row bottom to top - max 200
               "0380" + // collumn left to right - max 400
-              productRows[i * 3 + 2].original.description + // data
+              productRows[i * 3 + 2].original.type +
+              productRows[i * 3 + 2].original.color +
+              productRows[i * 3 + 2].original.brand + // data
               "\n",
             // Data
             "3" + // rotation
@@ -651,7 +679,9 @@ const AppProvider = ({ children }) => {
               "000" + // pattern
               "0165" + //row bottom to top - max 200
               "0010" + // collumn left to right - max 400
-              productRows[productRows.length - 1].original.description + // data
+              productRows[productRows.length - 1].original.type +
+              productRows[productRows.length - 1].original.color +
+              productRows[productRows.length - 1].original.brand + // data
               "\n",
             // Data
             "1" + // rotation
@@ -724,7 +754,9 @@ const AppProvider = ({ children }) => {
               "000" + // pattern
               "0165" + //row bottom to top - max 200
               "0010" + // collumn left to right - max 400
-              productRows[productRows.length - 2].original.description + // data
+              productRows[productRows.length - 2].original.type +
+              productRows[productRows.length - 2].original.color +
+              productRows[productRows.length - 2].original.brand + // data
               "\n",
             // Data
             "1" + // rotation
@@ -782,7 +814,9 @@ const AppProvider = ({ children }) => {
               "000" + // pattern
               "0165" + //row bottom to top - max 200
               "0150" + // collumn left to right - max 400
-              productRows[productRows.length - 1].original.description + // data
+              productRows[productRows.length - 1].original.type +
+              productRows[productRows.length - 1].original.color +
+              productRows[productRows.length - 1].original.brand + // data
               "\n",
             // Data
             "1" + // rotation
@@ -828,10 +862,6 @@ const AppProvider = ({ children }) => {
           });
           console.log("impressao 2");
         }
-
-        await qz.print(config, data).catch(function (e) {
-          console.error(e);
-        });
       });
   };
 
@@ -931,6 +961,9 @@ const AppProvider = ({ children }) => {
         clientPageOptions,
         setClientPageOptions,
         addJoker,
+        editSellFrontProductPrice,
+        showEditPriceModal,
+        setShowEditPriceModal,
       }}
     >
       {children}

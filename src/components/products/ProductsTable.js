@@ -172,7 +172,7 @@ const ProductsTable = () => {
       <tbody {...getTableBodyProps()}>
         {
           // Loop over the table rows
-          rows.map((row) => {
+          page.map((row) => {
             // Prepare the row for display
             prepareRow(row);
             return (
