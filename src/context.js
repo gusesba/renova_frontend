@@ -152,9 +152,11 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const goToSellFrontPage = () => {
+  const goToSellFrontPage = (sell) => {
     if (clientRows.length === 1) {
-      window.location = "/sell/".concat(clientRows[0].original.id);
+      window.location = "/sell/"
+        .concat(clientRows[0].original.id)
+        .concat("/" + sell);
     } else {
       setAlert({
         show: true,
@@ -399,6 +401,11 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const sellBorrowed = () => {
+    if (borrowRows.length > 0) {
+    }
+  };
+
   //SellFront
 
   const deleteLine = () => {
@@ -411,15 +418,24 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const finishSell = (clientId) => {
-    sellFrontProducts.forEach((product) => {
-      console.log(product);
-      addSell({
-        buyerId: clientId,
-        productId: product.id,
-        sellPrice: product.sellPrice,
+  const finishSell = (clientId, isSell) => {
+    if (isSell === "sell") {
+      sellFrontProducts.forEach((product) => {
+        addSell({
+          buyerId: clientId,
+          productId: product.id,
+          sellPrice: product.sellPrice,
+        });
       });
-    });
+    } else {
+      sellFrontProducts.forEach((product) => {
+        addBorrow({
+          buyerId: clientId,
+          productId: product.id,
+          sellPrice: product.sellPrice,
+        });
+      });
+    }
   };
 
   const addJoker = async () => {
@@ -455,7 +471,7 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  //Impressora
+  //Impressora Etiqueta
 
   const printEtiqueta2 = () => {
     qz.websocket
@@ -883,6 +899,83 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  //Impressora Recibo
+
+  const printRecibo = (sell) => {
+    qz.websocket
+      .connect()
+      .then(() => {
+        return qz.printers.find("EPSON TM-T20X Receipt");
+      })
+      .then(async (found) => {
+        console.log(found);
+        var config = qz.configs.create(found);
+        var productsData = [];
+        var total = 0;
+        for (var i = 0; i < sellFrontProducts.length; i++) {
+          total += sellFrontProducts[i].sellPrice;
+          var text =
+            sellFrontProducts[i].type +
+            " " +
+            sellFrontProducts[i].color +
+            " " +
+            sellFrontProducts[i].brand;
+          for (var j = 0; j < 56 - text.length; j++) {
+            text = text.concat(" ");
+          }
+          if (sell === "Venda") {
+            text = text.concat(sellFrontProducts[i].sellPrice);
+          } else {
+            total = 0;
+          }
+          productsData = productsData.concat([
+            text + //40
+              "\x1B" +
+              "\x74" +
+              "\x13" +
+              "\xAA", //print special character symbol after numeric value
+            "\x0A",
+          ]);
+        }
+
+        var data = [
+          "\x1B" + "\x40", // init
+          "\x1B" + "\x61" + "\x31", // center align
+          "RENOVA" + "\x0A",
+          "\x0A", // line break
+          "@renova_sustentavel_curitiba" + "\x0A", // text and line break
+          "\x0A", // line break
+          "\x0A", // line break
+          "Maio 13, 2022 11:02" + "\x0A",
+          "\x0A", // line break
+          "\x0A", // line break
+          "Registo de " + sell + "\x0A",
+          "\x0A",
+          "\x0A",
+          clientData.name + "\x0A",
+          "\x0A",
+          "\x0A",
+          "\x1B" + "\x61" + "\x30", // left align
+        ];
+
+        data = data.concat(productsData);
+        data = data.concat([
+          "\x1B" + "\x21" + "\x0A" + "\x1B" + "\x45" + "\x0A", // em mode off
+          "\x0A" + "\x0A",
+          "\x1B" + "\x61" + "\x30", // left align
+          "------------------------------------------" + "\x0A",
+          "Total                               " + total,
+          "\x1B" + "\x61" + "\x30", // left align
+          "\x0A" + "\x0A" + "\x0A" + "\x0A" + "\x0A" + "\x0A" + "\x0A",
+          "\x1B" + "\x69", // cut paper
+        ]);
+
+        await qz.print(config, data).catch(function (e) {
+          console.error(e);
+        });
+      });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -964,6 +1057,7 @@ const AppProvider = ({ children }) => {
         editSellFrontProductPrice,
         showEditPriceModal,
         setShowEditPriceModal,
+        printRecibo,
       }}
     >
       {children}

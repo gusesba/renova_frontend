@@ -4,6 +4,7 @@ import {
   AiFillDelete,
   AiOutlineLeft,
   AiOutlineRight,
+  AiFillDollarCircle,
 } from "react-icons/ai";
 import AddBorrowsModal from "../components/borrows/AddBorrowModal";
 import { useEffect } from "react";
@@ -17,6 +18,7 @@ const Borrows = () => {
     borrowPageOptions,
     borrowFilter,
     deleteBorrow,
+    sellBorrowed,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -32,6 +34,8 @@ const Borrows = () => {
             className="add-btn"
           />
           <AiFillDelete onClick={deleteBorrow} className="delete-btn" />
+
+          <AiFillDollarCircle className="print-btn" onClick={sellBorrowed} />
         </div>
         <div>
           <GlobalFilter

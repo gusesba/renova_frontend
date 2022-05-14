@@ -12,6 +12,10 @@ const Client = () => {
   const { id } = useParams();
 
   useEffect(() => {
+    setPageName("Cliente");
+  }, []);
+
+  useEffect(() => {
     fetchClient(id);
   }, [id]);
 

@@ -25,7 +25,7 @@ function App() {
             <Route path="/clients" exact element={<Clients />} />
             <Route path="/client/:id" exact element={<Client />} />
             <Route path="/product/:id" exact element={<Product />} />
-            <Route path="/sell/:id" exact element={<SellFront />} />
+            <Route path="/sell/:id/:sell" exact element={<SellFront />} />
             <Route path="/borrows" exact element={<Borrows />} />
           </Routes>
         </BrowserRouter>

@@ -3,8 +3,12 @@ import { useParams } from "react-router-dom";
 import { useGlobalContext } from "../context";
 
 const Product = () => {
-  const { fetchProduct, productData } = useGlobalContext();
+  const { fetchProduct, productData, setPageName } = useGlobalContext();
   const { id } = useParams();
+
+  useEffect(() => {
+    setPageName("Produto");
+  }, []);
 
   useEffect(() => {
     fetchProduct(id);

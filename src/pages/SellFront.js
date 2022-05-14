@@ -6,6 +6,7 @@ import {
   AiFillDelete,
   AiOutlineArrowRight,
   AiFillEdit,
+  AiFillPrinter,
 } from "react-icons/ai";
 import { GiCardJoker } from "react-icons/gi";
 import ProductsTable from "../components/sellFront/ProductsTable";
@@ -22,10 +23,19 @@ const SellFront = () => {
     deleteLine,
     finishSell,
     addJoker,
-    editSellFrontProductPrice,
+    printRecibo,
+    setPageName,
   } = useGlobalContext();
-  const { id } = useParams();
+  const { id, sell } = useParams();
   const [total, setTotal] = useState(0);
+
+  useEffect(() => {
+    if (sell === "sell") {
+      setPageName("Venda");
+    } else {
+      setPageName("Empréstimo");
+    }
+  }, [sell]);
 
   useEffect(() => {
     fetchClient(id);
@@ -73,7 +83,7 @@ const SellFront = () => {
           </div>
           <div className="card-client">
             <div className="card-inside">
-              <h4>{total.toFixed(2)}</h4>
+              <h4>{sell === "sell" ? total.toFixed(2) : 0}</h4>
               <span className="card-description">Total</span>
             </div>
           </div>
@@ -92,9 +102,15 @@ const SellFront = () => {
             onClick={() => setShowEditPriceModal(true)}
           />
           <AiFillDelete onClick={deleteLine} className="delete-btn" />
+          <AiFillPrinter
+            className="print-btn"
+            onClick={() =>
+              printRecibo(sell === "sell" ? "Venda" : "Emprestimo")
+            }
+          />
           <AiOutlineArrowRight
             className="sell-btn"
-            onClick={() => finishSell(id)}
+            onClick={() => finishSell(id, sell)}
           />
         </div>
       </div>

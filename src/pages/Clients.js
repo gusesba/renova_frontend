@@ -7,6 +7,8 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
 } from "react-icons/ai";
+
+import { FaShoppingBag } from "react-icons/fa";
 import AddClientsModal from "../components/clients/AddClientsModal";
 import GlobalFilter from "../components/clients/GlobalFilter";
 import { useGlobalContext } from "../context";
@@ -41,8 +43,16 @@ const Clients = () => {
             onClick={() => goToClientPage()}
           />
           <AiFillDollarCircle
-            onClick={() => goToSellFrontPage()}
+            onClick={() => {
+              goToSellFrontPage("sell");
+            }}
             className="sell-btn"
+          />
+          <FaShoppingBag
+            onClick={() => {
+              goToSellFrontPage("borrow");
+            }}
+            className="print-btn"
           />
         </div>
         <div>
