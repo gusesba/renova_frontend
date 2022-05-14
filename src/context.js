@@ -401,11 +401,6 @@ const AppProvider = ({ children }) => {
     }
   };
 
-  const sellBorrowed = () => {
-    if (borrowRows.length > 0) {
-    }
-  };
-
   //SellFront
 
   const deleteLine = () => {

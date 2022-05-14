@@ -5,11 +5,8 @@ import { AiOutlineMenu, AiOutlineInstagram } from "react-icons/ai";
 import { useGlobalContext } from "../context";
 
 const Topbar = () => {
-  const {
-    setIsSidebarCollapsed,
-    isSidebarCollapsed,
-    pageName,
-  } = useGlobalContext();
+  const { setIsSidebarCollapsed, isSidebarCollapsed, pageName } =
+    useGlobalContext();
   return (
     <>
       <Navbar className="color-nav">
