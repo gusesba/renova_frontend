@@ -8,7 +8,7 @@ import {
 import AddBorrowsModal from "../components/borrows/AddBorrowModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
-import GlobalFilter from "../components/clients/GlobalFilter";
+import { GlobalFilter } from "../components/GlobalFilter";
 
 const Borrows = () => {
   const {
@@ -35,9 +35,8 @@ const Borrows = () => {
         </div>
         <div>
           <GlobalFilter
-            filter={borrowFilter.state && borrowFilter.state.globalFilter}
+            filter={borrowFilter.globalFilter}
             setFilter={borrowFilter.setGlobalFilter}
-            placeholder="Busca"
           />
         </div>
         <div>

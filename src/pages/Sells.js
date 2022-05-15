@@ -8,15 +8,15 @@ import {
 import AddSellsModal from "../components/sells/AddSellsModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
-import GlobalFilter from "../components/clients/GlobalFilter";
+import { GlobalFilter } from "../components/GlobalFilter";
 
 const Sells = () => {
   const {
     setShowAddSellModal,
     setPageName,
     sellPageOptions,
-    sellFilter,
     deleteSell,
+    sellFilter,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -35,9 +35,8 @@ const Sells = () => {
         </div>
         <div>
           <GlobalFilter
-            filter={sellFilter.state && sellFilter.state.globalFilter}
+            filter={sellFilter.globalFilter}
             setFilter={sellFilter.setGlobalFilter}
-            placeholder="Busca"
           />
         </div>
         <div>

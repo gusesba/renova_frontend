@@ -18,7 +18,7 @@ const AddSellsModal = () => {
 
   const handleSubmit = () => {
     if (values.buyerId && values.productId) {
-      addSell(values);
+      addSell({ ...values, sellPrice: "-" });
       setShowAddSellModal(false);
       setValues({ buyerId: "", productId: "" });
     } else {

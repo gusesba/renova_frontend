@@ -422,6 +422,7 @@ const AppProvider = ({ children }) => {
           sellPrice: product.sellPrice,
         });
       });
+      window.location = "/sells";
     } else {
       sellFrontProducts.forEach((product) => {
         addBorrow({
@@ -430,6 +431,7 @@ const AppProvider = ({ children }) => {
           sellPrice: product.sellPrice,
         });
       });
+      window.location = "/borrows";
     }
   };
 

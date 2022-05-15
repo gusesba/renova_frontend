@@ -11,7 +11,8 @@ import {
 } from "react-icons/ai";
 import { useGlobalContext } from "../context";
 import AddProductsModal from "../components/products/AddProductsModal";
-import GlobalFilter from "../components/clients/GlobalFilter";
+import { GlobalFilter } from "../components/GlobalFilter";
+
 const Products = () => {
   const {
     setShowAddProductModal,
@@ -19,11 +20,11 @@ const Products = () => {
     goToProductPage,
     printEtiqueta,
     productPageOptions,
-    productFilter,
     setPageName,
     fetchClients,
     setOptions,
     clientsData,
+    productFilter,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -73,9 +74,8 @@ const Products = () => {
         </div>
         <div>
           <GlobalFilter
-            filter={productFilter.state && productFilter.state.globalFilter}
+            filter={productFilter.globalFilter}
             setFilter={productFilter.setGlobalFilter}
-            placeholder="Busca"
           />
         </div>
         <div>

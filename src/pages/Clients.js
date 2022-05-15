@@ -10,9 +10,9 @@ import {
 
 import { FaShoppingBag } from "react-icons/fa";
 import AddClientsModal from "../components/clients/AddClientsModal";
-import GlobalFilter from "../components/clients/GlobalFilter";
 import { useGlobalContext } from "../context";
 import { useEffect } from "react";
+import { GlobalFilter } from "../components/GlobalFilter";
 
 const Clients = () => {
   const {
@@ -21,8 +21,8 @@ const Clients = () => {
     goToClientPage,
     goToSellFrontPage,
     pageOptions,
-    clientFilter,
     setPageName,
+    clientFilter,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -57,9 +57,8 @@ const Clients = () => {
         </div>
         <div>
           <GlobalFilter
-            filter={clientFilter.state && clientFilter.state.globalFilter}
+            filter={clientFilter.globalFilter}
             setFilter={clientFilter.setGlobalFilter}
-            placeholder="Busca"
           />
         </div>
         <div>

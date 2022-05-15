@@ -3,8 +3,8 @@ import {
   useTable,
   useRowSelect,
   usePagination,
-  useGlobalFilter,
   useFilters,
+  useGlobalFilter,
 } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
@@ -82,8 +82,8 @@ const SellsTable = () => {
 
   const tableInstance = useTable(
     { columns, data },
-    useFilters,
     useGlobalFilter,
+    useFilters,
     usePagination,
     useRowSelect,
     (hooks) => {
@@ -115,9 +115,9 @@ const SellsTable = () => {
     canPreviousPage,
     pageOptions,
     state,
-    setGlobalFilter,
     prepareRow,
     selectedFlatRows,
+    setGlobalFilter,
   } = tableInstance;
 
   useEffect(() => {
@@ -145,8 +145,8 @@ const SellsTable = () => {
   ]);
 
   useEffect(() => {
-    setSellFilter({ state, setGlobalFilter });
-  }, [state, setGlobalFilter]);
+    setSellFilter({ globalFilter: state.globalFilter, setGlobalFilter });
+  }, [state.globalFilter, setGlobalFilter]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>

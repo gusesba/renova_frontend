@@ -50,8 +50,8 @@ const ClientsTable = () => {
 
   const tableInstance = useTable(
     { columns, data },
-    useFilters,
     useGlobalFilter,
+    useFilters,
     usePagination,
     useRowSelect,
     (hooks) => {
@@ -113,8 +113,8 @@ const ClientsTable = () => {
   ]);
 
   useEffect(() => {
-    setClientFilter({ state, setGlobalFilter });
-  }, [state, setGlobalFilter]);
+    setClientFilter({ globalFilter: state.globalFilter, setGlobalFilter });
+  }, [state.globalFilter, setGlobalFilter]);
 
   return (
     <>

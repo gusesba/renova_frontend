@@ -3,8 +3,8 @@ import {
   useTable,
   useRowSelect,
   usePagination,
-  useGlobalFilter,
   useFilters,
+  useGlobalFilter,
 } from "react-table";
 import { useGlobalContext } from "../../context";
 import Table from "react-bootstrap/Table";
@@ -77,8 +77,8 @@ const BorrowsTable = () => {
 
   const tableInstance = useTable(
     { columns, data },
-    useFilters,
     useGlobalFilter,
+    useFilters,
     usePagination,
     useRowSelect,
     (hooks) => {
@@ -140,8 +140,8 @@ const BorrowsTable = () => {
   ]);
 
   useEffect(() => {
-    setBorrowFilter({ state, setGlobalFilter });
-  }, [state, setGlobalFilter]);
+    setBorrowFilter({ globalFilter: state.globalFilter, setGlobalFilter });
+  }, [state.globalFilter, setGlobalFilter]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>
