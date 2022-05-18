@@ -40,6 +40,7 @@ const AppProvider = ({ children }) => {
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
   const [showEditPriceModal, setShowEditPriceModal] = useState(false);
+  const url_server = "http://localhost:5000";
 
   const [alert, setAlert] = useState({
     show: false,
@@ -52,7 +53,7 @@ const AppProvider = ({ children }) => {
   const fetchClients = async () => {
     axios({
       method: "get",
-      url: "http://localhost:5000/api/v1/clients",
+      url: url_server + "/api/v1/clients",
     })
       .then(function (response) {
         setClientsData(response.data);
@@ -70,7 +71,7 @@ const AppProvider = ({ children }) => {
   const addClient = async (data) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/clients",
+      url: url_server + "/api/v1/clients",
       data,
     })
       .then(() => {
@@ -94,7 +95,7 @@ const AppProvider = ({ children }) => {
   const fetchClient = async (id) => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/v1/clients/${id}`,
+      url: url_server + `/api/v1/clients/${id}`,
     })
       .then((response) => {
         response.data.client.income = response.data.income[0].grossIncome;
@@ -107,9 +108,8 @@ const AppProvider = ({ children }) => {
 
   const deleteClient = async (data) => {
     if (clientRows.length === 1) {
-      const url = "http://localhost:5000/api/v1/clients/".concat(
-        clientRows[0].original.id
-      );
+      const url =
+        url_server + "/api/v1/clients/".concat(clientRows[0].original.id);
       axios({
         method: "delete",
         url: url,
@@ -171,7 +171,7 @@ const AppProvider = ({ children }) => {
   const fetchProducts = async () => {
     axios({
       method: "get",
-      url: "http://localhost:5000/api/v1/products",
+      url: url_server + "/api/v1/products",
     })
       .then(function (response) {
         setProductsData(response.data);
@@ -189,7 +189,7 @@ const AppProvider = ({ children }) => {
   const addProduct = async (data) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/products",
+      url: url_server + "/api/v1/products",
       data,
     })
       .then((res) => {
@@ -207,9 +207,8 @@ const AppProvider = ({ children }) => {
 
   const deleteProduct = async (data) => {
     if (productRows.length === 1) {
-      const url = "http://localhost:5000/api/v1/products/".concat(
-        productRows[0].original.id
-      );
+      const url =
+        url_server + "/api/v1/products/".concat(productRows[0].original.id);
       axios({
         method: "delete",
         url: url,
@@ -242,7 +241,7 @@ const AppProvider = ({ children }) => {
   const fetchProduct = async (id, page) => {
     axios({
       method: "get",
-      url: `http://localhost:5000/api/v1/products/${id}`,
+      url: url_server + `/api/v1/products/${id}`,
     })
       .then((response) => {
         if (page === "sell_front") {
@@ -283,7 +282,7 @@ const AppProvider = ({ children }) => {
   const fetchSells = async () => {
     axios({
       method: "get",
-      url: "http://localhost:5000/api/v1/sells",
+      url: url_server + "/api/v1/sells",
     })
       .then(function (response) {
         setSellData(response.data);
@@ -301,7 +300,7 @@ const AppProvider = ({ children }) => {
   const addSell = async (data) => {
     axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/sells",
+      url: url_server + "/api/v1/sells",
       data,
     })
       .then((response) => {
@@ -331,9 +330,7 @@ const AppProvider = ({ children }) => {
 
   const deleteSell = async (data) => {
     if (sellRows.length === 1) {
-      const url = "http://localhost:5000/api/v1/sells/".concat(
-        sellRows[0].original.id
-      );
+      const url = url_server + "/api/v1/sells/".concat(sellRows[0].original.id);
       axios({
         method: "delete",
         url: url,
@@ -356,7 +353,7 @@ const AppProvider = ({ children }) => {
   const fetchBorrows = async () => {
     axios({
       method: "get",
-      url: "http://localhost:5000/api/v1/sells/borrows",
+      url: url_server + "/api/v1/sells/borrows",
     })
       .then(function (response) {
         setBorrowData(response.data);
@@ -370,7 +367,7 @@ const AppProvider = ({ children }) => {
     console.log(data);
     axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/sells/borrows",
+      url: url_server + "/api/v1/sells/borrows",
       data,
     })
       .then(() => {
@@ -381,9 +378,8 @@ const AppProvider = ({ children }) => {
 
   const deleteBorrow = async (data) => {
     if (borrowRows.length === 1) {
-      const url = "http://localhost:5000/api/v1/sells/".concat(
-        borrowRows[0].original.id
-      );
+      const url =
+        url_server + "/api/v1/sells/".concat(borrowRows[0].original.id);
       axios({
         method: "delete",
         url: url,
@@ -446,7 +442,7 @@ const AppProvider = ({ children }) => {
     };
     axios({
       method: "post",
-      url: "http://localhost:5000/api/v1/products",
+      url: url_server + "/api/v1/products",
       data,
     })
       .then((res) => {
