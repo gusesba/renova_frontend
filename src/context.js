@@ -904,9 +904,9 @@ const AppProvider = ({ children }) => {
         console.log(found);
         var config = qz.configs.create(found);
         var productsData = [];
-        var total = 0;
+        var total = 0.0;
         for (var i = 0; i < sellFrontProducts.length; i++) {
-          total += sellFrontProducts[i].sellPrice;
+          total += parseFloat(sellFrontProducts[i].sellPrice);
           var text =
             sellFrontProducts[i].type +
             " " +

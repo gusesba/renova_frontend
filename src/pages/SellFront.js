@@ -42,9 +42,9 @@ const SellFront = () => {
   }, [id]);
 
   useEffect(() => {
-    let total = 0;
+    let total = 0.0;
     sellFrontProducts.forEach((product) => {
-      total += product.price;
+      total += parseFloat(product.sellPrice);
     });
     setTotal(total);
   }, [sellFrontProducts]);
