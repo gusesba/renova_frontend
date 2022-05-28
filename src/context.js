@@ -15,6 +15,7 @@ const AppProvider = ({ children }) => {
   const [pageOptions, setPageOptions] = useState({});
   const [clientFilter, setClientFilter] = useState({});
   const [clientPageOptions, setClientPageOptions] = useState({});
+  const [clientColumns, setClientColumns] = useState([]);
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -40,7 +41,8 @@ const AppProvider = ({ children }) => {
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
   const [showEditPriceModal, setShowEditPriceModal] = useState(false);
-  const url_server = "https://renovab.herokuapp.com";
+  //const url_server = "https://renovab.herokuapp.com";
+  const url_server = "http://localhost:5000";
 
   const [alert, setAlert] = useState({
     show: false,
@@ -1051,6 +1053,8 @@ const AppProvider = ({ children }) => {
         showEditPriceModal,
         setShowEditPriceModal,
         printRecibo,
+        clientColumns,
+        setClientColumns,
       }}
     >
       {children}

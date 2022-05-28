@@ -280,3 +280,48 @@ main {
   cursor: pointer;
   transform: scale(1.15);
 }
+
+.checkbox-input {
+  display: none;
+}
+
+.checkbox-span {
+  margin: 3px;
+}
+
+.column-btns {
+  display: flex;
+  justify-content: space-between;
+  transition: 2s;
+}
+
+.checkbox-input:checked ~ .checkbox-span {
+  background-color: #005799;
+  border-color: #005799;
+}
+
+.show-columns-btns {
+  display: none;
+}
+
+.arrow-down-btn {
+  font-size: 25px;
+  color: white;
+  margin-bottom: 4px;
+}
+
+.show-columns-btns:checked ~ .show-columns-span {
+  background-color: #005799;
+}
+
+.show-columns-btns:checked ~ .column-btns {
+  display: none;
+}
+
+.show-columns-span {
+  padding: 5px !important;
+  background-color: #0057f9;
+  transition: 0.2s;
+  padding: 3px;
+  border-radius: 3px;
+}

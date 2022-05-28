@@ -6,6 +6,7 @@ import {
   AiFillDollarCircle,
   AiOutlineLeft,
   AiOutlineRight,
+  AiOutlineArrowDown,
 } from "react-icons/ai";
 
 import { FaShoppingBag } from "react-icons/fa";
@@ -13,6 +14,7 @@ import AddClientsModal from "../components/clients/AddClientsModal";
 import { useGlobalContext } from "../context";
 import { useEffect } from "react";
 import { GlobalFilter } from "../components/GlobalFilter";
+import ColumnSelector from "../components/ColumnSelector";
 
 const Clients = () => {
   const {
@@ -23,6 +25,7 @@ const Clients = () => {
     pageOptions,
     setPageName,
     clientFilter,
+    clientColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -33,6 +36,15 @@ const Clients = () => {
       <AddClientsModal />
       <div className="table-header">
         <div>
+          <div>
+            <label>
+              <input className="show-columns-btns" type="checkbox" />
+              <span className="show-columns-span">
+                <AiOutlineArrowDown className="arrow-down-btn" />
+              </span>
+              <ColumnSelector allColumns={clientColumns} />
+            </label>
+          </div>
           <AiFillPlusSquare
             className="add-btn"
             onClick={() => setShowAddClientModal(true)}
@@ -48,6 +60,7 @@ const Clients = () => {
             }}
             className="sell-btn"
           />
+
           <FaShoppingBag
             onClick={() => {
               goToSellFrontPage("borrow");
