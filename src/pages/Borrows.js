@@ -4,11 +4,13 @@ import {
   AiFillDelete,
   AiOutlineLeft,
   AiOutlineRight,
+  AiOutlineArrowDown,
 } from "react-icons/ai";
 import AddBorrowsModal from "../components/borrows/AddBorrowModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import { GlobalFilter } from "../components/GlobalFilter";
+import ColumnSelector from "../components/ColumnSelector";
 
 const Borrows = () => {
   const {
@@ -17,6 +19,7 @@ const Borrows = () => {
     borrowPageOptions,
     borrowFilter,
     deleteBorrow,
+    borrowsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -27,6 +30,15 @@ const Borrows = () => {
       <AddBorrowsModal />
       <div className="table-header">
         <div>
+          <div>
+            <label>
+              <input className="show-columns-btns" type="checkbox" />
+              <span className="show-columns-span">
+                <AiOutlineArrowDown className="arrow-down-btn" />
+              </span>
+              <ColumnSelector allColumns={borrowsColumns} />
+            </label>
+          </div>
           <AiFillPlusSquare
             onClick={() => setShowAddBorrowModal(true)}
             className="add-btn"

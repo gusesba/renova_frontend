@@ -4,11 +4,13 @@ import {
   AiFillDelete,
   AiOutlineLeft,
   AiOutlineRight,
+  AiOutlineArrowDown,
 } from "react-icons/ai";
 import AddSellsModal from "../components/sells/AddSellsModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import { GlobalFilter } from "../components/GlobalFilter";
+import ColumnSelector from "../components/ColumnSelector";
 
 const Sells = () => {
   const {
@@ -17,6 +19,7 @@ const Sells = () => {
     sellPageOptions,
     deleteSell,
     sellFilter,
+    sellsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -27,6 +30,15 @@ const Sells = () => {
       <AddSellsModal />
       <div className="table-header">
         <div>
+          <div>
+            <label>
+              <input className="show-columns-btns" type="checkbox" />
+              <span className="show-columns-span">
+                <AiOutlineArrowDown className="arrow-down-btn" />
+              </span>
+              <ColumnSelector allColumns={sellsColumns} />
+            </label>
+          </div>
           <AiFillPlusSquare
             onClick={() => setShowAddSellModal(true)}
             className="add-btn"

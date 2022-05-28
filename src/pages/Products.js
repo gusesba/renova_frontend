@@ -8,10 +8,12 @@ import {
   AiFillPrinter,
   AiOutlineLeft,
   AiOutlineRight,
+  AiOutlineArrowDown,
 } from "react-icons/ai";
 import { useGlobalContext } from "../context";
 import AddProductsModal from "../components/products/AddProductsModal";
 import { GlobalFilter } from "../components/GlobalFilter";
+import ColumnSelector from "../components/ColumnSelector";
 
 const Products = () => {
   const {
@@ -25,6 +27,7 @@ const Products = () => {
     setOptions,
     clientsData,
     productFilter,
+    productsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -55,6 +58,15 @@ const Products = () => {
       <AddProductsModal />
       <div className="table-header">
         <div>
+          <div>
+            <label>
+              <input className="show-columns-btns" type="checkbox" />
+              <span className="show-columns-span">
+                <AiOutlineArrowDown className="arrow-down-btn" />
+              </span>
+              <ColumnSelector allColumns={productsColumns} />
+            </label>
+          </div>
           <AiFillPlusSquare
             onClick={() => setShowAddProductModal(true)}
             className="add-btn"

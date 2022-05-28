@@ -4,11 +4,21 @@ import { useParams } from "react-router-dom";
 import Cards from "../components/client/Cards";
 import ClientTable from "../components/client/ClientTable";
 import Button from "react-bootstrap/Button";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import {
+  AiOutlineLeft,
+  AiOutlineRight,
+  AiOutlineArrowDown,
+} from "react-icons/ai";
+import ColumnSelector from "../components/ColumnSelector";
 
 const Client = () => {
-  const { fetchClient, setActualTableUsage, setPageName, clientPageOptions } =
-    useGlobalContext();
+  const {
+    fetchClient,
+    setActualTableUsage,
+    setPageName,
+    clientPageOptions,
+    clientColumns,
+  } = useGlobalContext();
   const { id } = useParams();
 
   useEffect(() => {
@@ -24,6 +34,15 @@ const Client = () => {
       <Cards />
       <div className="client-btn-group">
         <div>
+          <div>
+            <label>
+              <input className="show-columns-btns" type="checkbox" />
+              <span className="show-columns-span">
+                <AiOutlineArrowDown className="arrow-down-btn" />
+              </span>
+              <ColumnSelector allColumns={clientColumns} />
+            </label>
+          </div>
           <Button
             onClick={() => setActualTableUsage("total")}
             className="btn"

@@ -18,6 +18,7 @@ const SellsTable = () => {
     setSellRows,
     setSellPageOptions,
     setSellFilter,
+    setSellsColumns,
   } = useGlobalContext();
   const data = useMemo(() => [...sellData], [sellData]);
   useEffect(() => {
@@ -116,6 +117,7 @@ const SellsTable = () => {
     pageOptions,
     state,
     prepareRow,
+    allColumns,
     selectedFlatRows,
     setGlobalFilter,
   } = tableInstance;
@@ -147,6 +149,10 @@ const SellsTable = () => {
   useEffect(() => {
     setSellFilter({ globalFilter: state.globalFilter, setGlobalFilter });
   }, [state.globalFilter, setGlobalFilter]);
+
+  useEffect(() => {
+    setSellsColumns(allColumns);
+  }, [allColumns]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>

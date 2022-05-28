@@ -15,6 +15,7 @@ const AppProvider = ({ children }) => {
   const [pageOptions, setPageOptions] = useState({});
   const [clientFilter, setClientFilter] = useState({});
   const [clientPageOptions, setClientPageOptions] = useState({});
+  const [clientsColumns, setClientsColumns] = useState([]);
   const [clientColumns, setClientColumns] = useState([]);
 
   const [productsData, setProductsData] = useState([]);
@@ -24,18 +25,21 @@ const AppProvider = ({ children }) => {
   const [productPageOptions, setProductPageOptions] = useState({});
   const [productFilter, setProductFilter] = useState({});
   const [options, setOptions] = useState([]);
+  const [productsColumns, setProductsColumns] = useState([]);
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
   const [sellRows, setSellRows] = useState([]);
   const [sellPageOptions, setSellPageOptions] = useState({});
   const [sellFilter, setSellFilter] = useState({});
+  const [sellsColumns, setSellsColumns] = useState([]);
 
   const [borrowData, setBorrowData] = useState([]);
   const [showAddBorrowModal, setShowAddBorrowModal] = useState(false);
   const [borrowRows, setBorrowRows] = useState([]);
   const [borrowPageOptions, setBorrowPageOptions] = useState({});
   const [borrowFilter, setBorrowFilter] = useState({});
+  const [borrowsColumns, setBorrowsColumns] = useState([]);
 
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
@@ -1053,6 +1057,14 @@ const AppProvider = ({ children }) => {
         showEditPriceModal,
         setShowEditPriceModal,
         printRecibo,
+        clientsColumns,
+        setClientsColumns,
+        productsColumns,
+        setProductsColumns,
+        sellsColumns,
+        setSellsColumns,
+        borrowsColumns,
+        setBorrowsColumns,
         clientColumns,
         setClientColumns,
       }}

@@ -25,7 +25,7 @@ const Clients = () => {
     pageOptions,
     setPageName,
     clientFilter,
-    clientColumns,
+    clientsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const Clients = () => {
               <span className="show-columns-span">
                 <AiOutlineArrowDown className="arrow-down-btn" />
               </span>
-              <ColumnSelector allColumns={clientColumns} />
+              <ColumnSelector allColumns={clientsColumns} />
             </label>
           </div>
           <AiFillPlusSquare

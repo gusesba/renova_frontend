@@ -18,6 +18,7 @@ const ProductsTable = () => {
     setProductRows,
     setProductPageOptions,
     setProductFilter,
+    setProductsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -102,6 +103,7 @@ const ProductsTable = () => {
     headerGroups,
     rows,
     prepareRow,
+    allColumns,
     selectedFlatRows,
     page,
     nextPage,
@@ -140,6 +142,10 @@ const ProductsTable = () => {
   useEffect(() => {
     setProductFilter({ globalFilter: state.globalFilter, setGlobalFilter });
   }, [state.globalFilter, setGlobalFilter]);
+
+  useEffect(() => {
+    setProductsColumns(allColumns);
+  }, [allColumns]);
 
   return (
     <>

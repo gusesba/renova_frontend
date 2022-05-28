@@ -4,8 +4,12 @@ import { useTable, usePagination } from "react-table";
 import Table from "react-bootstrap/Table";
 
 const ClientTable = () => {
-  const { clientData, actualTableUsage, setClientPageOptions } =
-    useGlobalContext();
+  const {
+    clientData,
+    actualTableUsage,
+    setClientPageOptions,
+    setClientColumns,
+  } = useGlobalContext();
   const [tableData, setTableData] = useState([1, 2]);
 
   useEffect(() => {
@@ -80,6 +84,7 @@ const ClientTable = () => {
     rows,
     prepareRow,
     page,
+    allColumns,
     nextPage,
     previousPage,
     canNextPage,
@@ -107,6 +112,10 @@ const ClientTable = () => {
     pageOptions,
     state,
   ]);
+
+  useEffect(() => {
+    setClientColumns(allColumns);
+  }, [allColumns]);
 
   return (
     <>

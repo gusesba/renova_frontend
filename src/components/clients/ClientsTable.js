@@ -18,7 +18,7 @@ const ClientsTable = () => {
     fetchClients,
     setPageOptions,
     setClientFilter,
-    setClientColumns,
+    setClientsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -87,7 +87,6 @@ const ClientsTable = () => {
     setGlobalFilter,
     prepareRow,
     allColumns,
-    getToggleHideAllColumnsProps,
     selectedFlatRows,
   } = tableInstance;
 
@@ -120,7 +119,7 @@ const ClientsTable = () => {
   }, [state.globalFilter, setGlobalFilter]);
 
   useEffect(() => {
-    setClientColumns(allColumns);
+    setClientsColumns(allColumns);
   }, [allColumns]);
 
   return (

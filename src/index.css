@@ -290,7 +290,7 @@ main {
 }
 
 .column-btns {
-  display: flex;
+  display: none;
   justify-content: space-between;
   transition: 2s;
 }
@@ -316,7 +316,7 @@ main {
 }
 
 .show-columns-btns:checked ~ .column-btns {
-  display: none;
+  display: flex;
 }
 
 .show-columns-span {

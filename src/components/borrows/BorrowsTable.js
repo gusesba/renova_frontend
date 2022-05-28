@@ -18,6 +18,7 @@ const BorrowsTable = () => {
     setBorrowRows,
     setBorrowPageOptions,
     setBorrowFilter,
+    setBorrowsColumns,
   } = useGlobalContext();
   const data = useMemo(() => [...borrowData], [borrowData]);
   useEffect(() => {
@@ -113,6 +114,7 @@ const BorrowsTable = () => {
     setGlobalFilter,
     prepareRow,
     selectedFlatRows,
+    allColumns,
   } = tableInstance;
 
   useEffect(() => {
@@ -142,6 +144,10 @@ const BorrowsTable = () => {
   useEffect(() => {
     setBorrowFilter({ globalFilter: state.globalFilter, setGlobalFilter });
   }, [state.globalFilter, setGlobalFilter]);
+
+  useEffect(() => {
+    setBorrowsColumns(allColumns);
+  }, [allColumns]);
 
   return (
     <Table striped bordered hover {...getTableProps()}>
