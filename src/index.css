@@ -308,6 +308,7 @@ main {
   font-size: 25px;
   color: white;
   margin-bottom: 4px;
+  transition: 0.2s;
 }
 
 .show-columns-btns:checked ~ .show-columns-span {
@@ -324,4 +325,9 @@ main {
   transition: 0.2s;
   padding: 3px;
   border-radius: 3px;
+}
+
+.arrow-down-btn:hover {
+  font-size: 30px;
+  cursor: pointer;
 }
