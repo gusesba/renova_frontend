@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import { useParams } from "react-router-dom";
-import Cards from "../components/client/Cards";
 import ClientTable from "../components/client/ClientTable";
 import Button from "react-bootstrap/Button";
 import {
@@ -31,7 +30,6 @@ const Client = () => {
 
   return (
     <main>
-      <Cards />
       <div className="client-btn-group">
         <div>
           <div>

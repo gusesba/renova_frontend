@@ -118,9 +118,14 @@ const AppProvider = ({ children }) => {
       url: url_server + `/api/v1/clients/${id}`,
     })
       .then((response) => {
-        response.data.client.income = response.data.income[0].grossIncome;
-        response.data.client.boughtValue =
-          response.data.boughtValue[0].grossIncome;
+        response.data.client.product.forEach((product) => {
+          let date = new Date(product.createdAt);
+          product.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
+        response.data.client.buyer.forEach((buyer) => {
+          let date = new Date(buyer.product.createdAt);
+          buyer.product.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
         setClientData(response.data.client);
       })
       .catch((err) => console.log(err));

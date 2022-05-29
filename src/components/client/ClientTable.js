@@ -10,7 +10,7 @@ const ClientTable = () => {
     setClientPageOptions,
     setClientColumns,
   } = useGlobalContext();
-  const [tableData, setTableData] = useState([1, 2]);
+  const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     if (actualTableUsage === "total") {
@@ -70,6 +70,10 @@ const ClientTable = () => {
         {
           Header: "Descrição",
           accessor: "description",
+        },
+        {
+          Header: "Entrada",
+          accessor: "entryDate",
         },
       ],
     [tableData]
