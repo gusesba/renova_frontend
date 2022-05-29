@@ -72,6 +72,11 @@ const DonationsTable = () => {
           accessor: "buyer.name",
           Filter: ColumnFilter,
         },
+        {
+          Header: "Entrada",
+          accessor: "entryDate",
+          Filter: ColumnFilter,
+        },
       ],
     [donationsData]
   );

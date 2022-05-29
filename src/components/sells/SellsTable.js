@@ -77,6 +77,11 @@ const SellsTable = () => {
           accessor: "buyer.name",
           Filter: ColumnFilter,
         },
+        {
+          Header: "Entrada",
+          accessor: "entryDate",
+          Filter: ColumnFilter,
+        },
       ],
     [sellData]
   );

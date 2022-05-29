@@ -69,6 +69,11 @@ const ProductsTable = () => {
           accessor: "description",
           Filter: ColumnFilter,
         },
+        {
+          Header: "Entrada",
+          accessor: "entryDate",
+          Filter: ColumnFilter,
+        },
       ],
     [productsData]
   );

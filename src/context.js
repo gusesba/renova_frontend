@@ -194,6 +194,10 @@ const AppProvider = ({ children }) => {
       url: url_server + "/api/v1/products",
     })
       .then(function (response) {
+        response.data.forEach((product) => {
+          let date = new Date(product.createdAt);
+          product.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
         setProductsData(response.data);
       })
       .catch((err) => {
@@ -305,6 +309,10 @@ const AppProvider = ({ children }) => {
       url: url_server + "/api/v1/sells",
     })
       .then(function (response) {
+        response.data.forEach((sell) => {
+          let date = new Date(sell.createdAt);
+          sell.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
         setSellData(response.data);
       })
       .catch((err) => {
@@ -376,6 +384,10 @@ const AppProvider = ({ children }) => {
       url: url_server + "/api/v1/sells/borrows",
     })
       .then(function (response) {
+        response.data.forEach((borrow) => {
+          let date = new Date(borrow.createdAt);
+          borrow.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
         setBorrowData(response.data);
       })
       .catch((err) => {
@@ -459,6 +471,10 @@ const AppProvider = ({ children }) => {
       url: url_server + "/api/v1/sells/donations",
     })
       .then(function (response) {
+        response.data.forEach((donation) => {
+          let date = new Date(donation.createdAt);
+          donation.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
         setDonationsData(response.data);
       })
       .catch((err) => {
@@ -508,6 +524,10 @@ const AppProvider = ({ children }) => {
       url: url_server + "/api/v1/sells/devolutions",
     })
       .then(function (response) {
+        response.data.forEach((devolution) => {
+          let date = new Date(devolution.createdAt);
+          devolution.entryDate = date.getMonth() + "/" + date.getFullYear();
+        });
         setDevolutionsData(response.data);
       })
       .catch((err) => {
