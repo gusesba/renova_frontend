@@ -1,4 +1,4 @@
-import DonationsTable from "../components/donations/DonationsTable";
+import DevolutionsTable from "../components/devolutions/DevolutionsTable";
 import {
   AiFillPlusSquare,
   AiFillDelete,
@@ -6,28 +6,28 @@ import {
   AiOutlineRight,
   AiOutlineArrowDown,
 } from "react-icons/ai";
-import AddDonationModal from "../components/donations/AddDonationModal";
+import AddDevolutionModal from "../components/devolutions/AddDevolutionModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
 
-const Donations = () => {
+const Devolutions = () => {
   const {
-    setShowAddDonationModal,
+    setShowAddDevolutionModal,
     setPageName,
-    donationsPageOptions,
-    donationsFilter,
-    deleteDonation,
-    donationsColumns,
+    devolutionsPageOptions,
+    devolutionsFilter,
+    deleteDevolution,
+    devolutionsColumns,
   } = useGlobalContext();
 
   useEffect(() => {
-    setPageName("Doações");
+    setPageName("Devolvidos");
   }, []);
   return (
     <main>
-      <AddDonationModal />
+      <AddDevolutionModal />
       <div className="table-header">
         <div>
           <div>
@@ -36,54 +36,54 @@ const Donations = () => {
               <span className="show-columns-span">
                 <AiOutlineArrowDown className="arrow-down-btn" />
               </span>
-              <ColumnSelector allColumns={donationsColumns} />
+              <ColumnSelector allColumns={devolutionsColumns} />
             </label>
           </div>
           <AiFillPlusSquare
-            onClick={() => setShowAddDonationModal(true)}
+            onClick={() => setShowAddDevolutionModal(true)}
             className="add-btn"
           />
-          <AiFillDelete onClick={deleteDonation} className="delete-btn" />
+          <AiFillDelete onClick={deleteDevolution} className="delete-btn" />
         </div>
         <div>
           <GlobalFilter
-            filter={donationsFilter.globalFilter}
-            setFilter={donationsFilter.setGlobalFilter}
+            filter={devolutionsFilter.globalFilter}
+            setFilter={devolutionsFilter.setGlobalFilter}
           />
         </div>
         <div>
           <AiOutlineLeft
             className={
-              donationsPageOptions.canPreviousPage
+              devolutionsPageOptions.canPreviousPage
                 ? "pagination-arrow"
                 : "pagination-arrow-disabled"
             }
-            onClick={() => donationsPageOptions.previousPage()}
+            onClick={() => devolutionsPageOptions.previousPage()}
           />
           <span>
             {" "}
             Page{" "}
             <strong>
-              {donationsPageOptions.state &&
-                donationsPageOptions.state.pageIndex + 1}{" "}
+              {devolutionsPageOptions.state &&
+                devolutionsPageOptions.state.pageIndex + 1}{" "}
               of{" "}
-              {donationsPageOptions.pageOptions &&
-                donationsPageOptions.pageOptions.length}
+              {devolutionsPageOptions.pageOptions &&
+                devolutionsPageOptions.pageOptions.length}
             </strong>
           </span>
           <AiOutlineRight
             className={
-              donationsPageOptions.canNextPage
+              devolutionsPageOptions.canNextPage
                 ? "pagination-arrow"
                 : "pagination-arrow-disabled"
             }
-            onClick={() => donationsPageOptions.nextPage()}
+            onClick={() => devolutionsPageOptions.nextPage()}
           />
         </div>
       </div>
-      <DonationsTable />
+      <DevolutionsTable />
     </main>
   );
 };
 
-export default Donations;
+export default Devolutions;

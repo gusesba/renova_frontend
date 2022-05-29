@@ -11,22 +11,22 @@ import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 import ColumnFilter from "../ColumnFilter";
 
-const DonationsTable = () => {
+const DevolutionsTable = () => {
   const {
-    donationsData,
-    fetchDonations,
-    setDonationsRows,
-    setDonationsPageOptions,
-    setDonationsFilter,
-    setDonationsColumns,
+    devolutionsData,
+    fetchDevolutions,
+    setDevolutionsRows,
+    setDevolutionsPageOptions,
+    setDevolutionsFilter,
+    setDevolutionsColumns,
   } = useGlobalContext();
-  const data = useMemo(() => [...donationsData], [donationsData]);
+  const data = useMemo(() => [...devolutionsData], [devolutionsData]);
   useEffect(() => {
-    fetchDonations();
+    fetchDevolutions();
   }, []);
   const columns = useMemo(
     () =>
-      donationsData && [
+      devolutionsData && [
         {
           Header: "ID",
           accessor: "product.id", // accessor is the "key" in the data
@@ -73,7 +73,7 @@ const DonationsTable = () => {
           Filter: ColumnFilter,
         },
       ],
-    [donationsData]
+    [devolutionsData]
   );
 
   const tableInstance = useTable(
@@ -118,11 +118,11 @@ const DonationsTable = () => {
   } = tableInstance;
 
   useEffect(() => {
-    setDonationsRows(selectedFlatRows);
+    setDevolutionsRows(selectedFlatRows);
   }, [selectedFlatRows]);
 
   useEffect(() => {
-    setDonationsPageOptions({
+    setDevolutionsPageOptions({
       page,
       nextPage,
       previousPage,
@@ -142,11 +142,11 @@ const DonationsTable = () => {
   ]);
 
   useEffect(() => {
-    setDonationsFilter({ globalFilter: state.globalFilter, setGlobalFilter });
+    setDevolutionsFilter({ globalFilter: state.globalFilter, setGlobalFilter });
   }, [state.globalFilter, setGlobalFilter]);
 
   useEffect(() => {
-    setDonationsColumns(allColumns);
+    setDevolutionsColumns(allColumns);
   }, [allColumns]);
 
   return (
@@ -209,4 +209,4 @@ const DonationsTable = () => {
   );
 };
 
-export default DonationsTable;
+export default DevolutionsTable;

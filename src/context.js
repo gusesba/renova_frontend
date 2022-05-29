@@ -48,6 +48,13 @@ const AppProvider = ({ children }) => {
   const [donationsFilter, setDonationsFilter] = useState({});
   const [donationsColumns, setDonationsColumns] = useState([]);
 
+  const [devolutionsData, setDevolutionsData] = useState([]);
+  const [showAddDevolutionModal, setShowAddDevolutionModal] = useState(false);
+  const [devolutionsRows, setDevolutionsRows] = useState([]);
+  const [devolutionsPageOptions, setDevolutionsPageOptions] = useState({});
+  const [devolutionsFilter, setDevolutionsFilter] = useState({});
+  const [devolutionsColumns, setDevolutionsColumns] = useState([]);
+
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
@@ -426,9 +433,9 @@ const AppProvider = ({ children }) => {
   };
 
   const deleteDonation = async (data) => {
-    if (borrowRows.length === 1) {
+    if (donationsRows.length === 1) {
       const url =
-        url_server + "/api/v1/sells/".concat(borrowRows[0].original.id);
+        url_server + "/api/v1/sells/".concat(donationsRows[0].original.id);
       axios({
         method: "delete",
         url: url,
@@ -440,7 +447,7 @@ const AppProvider = ({ children }) => {
     } else {
       setAlert({
         show: true,
-        message: "Deletar 1 produto por vez",
+        message: "Deletar 1 doação por vez",
         variant: "danger",
       });
     }
@@ -453,6 +460,55 @@ const AppProvider = ({ children }) => {
     })
       .then(function (response) {
         setDonationsData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  // Devolutions
+
+  const addDevolution = async (data) => {
+    console.log(data);
+    axios({
+      method: "post",
+      url: url_server + "/api/v1/sells/devolutions",
+      data,
+    })
+      .then(() => {
+        fetchDevolutions();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteDevolution = async (data) => {
+    if (devolutionsRows.length === 1) {
+      const url =
+        url_server + "/api/v1/sells/".concat(devolutionsRows[0].original.id);
+      axios({
+        method: "delete",
+        url: url,
+      })
+        .then(() => {
+          fetchDevolutions();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setAlert({
+        show: true,
+        message: "Deletar 1 devolução por vez",
+        variant: "danger",
+      });
+    }
+  };
+
+  const fetchDevolutions = async () => {
+    axios({
+      method: "get",
+      url: url_server + "/api/v1/sells/devolutions",
+    })
+      .then(function (response) {
+        setDevolutionsData(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -1138,6 +1194,21 @@ const AppProvider = ({ children }) => {
         addDonation,
         deleteDonation,
         fetchDonations,
+        devolutionsData,
+        setDevolutionsData,
+        showAddDevolutionModal,
+        setShowAddDevolutionModal,
+        devolutionsRows,
+        setDevolutionsRows,
+        devolutionsPageOptions,
+        setDevolutionsPageOptions,
+        devolutionsFilter,
+        setDevolutionsFilter,
+        devolutionsColumns,
+        setDevolutionsColumns,
+        addDevolution,
+        deleteDevolution,
+        fetchDevolutions,
       }}
     >
       {children}

@@ -73,6 +73,22 @@ const Sidebar = () => {
               {" "}
               Emprestados
             </MenuItem>
+
+            <MenuItem
+              onClick={() => (window.location = "/donations")}
+              icon={<FaShoppingBag />}
+            >
+              {" "}
+              Doados
+            </MenuItem>
+
+            <MenuItem
+              onClick={() => (window.location = "/devolutions")}
+              icon={<FaShoppingBag />}
+            >
+              {" "}
+              Devolvidos
+            </MenuItem>
           </Menu>
         </SidebarContent>
 
