@@ -41,6 +41,13 @@ const AppProvider = ({ children }) => {
   const [borrowFilter, setBorrowFilter] = useState({});
   const [borrowsColumns, setBorrowsColumns] = useState([]);
 
+  const [donationsData, setDonationsData] = useState([]);
+  const [showAddDonationModal, setShowAddDonationModal] = useState(false);
+  const [donationsRows, setDonationsRows] = useState([]);
+  const [donationsPageOptions, setDonationsPageOptions] = useState({});
+  const [donationsFilter, setDonationsFilter] = useState({});
+  const [donationsColumns, setDonationsColumns] = useState([]);
+
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
@@ -401,6 +408,55 @@ const AppProvider = ({ children }) => {
         variant: "danger",
       });
     }
+  };
+
+  // Donations
+
+  const addDonation = async (data) => {
+    console.log(data);
+    axios({
+      method: "post",
+      url: url_server + "/api/v1/sells/donations",
+      data,
+    })
+      .then(() => {
+        fetchDonations();
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const deleteDonation = async (data) => {
+    if (borrowRows.length === 1) {
+      const url =
+        url_server + "/api/v1/sells/".concat(borrowRows[0].original.id);
+      axios({
+        method: "delete",
+        url: url,
+      })
+        .then(() => {
+          fetchDonations();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setAlert({
+        show: true,
+        message: "Deletar 1 produto por vez",
+        variant: "danger",
+      });
+    }
+  };
+
+  const fetchDonations = async () => {
+    axios({
+      method: "get",
+      url: url_server + "/api/v1/sells/donations",
+    })
+      .then(function (response) {
+        setDonationsData(response.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   //SellFront
@@ -1067,6 +1123,21 @@ const AppProvider = ({ children }) => {
         setBorrowsColumns,
         clientColumns,
         setClientColumns,
+        donationsData,
+        setDonationsData,
+        showAddDonationModal,
+        setShowAddDonationModal,
+        donationsRows,
+        setDonationsRows,
+        donationsPageOptions,
+        setDonationsPageOptions,
+        donationsFilter,
+        setDonationsFilter,
+        donationsColumns,
+        setDonationsColumns,
+        addDonation,
+        deleteDonation,
+        fetchDonations,
       }}
     >
       {children}

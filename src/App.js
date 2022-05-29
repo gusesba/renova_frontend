@@ -9,6 +9,7 @@ import Sells from "./pages/Sells";
 import Product from "./pages/Product";
 import SellFront from "./pages/SellFront";
 import Borrows from "./pages/Borrows";
+import Donations from "./pages/Donations";
 import BottomAlert from "./components/BottomAlert";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/product/:id" exact element={<Product />} />
             <Route path="/sell/:id/:sell" exact element={<SellFront />} />
             <Route path="/borrows" exact element={<Borrows />} />
+            <Route path="/donations" exact element={<Donations />} />
           </Routes>
         </BrowserRouter>
       </div>
