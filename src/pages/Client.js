@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useGlobalContext } from "../context";
 import { useParams } from "react-router-dom";
 import ClientTable from "../components/client/ClientTable";
@@ -22,6 +22,9 @@ const Client = () => {
     clientIncome,
   } = useGlobalContext();
   const { id } = useParams();
+
+  const [dateInit, setDateInit] = useState();
+  const [dateFinal, setDateFinal] = useState();
 
   useEffect(() => {
     setPageName("Cliente");
@@ -108,10 +111,43 @@ const Client = () => {
       </div>
       <ClientTable />
       <div>
-        Valor comprado:{" "}
-        {clientIncome.buyIncome && clientIncome.buyIncome[0].buyIncome} Valor
-        vendido:{" "}
-        {clientIncome.sellIncome && clientIncome.sellIncome[0].sellIncome}
+        <div class="card bg-light mb-3">
+          <div class="card-header">Cliente</div>
+          <div class="card-body">
+            <h5 class="card-title">Nome</h5>
+            <p class="card-text">{clientData.name}</p>
+            <h5 class="card-title">Telefone</h5>
+            <p class="card-text">{clientData.phone}</p>
+          </div>
+        </div>
+        <div class="card bg-light mb-3">
+          <div class="card-header">
+            Caixa{" "}
+            <input
+              value={dateInit}
+              onChange={(event) => setDateInit(event.target.value)}
+              placeholder={"ano-mes-dia"}
+            ></input>{" "}
+            <input
+              placeholder={"ano-mes-dia"}
+              onChange={(event) => setDateFinal(event.target.value)}
+              value={dateFinal}
+            ></input>{" "}
+            <btn onClick={() => fetchClientIncome(id, { dateInit, dateFinal })}>
+              Buscar
+            </btn>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">Valor Vendido</h5>
+            <p class="card-text">
+              {clientIncome.sellIncome && clientIncome.sellIncome[0].sellIncome}
+            </p>
+            <h5 class="card-title">Valor Comprado</h5>
+            <p class="card-text">
+              {clientIncome.buyIncome && clientIncome.buyIncome[0].buyIncome}
+            </p>
+          </div>
+        </div>
       </div>
     </main>
   );

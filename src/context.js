@@ -133,6 +133,7 @@ const AppProvider = ({ children }) => {
   };
 
   const fetchClientIncome = async (id, data) => {
+    console.log(data);
     axios({
       method: "post",
       url: url_server + `/api/v1/sells/${id}/income`,
