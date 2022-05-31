@@ -17,6 +17,9 @@ const Client = () => {
     setPageName,
     clientPageOptions,
     clientColumns,
+    fetchClientIncome,
+    clientData,
+    clientIncome,
   } = useGlobalContext();
   const { id } = useParams();
 
@@ -26,6 +29,10 @@ const Client = () => {
 
   useEffect(() => {
     fetchClient(id);
+    fetchClientIncome(id, {
+      dateInit: "2022-01-22",
+      dateFinal: "2022-06-26",
+    });
   }, [id]);
 
   return (
@@ -100,6 +107,12 @@ const Client = () => {
         </div>
       </div>
       <ClientTable />
+      <div>
+        Valor comprado:{" "}
+        {clientIncome.buyIncome && clientIncome.buyIncome[0].buyIncome} Valor
+        vendido:{" "}
+        {clientIncome.sellIncome && clientIncome.sellIncome[0].sellIncome}
+      </div>
     </main>
   );
 };

@@ -17,6 +17,7 @@ const AppProvider = ({ children }) => {
   const [clientPageOptions, setClientPageOptions] = useState({});
   const [clientsColumns, setClientsColumns] = useState([]);
   const [clientColumns, setClientColumns] = useState([]);
+  const [clientIncome, setClientIncome] = useState({});
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -127,6 +128,18 @@ const AppProvider = ({ children }) => {
           buyer.product.entryDate = date.getMonth() + "/" + date.getFullYear();
         });
         setClientData(response.data.client);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const fetchClientIncome = async (id, data) => {
+    axios({
+      method: "post",
+      url: url_server + `/api/v1/sells/${id}/income`,
+      data,
+    })
+      .then((response) => {
+        setClientIncome(response.data);
       })
       .catch((err) => console.log(err));
   };
@@ -1234,6 +1247,9 @@ const AppProvider = ({ children }) => {
         addDevolution,
         deleteDevolution,
         fetchDevolutions,
+        fetchClientIncome,
+        clientIncome,
+        setClientIncome,
       }}
     >
       {children}
