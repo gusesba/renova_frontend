@@ -20,6 +20,7 @@ const Donations = () => {
     donationsFilter,
     deleteDonation,
     donationsColumns,
+    setShowSelectColumnsModal,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -32,7 +33,11 @@ const Donations = () => {
         <div>
           <div>
             <label>
-              <input className="show-columns-btns" type="checkbox" />
+              <input
+                className="show-columns-btns"
+                type="button"
+                onClick={() => setShowSelectColumnsModal(true)}
+              />
               <span className="show-columns-span">
                 <AiOutlineArrowDown className="arrow-down-btn" />
               </span>

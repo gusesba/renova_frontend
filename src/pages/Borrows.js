@@ -20,6 +20,7 @@ const Borrows = () => {
     borrowFilter,
     deleteBorrow,
     borrowsColumns,
+    setShowSelectColumnsModal,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -32,7 +33,11 @@ const Borrows = () => {
         <div>
           <div>
             <label>
-              <input className="show-columns-btns" type="checkbox" />
+              <input
+                className="show-columns-btns"
+                type="button"
+                onClick={() => setShowSelectColumnsModal(true)}
+              />
               <span className="show-columns-span">
                 <AiOutlineArrowDown className="arrow-down-btn" />
               </span>

@@ -20,6 +20,7 @@ const Client = () => {
     fetchClientIncome,
     clientData,
     clientIncome,
+    setShowSelectColumnsModal,
   } = useGlobalContext();
   const { id } = useParams();
 
@@ -44,7 +45,11 @@ const Client = () => {
         <div>
           <div>
             <label>
-              <input className="show-columns-btns" type="checkbox" />
+              <input
+                className="show-columns-btns"
+                type="button"
+                onClick={() => setShowSelectColumnsModal(true)}
+              />
               <span className="show-columns-span">
                 <AiOutlineArrowDown className="arrow-down-btn" />
               </span>

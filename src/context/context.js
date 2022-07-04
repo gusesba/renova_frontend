@@ -60,6 +60,9 @@ const AppProvider = ({ children }) => {
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
   const [showEditPriceModal, setShowEditPriceModal] = useState(false);
+
+  const [showSelectColumnsModal, setShowSelectColumnsModal] = useState(false);
+
   //const url_server = "https://renovab.herokuapp.com";
   const url_server = "http://localhost:5000";
 
@@ -1251,6 +1254,8 @@ const AppProvider = ({ children }) => {
         fetchClientIncome,
         clientIncome,
         setClientIncome,
+        showSelectColumnsModal,
+        setShowSelectColumnsModal,
       }}
     >
       {children}

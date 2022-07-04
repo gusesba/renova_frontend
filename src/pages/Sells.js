@@ -20,6 +20,7 @@ const Sells = () => {
     deleteSell,
     sellFilter,
     sellsColumns,
+    setShowSelectColumnsModal,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -32,7 +33,11 @@ const Sells = () => {
         <div>
           <div>
             <label>
-              <input className="show-columns-btns" type="checkbox" />
+              <input
+                className="show-columns-btns"
+                type="button"
+                onClick={() => setShowSelectColumnsModal(true)}
+              />
               <span className="show-columns-span">
                 <AiOutlineArrowDown className="arrow-down-btn" />
               </span>
