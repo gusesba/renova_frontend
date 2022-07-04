@@ -14,7 +14,7 @@ import {
 } from "react-icons/fa";
 
 import "react-pro-sidebar/dist/css/styles.css";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 
 const Sidebar = () => {
   const { isSidebarCollapsed } = useGlobalContext();

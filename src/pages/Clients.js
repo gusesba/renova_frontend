@@ -11,7 +11,7 @@ import {
 
 import { FaShoppingBag } from "react-icons/fa";
 import AddClientsModal from "../components/clients/AddClientsModal";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 import { useEffect } from "react";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";

@@ -8,7 +8,7 @@ import {
 } from "react-icons/ai";
 import AddDevolutionModal from "../components/devolutions/AddDevolutionModal";
 import { useEffect } from "react";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
 

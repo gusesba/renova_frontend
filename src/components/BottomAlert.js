@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Alert from "react-bootstrap/Alert";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 
 const BottomAlert = () => {
   const { alert, setAlert } = useGlobalContext();

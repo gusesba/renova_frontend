@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 import { useParams } from "react-router-dom";
 import {
   AiFillPlusSquare,

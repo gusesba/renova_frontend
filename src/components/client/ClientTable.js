@@ -1,5 +1,5 @@
 import { useMemo, useEffect, useState } from "react";
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/context";
 import { useTable, usePagination } from "react-table";
 import Table from "react-bootstrap/Table";
 

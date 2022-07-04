@@ -6,7 +6,7 @@ import {
   useGlobalFilter,
   useFilters,
 } from "react-table";
-import { useGlobalContext } from "../../context";
+import { useGlobalContext } from "../../context/context";
 import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 import ColumnFilter from "../ColumnFilter";

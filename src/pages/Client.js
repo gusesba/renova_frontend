@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 import { useParams } from "react-router-dom";
 import ClientTable from "../components/client/ClientTable";
 import Button from "react-bootstrap/Button";

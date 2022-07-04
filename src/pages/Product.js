@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 
 const Product = () => {
   const { fetchProduct, productData, setPageName } = useGlobalContext();

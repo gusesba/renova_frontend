@@ -10,7 +10,7 @@ import {
   AiOutlineRight,
   AiOutlineArrowDown,
 } from "react-icons/ai";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context/context";
 import AddProductsModal from "../components/products/AddProductsModal";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
