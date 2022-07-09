@@ -77,6 +77,11 @@ const BorrowsTable = () => {
           accessor: "entryDate",
           Filter: ColumnFilter,
         },
+        {
+          Header: "Emprestimo",
+          accessor: "borrowDate",
+          Filter: ColumnFilter,
+        },
       ],
     [borrowData]
   );

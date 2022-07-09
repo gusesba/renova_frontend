@@ -75,6 +75,10 @@ const ClientTable = () => {
           Header: "Entrada",
           accessor: "entryDate",
         },
+        {
+          Header: "Saída",
+          accessor: "departureDate",
+        },
       ],
     [tableData]
   );

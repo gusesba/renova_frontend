@@ -77,6 +77,11 @@ const DonationsTable = () => {
           accessor: "entryDate",
           Filter: ColumnFilter,
         },
+        {
+          Header: "Doação",
+          accessor: "donationDate",
+          Filter: ColumnFilter,
+        },
       ],
     [donationsData]
   );

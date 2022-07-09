@@ -122,13 +122,24 @@ const AppProvider = ({ children }) => {
       url: url_server + `/api/v1/clients/${id}`,
     })
       .then((response) => {
+        console.log(response.data);
         response.data.client.product.forEach((product) => {
           let date = new Date(product.createdAt);
-          product.entryDate = date.getMonth() + "/" + date.getFullYear();
+          product.entryDate = date.getMonth() + 1 + "/" + date.getFullYear();
+          if (product.sell !== null) {
+            let departureDate = new Date(product.sell.createdAt);
+            product.departureDate =
+              departureDate.getMonth() + 1 + "/" + departureDate.getFullYear();
+          }
         });
         response.data.client.buyer.forEach((buyer) => {
           let date = new Date(buyer.product.createdAt);
           buyer.product.entryDate = date.getMonth() + "/" + date.getFullYear();
+          if (buyer.product.sell !== null) {
+            let departureDate = new Date(buyer.product.sell.createdAt);
+            buyer.product.departureDate =
+              departureDate.getMonth() + 1 + "/" + departureDate.getFullYear();
+          }
         });
         setClientData(response.data.client);
       })
@@ -218,7 +229,7 @@ const AppProvider = ({ children }) => {
       .then(function (response) {
         response.data.forEach((product) => {
           let date = new Date(product.createdAt);
-          product.entryDate = date.getMonth() + "/" + date.getFullYear();
+          product.entryDate = date.getMonth() + 1 + "/" + date.getFullYear();
         });
         setProductsData(response.data);
       })
@@ -332,8 +343,11 @@ const AppProvider = ({ children }) => {
     })
       .then(function (response) {
         response.data.forEach((sell) => {
-          let date = new Date(sell.createdAt);
-          sell.entryDate = date.getMonth() + "/" + date.getFullYear();
+          let date = new Date(sell.product.createdAt);
+          sell.entryDate = date.getMonth() + 1 + "/" + date.getFullYear();
+          let sellDate = new Date(sell.createdAt);
+          sell.sellDate =
+            sellDate.getMonth() + 1 + "/" + sellDate.getFullYear();
         });
         setSellData(response.data);
       })
@@ -407,8 +421,11 @@ const AppProvider = ({ children }) => {
     })
       .then(function (response) {
         response.data.forEach((borrow) => {
-          let date = new Date(borrow.createdAt);
-          borrow.entryDate = date.getMonth() + "/" + date.getFullYear();
+          let date = new Date(borrow.product.createdAt);
+          borrow.entryDate = date.getMonth() + 1 + "/" + date.getFullYear();
+          let borrowDate = new Date(borrow.createdAt);
+          borrow.borrowDate =
+            borrowDate.getMonth() + 1 + "/" + borrowDate.getFullYear();
         });
         setBorrowData(response.data);
       })
@@ -494,8 +511,11 @@ const AppProvider = ({ children }) => {
     })
       .then(function (response) {
         response.data.forEach((donation) => {
-          let date = new Date(donation.createdAt);
-          donation.entryDate = date.getMonth() + "/" + date.getFullYear();
+          let date = new Date(donation.product.createdAt);
+          donation.entryDate = date.getMonth() + 1 + "/" + date.getFullYear();
+          let donationDate = new Date(donation.createdAt);
+          donation.donationDate =
+            donationDate.getMonth() + 1 + "/" + donationDate.getFullYear();
         });
         setDonationsData(response.data);
       })
@@ -547,8 +567,11 @@ const AppProvider = ({ children }) => {
     })
       .then(function (response) {
         response.data.forEach((devolution) => {
-          let date = new Date(devolution.createdAt);
-          devolution.entryDate = date.getMonth() + "/" + date.getFullYear();
+          let date = new Date(devolution.product.createdAt);
+          devolution.entryDate = date.getMonth() + 1 + "/" + date.getFullYear();
+          let devolutionDate = new Date(devolution.createdAt);
+          devolution.devolutionDate =
+            devolutionDate.getMonth() + 1 + "/" + devolutionDate.getFullYear();
         });
         setDevolutionsData(response.data);
       })

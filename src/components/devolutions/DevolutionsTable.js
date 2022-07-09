@@ -77,6 +77,11 @@ const DevolutionsTable = () => {
           accessor: "entryDate",
           Filter: ColumnFilter,
         },
+        {
+          Header: "Devolução",
+          accessor: "devolutionDate",
+          Filter: ColumnFilter,
+        },
       ],
     [devolutionsData]
   );

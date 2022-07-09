@@ -41,6 +41,21 @@ const Client = () => {
 
   return (
     <main>
+      <div class="card bg-light mb-3">
+        <div class="card-header">Cliente</div>
+        <div class="card-body">
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+            <div>
+              <h5 class="card-title">Nome</h5>
+              <p class="card-text">{clientData.name}</p>
+            </div>
+            <div>
+              <h5 class="card-title">Telefone</h5>
+              <p class="card-text">{clientData.phone}</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="client-btn-group">
         <div>
           <div>
@@ -116,15 +131,6 @@ const Client = () => {
       </div>
       <ClientTable />
       <div>
-        <div class="card bg-light mb-3">
-          <div class="card-header">Cliente</div>
-          <div class="card-body">
-            <h5 class="card-title">Nome</h5>
-            <p class="card-text">{clientData.name}</p>
-            <h5 class="card-title">Telefone</h5>
-            <p class="card-text">{clientData.phone}</p>
-          </div>
-        </div>
         <div class="card bg-light mb-3">
           <div class="card-header">
             Caixa{" "}
