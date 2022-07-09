@@ -116,7 +116,7 @@ const AppProvider = ({ children }) => {
       });
   };
 
-  const fetchClient = async (id) => {
+  const fetchClient = async (id, date) => {
     axios({
       method: "get",
       url: url_server + `/api/v1/clients/${id}`,
