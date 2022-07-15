@@ -79,6 +79,19 @@ main {
   transform: scale(1.2);
 }
 
+.update-btn {
+  font-size: 40px;
+  color: #42e222;
+  margin-left: -3px;
+  transition: 0.2s;
+}
+
+.update-btn:hover {
+  color: #2bff00;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
 .div-large-form {
   display: flex;
   justify-content: space-around;

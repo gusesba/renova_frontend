@@ -36,6 +36,11 @@ const ClientsTable = () => {
           Filter: ColumnFilter,
         },
         {
+          Header: "Numero",
+          accessor: "number",
+          Filter: ColumnFilter,
+        },
+        {
           Header: "Nome",
           accessor: "name",
           Filter: ColumnFilter,

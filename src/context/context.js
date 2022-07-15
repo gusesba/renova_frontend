@@ -9,6 +9,7 @@ const AppProvider = ({ children }) => {
 
   const [clientsData, setClientsData] = useState([]);
   const [showAddClientModal, setShowAddClientModal] = useState(false);
+  const [showUpdateClientModal, setShowUpdateClientModal] = useState(false);
   const [clientRows, setClientRows] = useState([]);
   const [clientData, setClientData] = useState({ product: [] });
   const [actualTableUsage, setActualTableUsage] = useState("total");
@@ -21,6 +22,7 @@ const AppProvider = ({ children }) => {
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
+  const [showUpdateProductModal, setShowUpdateProductModal] = useState(false);
   const [productRows, setProductRows] = useState([]);
   const [productData, setProductData] = useState({});
   const [productPageOptions, setProductPageOptions] = useState({});
@@ -63,8 +65,8 @@ const AppProvider = ({ children }) => {
 
   const [showSelectColumnsModal, setShowSelectColumnsModal] = useState(false);
 
-  const url_server = "https://renovab.herokuapp.com";
-  //const url_server = "http://localhost:5000";
+  //const url_server = "https://renovab.herokuapp.com";
+  const url_server = "http://localhost:5000";
 
   const [alert, setAlert] = useState({
     show: false,
@@ -159,7 +161,7 @@ const AppProvider = ({ children }) => {
       .catch((err) => console.log(err));
   };
 
-  const deleteClient = async (data) => {
+  const deleteClient = async () => {
     if (clientRows.length === 1) {
       const url =
         url_server + "/api/v1/clients/".concat(clientRows[0].original.id);
@@ -193,9 +195,49 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const updateClient = async (data) => {
+    if (clientRows.length === 1) {
+      const url =
+        url_server + "/api/v1/clients/".concat(clientRows[0].original.id);
+      axios({
+        method: "patch",
+        url: url,
+        data,
+      })
+        .then(() => {
+          fetchClients();
+          setAlert({
+            show: true,
+            message: "Cliente Atualizado",
+            variant: "success",
+          });
+        })
+        .catch((err) => {
+          setAlert({
+            show: true,
+            message: "Erro ao atualizar cliente",
+            variant: "danger",
+          });
+          console.log(err);
+        });
+    }
+  };
+
   const goToClientPage = () => {
     if (clientRows.length === 1) {
       window.location = "/client/".concat(clientRows[0].original.id);
+    } else {
+      setAlert({
+        show: true,
+        message: "Selecionar apenas 1 Cliente",
+        variant: "danger",
+      });
+    }
+  };
+
+  const openUpdateClientModal = () => {
+    if (clientRows.length === 1) {
+      setShowUpdateClientModal(true);
     } else {
       setAlert({
         show: true,
@@ -283,6 +325,34 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const updateProduct = async (data) => {
+    if (productRows.length === 1) {
+      const url =
+        url_server + "/api/v1/products/".concat(productRows[0].original.id);
+      axios({
+        method: "patch",
+        url: url,
+        data,
+      })
+        .then(() => {
+          fetchProducts();
+          setAlert({
+            show: true,
+            message: "Produto Atualizado",
+            variant: "success",
+          });
+        })
+        .catch((err) => {
+          setAlert({
+            show: true,
+            message: "Erro ao atualizar produto",
+            variant: "danger",
+          });
+          console.log(err);
+        });
+    }
+  };
+
   const goToProductPage = () => {
     if (productRows.length === 1) {
       window.location = "/product/".concat(productRows[0].original.id);
@@ -290,6 +360,18 @@ const AppProvider = ({ children }) => {
       setAlert({
         show: true,
         message: "Selecionar 1 produto",
+        variant: "danger",
+      });
+    }
+  };
+
+  const openUpdateProductModal = () => {
+    if (productRows.length === 1) {
+      setShowUpdateProductModal(true);
+    } else {
+      setAlert({
+        show: true,
+        message: "Selecionar apenas 1 Produto",
         variant: "danger",
       });
     }
@@ -1170,6 +1252,7 @@ const AppProvider = ({ children }) => {
         showAddSellModal,
         setShowAddSellModal,
         addSell,
+        clientRows,
         setClientRows,
         deleteClient,
         clientData,
@@ -1279,6 +1362,15 @@ const AppProvider = ({ children }) => {
         setClientIncome,
         showSelectColumnsModal,
         setShowSelectColumnsModal,
+        updateClient,
+        showUpdateClientModal,
+        setShowUpdateClientModal,
+        openUpdateClientModal,
+        showUpdateProductModal,
+        setShowUpdateProductModal,
+        openUpdateProductModal,
+        productRows,
+        updateProduct,
       }}
     >
       {children}

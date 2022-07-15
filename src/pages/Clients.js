@@ -2,6 +2,7 @@ import Table from "../components/clients/ClientsTable";
 import {
   AiFillPlusSquare,
   AiFillDelete,
+  AiFillEdit,
   AiFillUpCircle,
   AiFillDollarCircle,
   AiOutlineLeft,
@@ -11,6 +12,7 @@ import {
 
 import { FaShoppingBag } from "react-icons/fa";
 import AddClientsModal from "../components/clients/AddClientsModal";
+import UpdateClientsModal from "../components/clients/UpdateClientsModal";
 import { useGlobalContext } from "../context/context";
 import { useEffect } from "react";
 import { GlobalFilter } from "../components/GlobalFilter";
@@ -27,6 +29,7 @@ const Clients = () => {
     clientFilter,
     clientsColumns,
     setShowSelectColumnsModal,
+    openUpdateClientModal,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -35,6 +38,7 @@ const Clients = () => {
   return (
     <main>
       <AddClientsModal />
+      <UpdateClientsModal />
       <div className="table-header">
         <div>
           <div>
@@ -55,6 +59,10 @@ const Clients = () => {
             onClick={() => setShowAddClientModal(true)}
           />
           <AiFillDelete className="delete-btn" onClick={() => deleteClient()} />
+          <AiFillEdit
+            className="update-btn"
+            onClick={() => openUpdateClientModal()}
+          />
           <AiFillUpCircle
             className="gotopage-btn"
             onClick={() => goToClientPage()}

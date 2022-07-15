@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import {
   AiFillPlusSquare,
   AiFillDelete,
+  AiFillEdit,
   AiFillUpCircle,
   AiFillPrinter,
   AiOutlineLeft,
@@ -12,6 +13,7 @@ import {
 } from "react-icons/ai";
 import { useGlobalContext } from "../context/context";
 import AddProductsModal from "../components/products/AddProductsModal";
+import UpdateProductsModal from "../components/products/UpdateProductsModal";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
 
@@ -29,6 +31,7 @@ const Products = () => {
     productFilter,
     productsColumns,
     setShowSelectColumnsModal,
+    openUpdateProductModal,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const Products = () => {
       clientsData.map((item) => {
         return {
           value: item.id,
-          label: item.name,
+          label: ("0000" + item.number).slice(-4) + " - " + item.name,
           target: {
             name: "providerId",
             value: item.id,
@@ -57,6 +60,7 @@ const Products = () => {
   return (
     <main>
       <AddProductsModal />
+      <UpdateProductsModal />
       <div className="table-header">
         <div>
           <div>
@@ -79,6 +83,10 @@ const Products = () => {
           <AiFillDelete
             className="delete-btn"
             onClick={() => deleteProduct()}
+          />
+          <AiFillEdit
+            className="update-btn"
+            onClick={() => openUpdateProductModal()}
           />
           <AiFillUpCircle
             className="gotopage-btn"

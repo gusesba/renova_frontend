@@ -1,13 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useGlobalContext } from "../../context/context";
 
-const AddClientsModal = () => {
-  const { showAddClientModal, setShowAddClientModal, addClient, setAlert } =
-    useGlobalContext();
-  const [values, setValues] = useState({ name: "", number: "", phone: "" });
+const UpdateClientsModal = () => {
+  const {
+    showUpdateClientModal,
+    setShowUpdateClientModal,
+    updateClient,
+    setAlert,
+    clientRows,
+  } = useGlobalContext();
+  const [values, setValues] = useState({
+    name: "",
+    number: "",
+    phone: "",
+    id: "",
+  });
 
   const onChange = (ev) => {
     setValues({
@@ -16,10 +26,21 @@ const AddClientsModal = () => {
     });
   };
 
+  useEffect(() => {
+    if (clientRows.length === 1) {
+      setValues({
+        id: clientRows[0].original.id,
+        name: clientRows[0].original.name,
+        number: clientRows[0].original.number,
+        phone: clientRows[0].original.phone,
+      });
+    }
+  }, [clientRows]);
+
   const handleSubmit = () => {
     if (values.name.length && values.phone.length && values.number) {
-      addClient(values);
-      setShowAddClientModal(false);
+      updateClient(values);
+      setShowUpdateClientModal(false);
       setValues({ name: "", phone: "", number: "" });
     } else {
       setAlert({
@@ -32,14 +53,25 @@ const AddClientsModal = () => {
 
   return (
     <Modal
-      show={showAddClientModal}
-      onHide={() => setShowAddClientModal(false)}
+      show={showUpdateClientModal}
+      onHide={() => setShowUpdateClientModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Novo Cliente</Modal.Title>
+        <Modal.Title>Atualizar Cliente</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <Form.Group className="mb-3" controlId="formID">
+            <Form.Label>ID</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="ID"
+              name="id"
+              value={values.id}
+              onChange={onChange}
+              disabled
+            />
+          </Form.Group>
           <Form.Group className="mb-3" controlId="formName">
             <Form.Label>Nome</Form.Label>
             <Form.Control
@@ -75,16 +107,16 @@ const AddClientsModal = () => {
       <Modal.Footer>
         <Button
           variant="secondary"
-          onClick={() => setShowAddClientModal(false)}
+          onClick={() => setShowUpdateClientModal(false)}
         >
           Cancelar
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
-          Adicionar
+          Atualizar
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddClientsModal;
+export default UpdateClientsModal;

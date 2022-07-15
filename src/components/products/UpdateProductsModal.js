@@ -5,16 +5,18 @@ import Form from "react-bootstrap/Form";
 import Select from "react-select";
 import { useGlobalContext } from "../../context/context";
 
-const AddProductsModal = () => {
+const UpdateProductsModal = () => {
   const {
-    showAddProductModal,
-    setShowAddProductModal,
-    addProduct,
+    showUpdateProductModal,
+    setShowUpdateProductModal,
+    updateProduct,
     setAlert,
     options,
+    productRows,
   } = useGlobalContext();
 
   const [values, setValues] = useState({
+    id: "",
     price: "",
     type: "",
     brand: "",
@@ -32,6 +34,23 @@ const AddProductsModal = () => {
     });
   };
 
+  useEffect(() => {
+    if (productRows.length === 1) {
+      console.log(productRows[0].original.providerId);
+      setValues({
+        id: productRows[0].original.id,
+        price: productRows[0].original.price,
+        type: productRows[0].original.type,
+        brand: productRows[0].original.brand,
+        size: productRows[0].original.size,
+        color: productRows[0].original.color,
+        description: productRows[0].original.description,
+        number: productRows[0].original.number,
+        providerId: productRows[0].original.providerId,
+      });
+    }
+  }, [productRows]);
+
   const handleSubmit = () => {
     if (
       values.price &&
@@ -42,8 +61,8 @@ const AddProductsModal = () => {
       values.providerId &&
       values.number
     ) {
-      addProduct(values);
-      setShowAddProductModal(false);
+      updateProduct(values);
+      setShowUpdateProductModal(false);
       setValues({
         price: "",
         type: "",
@@ -66,15 +85,26 @@ const AddProductsModal = () => {
   return (
     <Modal
       size="lg"
-      show={showAddProductModal}
-      onHide={() => setShowAddProductModal(false)}
+      show={showUpdateProductModal}
+      onHide={() => setShowUpdateProductModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Novo Produto</Modal.Title>
+        <Modal.Title>Atualizar Produto</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
           <div className="div-large-form">
+            <Form.Group className="mb-3 form-group" controlId="formId">
+              <Form.Label>ID</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="ID"
+                name="id"
+                value={values.id}
+                onChange={onChange}
+                disabled
+              />
+            </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formProviderId">
               <Form.Label>Fornecedor</Form.Label>
               <Select onChange={onChange} options={options} />
@@ -163,16 +193,16 @@ const AddProductsModal = () => {
       <Modal.Footer>
         <Button
           variant="secondary"
-          onClick={() => setShowAddProductModal(false)}
+          onClick={() => setShowUpdateProductModal(false)}
         >
           Cancelar
         </Button>
         <Button variant="primary" onClick={handleSubmit}>
-          Adicionar
+          Atualizar
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default AddProductsModal;
+export default UpdateProductsModal;
