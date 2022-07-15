@@ -9,7 +9,7 @@ const ColumnSelector = ({ allColumns }) => {
       onHide={() => setShowSelectColumnsModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Novo Cliente</Modal.Title>
+        <Modal.Title>Colunas</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <div className="column-btns">

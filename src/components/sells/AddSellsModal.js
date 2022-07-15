@@ -33,7 +33,7 @@ const AddSellsModal = () => {
   return (
     <Modal show={showAddSellModal} onHide={() => setShowAddSellModal(false)}>
       <Modal.Header closeButton>
-        <Modal.Title>Novo Cliente</Modal.Title>
+        <Modal.Title>Nova Venda</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

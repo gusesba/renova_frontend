@@ -40,7 +40,7 @@ const AddDevolutionModal = () => {
       onHide={() => setShowAddDevolutionModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Nova Doação</Modal.Title>
+        <Modal.Title>Nova Devolução</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>

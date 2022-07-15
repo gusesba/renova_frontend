@@ -36,7 +36,7 @@ const AddBorrowsModal = () => {
       onHide={() => setShowAddBorrowModal(false)}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Novo Cliente</Modal.Title>
+        <Modal.Title>Novo Empréstimo</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
