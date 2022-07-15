@@ -65,8 +65,8 @@ const AppProvider = ({ children }) => {
 
   const [showSelectColumnsModal, setShowSelectColumnsModal] = useState(false);
 
-  //const url_server = "https://renovab.herokuapp.com";
-  const url_server = "http://localhost:5000";
+  const url_server = "https://renovab.herokuapp.com";
+  //const url_server = "http://localhost:5000";
 
   const [alert, setAlert] = useState({
     show: false,
