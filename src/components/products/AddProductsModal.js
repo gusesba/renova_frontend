@@ -126,7 +126,7 @@ const AddProductsModal = () => {
             <Form.Group className="mb-3 form-group" controlId="formPrice">
               <Form.Label>Preço</Form.Label>
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Preço"
                 name="price"
                 value={values.price}
