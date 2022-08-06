@@ -211,6 +211,30 @@ main {
   transform: scale(1.15);
 }
 
+.donation-btn {
+  font-size: 40px;
+  color: #ff0000;
+  transition: 0.2s;
+}
+
+.donation-btn:hover {
+  color: #f40606;
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
+.devolution-btn {
+  font-size: 40px;
+  color: #b700ff;
+  transition: 0.2s;
+}
+
+.devolution-btn:hover {
+  color: #a214da;
+  cursor: pointer;
+  transform: scale(1.15);
+}
+
 .table-header {
   display: flex;
   justify-content: space-between;
@@ -342,4 +366,13 @@ main {
 .arrow-down-btn:hover {
   font-size: 30px;
   cursor: pointer;
+}
+
+.search-date-input {
+  display: flex;
+}
+
+.client-buttons {
+  display: grid;
+  grid: repeat(2, 60px) / auto-flow 150px;
 }

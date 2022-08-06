@@ -25,6 +25,7 @@ const UpdateProductsModal = () => {
     providerId: 0,
     description: "",
     number: "",
+    createdAt: "",
   });
 
   const onChange = (ev) => {
@@ -36,7 +37,7 @@ const UpdateProductsModal = () => {
 
   useEffect(() => {
     if (productRows.length === 1) {
-      console.log(productRows[0].original.providerId);
+      console.log(productRows[0].original);
       setValues({
         id: productRows[0].original.id,
         price: productRows[0].original.price,
@@ -47,6 +48,7 @@ const UpdateProductsModal = () => {
         description: productRows[0].original.description,
         number: productRows[0].original.number,
         providerId: productRows[0].original.providerId,
+        createdAt: productRows[0].original.createdAt.split("T")[0],
       });
     }
   }, [productRows]);
@@ -59,7 +61,8 @@ const UpdateProductsModal = () => {
       values.size &&
       values.color &&
       values.providerId &&
-      values.number
+      values.number &&
+      values.createdAt
     ) {
       updateProduct(values);
       setShowUpdateProductModal(false);
@@ -72,6 +75,7 @@ const UpdateProductsModal = () => {
         providerId: 0,
         description: "",
         product: "",
+        createdAt: "",
       });
     } else {
       setAlert({
@@ -168,13 +172,25 @@ const UpdateProductsModal = () => {
             <Form.Group className="mb-3 form-group" controlId="formNumber">
               <Form.Label>Numero</Form.Label>
               <Form.Control
-                type="number"
+                type="text"
                 placeholder="Numero"
                 name="number"
                 value={values.number}
                 onChange={onChange}
               />
             </Form.Group>
+            <Form.Group className="mb-3 form-group" controlId="formCreatedAte">
+              <Form.Label>Entrada</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="Data Entrada"
+                name="createdAt"
+                value={values.createdAt}
+                onChange={onChange}
+              />
+            </Form.Group>
+          </div>
+          <div className="div-large-form">
             <Form.Group className="mb-3 form-group" controlId="formDescription">
               <Form.Label>Descrição</Form.Label>
               <Form.Control

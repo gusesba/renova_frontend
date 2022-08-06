@@ -19,6 +19,8 @@ const AppProvider = ({ children }) => {
   const [clientsColumns, setClientsColumns] = useState([]);
   const [clientColumns, setClientColumns] = useState([]);
   const [clientIncome, setClientIncome] = useState({});
+  const [dateInit, setDateInit] = useState("2020-01-01");
+  const [dateFinal, setDateFinal] = useState("2025-01-01");
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -136,7 +138,8 @@ const AppProvider = ({ children }) => {
         });
         response.data.client.buyer.forEach((buyer) => {
           let date = new Date(buyer.product.createdAt);
-          buyer.product.entryDate = date.getMonth() + "/" + date.getFullYear();
+          buyer.product.entryDate =
+            date.getMonth() + 1 + "/" + date.getFullYear();
           if (buyer.product.sell !== null) {
             let departureDate = new Date(buyer.product.sell.createdAt);
             buyer.product.departureDate =
@@ -397,9 +400,20 @@ const AppProvider = ({ children }) => {
               }
             });
             if (controll) {
+              const dias =
+                (new Date() - new Date(response.data.createdAt)) / 86400000;
+              var sellPrice = response.data.price;
+              if (dias > 90) {
+                sellPrice = response.data.price * 0.7;
+              } else if (dias > 60) {
+                sellPrice = response.data.price * 0.8;
+              } else if (dias > 30) {
+                sellPrice = response.data.price * 0.9;
+              }
+
               setSellFrontProducts([
                 ...sellFrontProducts,
-                { ...response.data, sellPrice: response.data.price },
+                { ...response.data, sellPrice: sellPrice },
               ]);
             }
           } else {
@@ -684,15 +698,33 @@ const AppProvider = ({ children }) => {
         });
       });
       window.location = "/sells";
-    } else {
+    } else if (isSell === "borrow") {
       sellFrontProducts.forEach((product) => {
         addBorrow({
           buyerId: clientId,
           productId: product.id,
-          sellPrice: product.sellPrice,
+          sellPrice: 0,
         });
       });
       window.location = "/borrows";
+    } else if (isSell === "donation") {
+      sellFrontProducts.forEach((product) => {
+        addDonation({
+          buyerId: clientId,
+          productId: product.id,
+          sellPrice: 0,
+        });
+      });
+      window.location = "/donations";
+    } else if (isSell === "devolution") {
+      sellFrontProducts.forEach((product) => {
+        addDevolution({
+          buyerId: clientId,
+          productId: product.id,
+          sellPrice: 0,
+        });
+      });
+      window.location = "/devolutions";
     }
   };
 
@@ -1372,6 +1404,10 @@ const AppProvider = ({ children }) => {
         openUpdateProductModal,
         productRows,
         updateProduct,
+        dateInit,
+        setDateInit,
+        dateFinal,
+        setDateFinal,
       }}
     >
       {children}

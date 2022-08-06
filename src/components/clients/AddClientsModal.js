@@ -53,7 +53,7 @@ const AddClientsModal = () => {
           <Form.Group className="mb-3" controlId="formNumber">
             <Form.Label>Numero</Form.Label>
             <Form.Control
-              type="number"
+              type="text"
               placeholder="Numero"
               name="number"
               value={values.number}

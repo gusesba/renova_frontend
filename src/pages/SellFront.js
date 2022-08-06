@@ -28,12 +28,17 @@ const SellFront = () => {
   } = useGlobalContext();
   const { id, sell } = useParams();
   const [total, setTotal] = useState(0);
+  const [discount, setdiscount] = useState(0);
 
   useEffect(() => {
     if (sell === "sell") {
       setPageName("Venda");
-    } else {
+    } else if (sell === "borrow") {
       setPageName("Empréstimo");
+    } else if (sell === "devolution") {
+      setPageName("Devolução");
+    } else if (sell === "donation") {
+      setPageName("Doação");
     }
   }, [sell]);
 
@@ -42,11 +47,14 @@ const SellFront = () => {
   }, [id]);
 
   useEffect(() => {
-    let total = 0.0;
+    let totalPreco = 0.0;
+    let totalVenda = 0.0;
     sellFrontProducts.forEach((product) => {
-      total += parseFloat(product.sellPrice);
+      totalVenda += parseFloat(product.sellPrice);
+      totalPreco += parseFloat(product.price);
     });
-    setTotal(total);
+    setTotal(totalVenda);
+    setdiscount(totalPreco - totalVenda);
   }, [sellFrontProducts]);
 
   return (
@@ -77,7 +85,7 @@ const SellFront = () => {
           </div>
           <div className="card-client">
             <div className="card-inside">
-              <h4>{0.0}</h4>
+              <h4>{sell === "sell" ? discount.toFixed(2) : 0}</h4>
               <span className="card-description">Desconto</span>
             </div>
           </div>
@@ -104,9 +112,7 @@ const SellFront = () => {
           <AiFillDelete onClick={deleteLine} className="delete-btn" />
           <AiFillPrinter
             className="print-btn"
-            onClick={() =>
-              printRecibo(sell === "sell" ? "Venda" : "Emprestimo")
-            }
+            onClick={() => printRecibo(sell)}
           />
           <AiOutlineArrowRight
             className="sell-btn"

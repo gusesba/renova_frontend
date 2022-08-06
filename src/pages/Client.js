@@ -3,6 +3,7 @@ import { useGlobalContext } from "../context/context";
 import { useParams } from "react-router-dom";
 import ClientTable from "../components/client/ClientTable";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 import {
   AiOutlineLeft,
   AiOutlineRight,
@@ -21,11 +22,12 @@ const Client = () => {
     clientData,
     clientIncome,
     setShowSelectColumnsModal,
+    dateInit,
+    setDateInit,
+    dateFinal,
+    setDateFinal,
   } = useGlobalContext();
   const { id } = useParams();
-
-  const [dateInit, setDateInit] = useState();
-  const [dateFinal, setDateFinal] = useState();
 
   useEffect(() => {
     setPageName("Cliente");
@@ -34,24 +36,25 @@ const Client = () => {
   useEffect(() => {
     fetchClient(id);
     fetchClientIncome(id, {
-      dateInit: "2022-01-22",
-      dateFinal: "2022-06-26",
+      dateInit: "2020-01-01",
+      dateFinal: "2050-01-01",
     });
+    console.log(clientIncome);
   }, [id]);
 
   return (
     <main>
-      <div class="card bg-light mb-3">
-        <div class="card-header">Cliente</div>
-        <div class="card-body">
+      <div className="card bg-light mb-3">
+        <div className="card-header">Cliente</div>
+        <div className="card-body">
           <div style={{ display: "flex", justifyContent: "space-evenly" }}>
             <div>
-              <h5 class="card-title">Nome</h5>
-              <p class="card-text">{clientData.name}</p>
+              <h5 className="card-title">Nome</h5>
+              <p className="card-text">{clientData.name}</p>
             </div>
             <div>
-              <h5 class="card-title">Telefone</h5>
-              <p class="card-text">{clientData.phone}</p>
+              <h5 className="card-title">Telefone</h5>
+              <p className="card-text">{clientData.phone}</p>
             </div>
           </div>
         </div>
@@ -71,36 +74,93 @@ const Client = () => {
               <ColumnSelector allColumns={clientColumns} />
             </label>
           </div>
-          <Button
-            onClick={() => setActualTableUsage("total")}
-            className="btn"
-            variant="light"
-          >
-            Fornecidos
-          </Button>
-          <Button
-            onClick={() => setActualTableUsage("sold")}
-            className="btn"
-            variant="light"
-          >
-            Vendidos
-          </Button>
-          <Button
-            onClick={() => setActualTableUsage("inventory")}
-            className="btn"
-            variant="light"
-          >
-            Estoque
-          </Button>
-          <Button
-            onClick={() => setActualTableUsage("bought")}
-            className="btn"
-            variant="light"
-          >
-            Comprados
-          </Button>
+          <div className="search-date-input">
+            <Form.Group className="mb-2 mt-2" controlId="formDateInit">
+              <Form.Control
+                type="date"
+                placeholder="Data Inicial"
+                name="name"
+                value={dateInit}
+                onChange={(e) => setDateInit(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group className="mb-2 mt-2" controlId="formDateFinal">
+              <Form.Control
+                type="date"
+                placeholder="Data Final"
+                name="name"
+                value={dateFinal}
+                onChange={(e) => setDateFinal(e.target.value)}
+              />
+            </Form.Group>
+            <Button
+              onClick={() => fetchClientIncome(id, { dateInit, dateFinal })}
+              className="btn mb-3"
+              variant="light"
+            >
+              Pesquisar
+            </Button>
+          </div>
+          <div className="client-buttons">
+            <Button
+              onClick={() => setActualTableUsage("total")}
+              className="btn mb-3"
+              variant="light"
+            >
+              Fornecidos
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("sold")}
+              className="btn"
+              variant="light"
+            >
+              Vendidos
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("inventory")}
+              className="btn"
+              variant="light"
+            >
+              Estoque
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("bought")}
+              className="btn"
+              variant="light"
+            >
+              Comprados
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("borrow")}
+              className="btn"
+              variant="light"
+            >
+              Emprestados
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("borrowed")}
+              className="btn"
+              variant="light"
+            >
+              Emprestimos
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("donation")}
+              className="btn"
+              variant="light"
+            >
+              Doados
+            </Button>
+            <Button
+              onClick={() => setActualTableUsage("devolution")}
+              className="btn"
+              variant="light"
+            >
+              Devolvidos
+            </Button>
+          </div>
         </div>
-        <div style={{ marginTop: "10px" }}>
+        <div style={{ marginTop: "10px", width: "170px" }}>
           <AiOutlineLeft
             className={
               clientPageOptions.canPreviousPage
@@ -130,33 +190,21 @@ const Client = () => {
         </div>
       </div>
       <ClientTable />
-      <div>
-        <div class="card bg-light mb-3">
-          <div class="card-header">
-            Caixa{" "}
-            <input
-              value={dateInit}
-              onChange={(event) => setDateInit(event.target.value)}
-              placeholder={"ano-mes-dia"}
-            ></input>{" "}
-            <input
-              placeholder={"ano-mes-dia"}
-              onChange={(event) => setDateFinal(event.target.value)}
-              value={dateFinal}
-            ></input>{" "}
-            <btn onClick={() => fetchClientIncome(id, { dateInit, dateFinal })}>
-              Buscar
-            </btn>
-          </div>
-          <div class="card-body">
-            <h5 class="card-title">Valor Vendido</h5>
-            <p class="card-text">
-              {clientIncome.sellIncome && clientIncome.sellIncome[0].sellIncome}
-            </p>
-            <h5 class="card-title">Valor Comprado</h5>
-            <p class="card-text">
+      <div className="cards">
+        <div className="card-client">
+          <div className="card-inside">
+            <h4>
               {clientIncome.buyIncome && clientIncome.buyIncome[0].buyIncome}
-            </p>
+            </h4>
+            <span className="card-description">Comprado</span>
+          </div>
+        </div>
+        <div className="card-client">
+          <div className="card-inside">
+            <h4>
+              {clientIncome.sellIncome && clientIncome.sellIncome[0].sellIncome}
+            </h4>
+            <span className="card-description">Vendido</span>
           </div>
         </div>
       </div>

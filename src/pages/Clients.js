@@ -8,7 +8,10 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiFillMinusCircle,
 } from "react-icons/ai";
+
+import { CgHeart } from "react-icons/cg";
 
 import { FaShoppingBag } from "react-icons/fa";
 import AddClientsModal from "../components/clients/AddClientsModal";
@@ -79,6 +82,18 @@ const Clients = () => {
               goToSellFrontPage("borrow");
             }}
             className="print-btn"
+          />
+          <CgHeart
+            onClick={() => {
+              goToSellFrontPage("donation");
+            }}
+            className="donation-btn"
+          />
+          <AiFillMinusCircle
+            onClick={() => {
+              goToSellFrontPage("devolution");
+            }}
+            className="devolution-btn"
           />
         </div>
         <div>

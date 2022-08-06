@@ -4,11 +4,25 @@ import { useTable, usePagination } from "react-table";
 import Table from "react-bootstrap/Table";
 
 const ClientTable = () => {
+  const dateCheck = (from, to, check) => {
+    var fDate, lDate, cDate;
+    fDate = Date.parse(from);
+    lDate = Date.parse(to);
+    cDate = Date.parse(check);
+
+    if (cDate <= lDate && cDate >= fDate) {
+      return true;
+    }
+    return false;
+  };
+
   const {
     clientData,
     actualTableUsage,
     setClientPageOptions,
     setClientColumns,
+    dateInit,
+    dateFinal,
   } = useGlobalContext();
   const [tableData, setTableData] = useState([]);
 
@@ -17,21 +31,70 @@ const ClientTable = () => {
       setTableData(clientData.product);
     } else if (actualTableUsage === "sold") {
       setTableData(
-        clientData.product.filter((product) => product.sell !== null)
+        clientData.product.filter((product) => {
+          return (
+            product.sell !== null &&
+            dateCheck(dateInit, dateFinal, product.sell.createdAt) &&
+            product.sell.type === "sell"
+          );
+        })
       );
     } else if (actualTableUsage === "inventory") {
       setTableData(
         clientData.product.filter((product) => product.sell === null)
       );
-    } else {
+    } else if (actualTableUsage === "bought") {
       setTableData(
-        clientData.buyer.map((buyer) => {
-          return buyer.product;
+        clientData.buyer
+          .filter(
+            (buyer) =>
+              dateCheck(dateInit, dateFinal, buyer.createdAt) &&
+              buyer.type === "sell"
+          )
+          .map((buyer) => buyer.product)
+      );
+    } else if (actualTableUsage === "borrow") {
+      setTableData(
+        clientData.product.filter((product) => {
+          return (
+            product.sell !== null &&
+            dateCheck(dateInit, dateFinal, product.sell.createdAt) &&
+            product.sell.type === "borrow"
+          );
         })
       );
-      console.log(tableData);
+    } else if (actualTableUsage === "borrowed") {
+      setTableData(
+        clientData.buyer
+          .filter(
+            (buyer) =>
+              dateCheck(dateInit, dateFinal, buyer.createdAt) &&
+              buyer.type === "borrow"
+          )
+          .map((buyer) => buyer.product)
+      );
+    } else if (actualTableUsage === "donation") {
+      setTableData(
+        clientData.product.filter((product) => {
+          return (
+            product.sell !== null &&
+            dateCheck(dateInit, dateFinal, product.sell.createdAt) &&
+            product.sell.type === "donation"
+          );
+        })
+      );
+    } else if (actualTableUsage === "devolution") {
+      setTableData(
+        clientData.product.filter((product) => {
+          return (
+            product.sell !== null &&
+            dateCheck(dateInit, dateFinal, product.sell.createdAt) &&
+            product.sell.type === "devolution"
+          );
+        })
+      );
     }
-  }, [actualTableUsage, clientData]);
+  }, [actualTableUsage, clientData, dateInit, dateFinal]);
 
   const data = useMemo(() => [...tableData], [tableData]);
 
