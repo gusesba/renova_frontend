@@ -771,8 +771,11 @@ const AppProvider = ({ children }) => {
         return qz.printers.find("Argox");
       })
       .then(async (found) => {
-        console.log(found);
-        var config = qz.configs.create(found);
+        var config = qz.configs.create(found, {
+          size: { width: 10.5, height: 6 },
+          colorType: "blackwhite",
+          units: "cm",
+        });
         for (let i = 0; i < Math.floor(productRows.length / 3); i++) {
           var data = [
             "\x02L\n", // Important DPL/CLP must begin with STX (x02) on
@@ -836,6 +839,16 @@ const AppProvider = ({ children }) => {
               "\n",
             //Barcode
             "3D5200002000110" + padId(productRows[i * 3].original.id) + "\n",
+            //Numero
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0210" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
+              productRows[i * 3].original.number + // data
+              "\n",
             //Etq 2
             //Renova
             "3" + // rotation
@@ -893,6 +906,16 @@ const AppProvider = ({ children }) => {
             //Barcode
             "3D5200002000245" +
               padId(productRows[i * 3 + 1].original.id) +
+              "\n",
+            //Numero
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0210" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
+              productRows[i * 3 + 1].original.number + // data
               "\n",
             //Etq 3
             //Renova
@@ -952,6 +975,16 @@ const AppProvider = ({ children }) => {
             "3D5200002000380" +
               padId(productRows[i * 3 + 2].original.id) +
               "\n",
+            //Numero
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0210" + //row bottom to top - max 200
+              "0380" + // collumn left to right - max 400
+              productRows[i * 3 + 2].original.number + // data
+              "\n",
             "E\n",
           ];
           await qz.print(config, data).catch(function (e) {
@@ -969,70 +1002,79 @@ const AppProvider = ({ children }) => {
             "Q1\n",
             //Etq 1
             //Renova
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0190" + //row bottom to top - max 200
-              "0040" + // collumn left to right - max 400
+              "0040" + //row bottom to top - max 200
+              "0080" + // collumn left to right - max 400
               "RENOVA" + // data
               "\n",
             // Desc
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0165" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0065" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.type +
               productRows[productRows.length - 1].original.color +
               productRows[productRows.length - 1].original.brand + // data
               "\n",
             // Data
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0142" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0090" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.createdAt.split(
                 "T"
               )[0] + // data
               "\n",
             //Tam
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0120" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0110" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.size + // data
               "\n",
             //Preco
-            "1" + // rotation
+            "3" + // rotation
               "3" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               "R$" +
               productRows[productRows.length - 1].original.price + // data
               "\n",
             //Barcode
-            "1D5200000200020" +
+            "3D5200002000110" +
               padId(productRows[productRows.length - 1].original.id) +
+              "\n",
+            //Numero
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0210" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
+              productRows[productRows.length - 1].original.number + // data
               "\n",
             "E\n",
           ];
           await qz.print(config, data).catch(function (e) {
             console.error(e);
           });
-          console.log("impressao 2");
         }
 
         if (productRows.length % 3 === 2) {
@@ -1044,41 +1086,41 @@ const AppProvider = ({ children }) => {
             "Q1\n",
             //Etq 1
             //Renova
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0190" + //row bottom to top - max 200
-              "0040" + // collumn left to right - max 400
+              "0040" + //row bottom to top - max 200
+              "0080" + // collumn left to right - max 400
               "RENOVA" + // data
               "\n",
             // Desc
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0165" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0065" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 2].original.type +
               productRows[productRows.length - 2].original.color +
               productRows[productRows.length - 2].original.brand + // data
               "\n",
             // Data
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0142" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0090" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 2].original.createdAt.split(
                 "T"
               )[0] + // data
               "\n",
             //Tam
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
@@ -1093,82 +1135,102 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0115" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               "R$" +
               productRows[productRows.length - 2].original.price + // data
               "\n",
             //Barcode
-            "1D5200000200020" +
+            "3D5200002000110" +
               padId(productRows[productRows.length - 2].original.id) +
+              "\n",
+            //Numero
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0210" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
+              productRows[productRows.length - 2].original.number + // data
               "\n",
             //Etq 2
             //Renova
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0190" + //row bottom to top - max 200
-              "0180" + // collumn left to right - max 400
+              "0040" + //row bottom to top - max 200
+              "0215" + // collumn left to right - max 400
               "RENOVA" + // data
               "\n",
             // Desc
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0165" + //row bottom to top - max 200
-              "0150" + // collumn left to right - max 400
+              "0065" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.type +
               productRows[productRows.length - 1].original.color +
               productRows[productRows.length - 1].original.brand + // data
               "\n",
             // Data
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0142" + //row bottom to top - max 200
-              "0150" + // collumn left to right - max 400
+              "0090" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.createdAt.split(
                 "T"
               )[0] + // data
               "\n",
             //Tam
-            "1" + // rotation
+            "3" + // rotation
               "2" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0120" + //row bottom to top - max 200
-              "0150" + // collumn left to right - max 400
+              "0115" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.size + // data
               "\n",
             //Preco
-            "1" + // rotation
+            "3" + // rotation
               "3" + // font size
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
-              "0150" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
               "R$" +
               productRows[productRows.length - 1].original.price + // data
               "\n",
             //Barcode
-            "1D5200000200160" +
+            "3D5200002000110" +
               padId(productRows[productRows.length - 1].original.id) +
+              "\n",
+            //Numero
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0210" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
+              productRows[productRows.length - 1].original.number + // data
               "\n",
             "E\n",
           ];
           await qz.print(config, data).catch(function (e) {
             console.error(e);
           });
-          console.log("impressao 2");
         }
+        await qz.websocket.disconnect();
       });
   };
 
@@ -1193,13 +1255,31 @@ const AppProvider = ({ children }) => {
   //Impressora Recibo
 
   const printRecibo = (sell) => {
+    if (qz.websocket.isActive()) {
+      qz.websocket.disconnect().then(() => printRecibo2(sell));
+    } else {
+      printRecibo2(sell);
+    }
+  };
+
+  const printRecibo2 = (sell) => {
+    const date = new Date(Date.now());
+    var sellType = "";
+    if (sell === "sell") {
+      sellType = "Venda";
+    } else if (sell === "borrow") {
+      sellType = "Emprestimo";
+    } else if (sell === "devolution") {
+      sellType = "Devolução";
+    } else if (sell === "donation") {
+      sellType = "Doação";
+    }
     qz.websocket
       .connect()
       .then(() => {
-        return qz.printers.find("EPSON TM-T20X Receipt");
+        return qz.printers.find("EPSON TM-T20 Receipt");
       })
       .then(async (found) => {
-        console.log(found);
         var config = qz.configs.create(found);
         var productsData = [];
         var total = 0.0;
@@ -1211,14 +1291,11 @@ const AppProvider = ({ children }) => {
             sellFrontProducts[i].color +
             " " +
             sellFrontProducts[i].brand;
-          for (var j = 0; j < 56 - text.length; j++) {
-            text = text.concat(" ");
-          }
-          if (sell === "Venda") {
-            text = text.concat(sellFrontProducts[i].sellPrice);
-          } else {
-            total = 0;
-          }
+
+          text = text.concat(" ".repeat(40 - text.length));
+
+          text = text.concat(sellFrontProducts[i].sellPrice.toFixed(2));
+
           productsData = productsData.concat([
             text + //40
               "\x1B" +
@@ -1233,14 +1310,26 @@ const AppProvider = ({ children }) => {
           "\x1B" + "\x40", // init
           "\x1B" + "\x61" + "\x31", // center align
           "RENOVA" + "\x0A",
+
           "\x0A", // line break
           "@renova_sustentavel_curitiba" + "\x0A", // text and line break
           "\x0A", // line break
           "\x0A", // line break
-          "Maio 13, 2022 11:02" + "\x0A",
+          ("00" + date.getDate()).slice(-2) +
+            "/" +
+            ("00" + (date.getMonth() + 1)).slice(-2) +
+            "/" +
+            date.getFullYear() +
+            " " +
+            ("00" + date.getHours()).slice(-2) +
+            ":" +
+            ("00" + date.getMinutes()).slice(-2) +
+            ":" +
+            ("00" + date.getSeconds()).slice(-2) +
+            "\x0A",
           "\x0A", // line break
           "\x0A", // line break
-          "Registo de " + sell + "\x0A",
+          "Registo de " + sellType + "\x0A",
           "\x0A",
           "\x0A",
           clientData.name + "\x0A",
@@ -1254,8 +1343,13 @@ const AppProvider = ({ children }) => {
           "\x1B" + "\x21" + "\x0A" + "\x1B" + "\x45" + "\x0A", // em mode off
           "\x0A" + "\x0A",
           "\x1B" + "\x61" + "\x30", // left align
-          "------------------------------------------" + "\x0A",
-          "Total                               " + total,
+          "----------------------------------------------" + "\x0A",
+          "Total                                   " +
+            total.toFixed(2) +
+            "\x1B" +
+            "\x74" +
+            "\x13" +
+            "\xAA",
           "\x1B" + "\x61" + "\x30", // left align
           "\x0A" + "\x0A" + "\x0A" + "\x0A" + "\x0A" + "\x0A" + "\x0A",
           "\x1B" + "\x69", // cut paper
