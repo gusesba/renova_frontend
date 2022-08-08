@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useState } from "react";
 import { useGlobalContext } from "../../context/context";
-import { useTable, usePagination } from "react-table";
+import { useTable, usePagination, useSortBy } from "react-table";
 import Table from "react-bootstrap/Table";
 
 const ClientTable = () => {
@@ -146,7 +146,7 @@ const ClientTable = () => {
     [tableData]
   );
 
-  const tableInstance = useTable({ columns, data }, usePagination);
+  const tableInstance = useTable({ columns, data }, useSortBy, usePagination);
 
   const {
     getTableProps,
@@ -207,11 +207,20 @@ const ClientTable = () => {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
                     // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
                       {
                         // Render the header
                         column.render("Header")
                       }
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? " 🔽"
+                            : " 🔼"
+                          : ""}
+                      </span>
                     </th>
                   ))
                 }

@@ -5,6 +5,7 @@ import {
   usePagination,
   useGlobalFilter,
   useFilters,
+  useSortBy,
 } from "react-table";
 import { useGlobalContext } from "../../context/context";
 import Table from "react-bootstrap/Table";
@@ -58,6 +59,7 @@ const ClientsTable = () => {
     { columns, data },
     useGlobalFilter,
     useFilters,
+    useSortBy,
     usePagination,
     useRowSelect,
     (hooks) => {
@@ -140,11 +142,20 @@ const ClientsTable = () => {
                   // Loop over the headers in each row
                   headerGroup.headers.map((column) => (
                     // Apply the header cell props
-                    <th {...column.getHeaderProps()}>
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
                       {
                         // Render the header
                         column.render("Header")
                       }
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? " 🔽"
+                            : " 🔼"
+                          : ""}
+                      </span>
                       <div>
                         {column.canFilter ? column.render("Filter") : null}{" "}
                       </div>
