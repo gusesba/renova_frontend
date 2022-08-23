@@ -14,7 +14,6 @@ const UpdateClientsModal = () => {
   } = useGlobalContext();
   const [values, setValues] = useState({
     name: "",
-    number: "",
     phone: "",
     id: "",
   });
@@ -31,17 +30,17 @@ const UpdateClientsModal = () => {
       setValues({
         id: clientRows[0].original.id,
         name: clientRows[0].original.name,
-        number: clientRows[0].original.number,
+
         phone: clientRows[0].original.phone,
       });
     }
   }, [clientRows]);
 
   const handleSubmit = () => {
-    if (values.name.length && values.phone.length && values.number) {
+    if (values.name.length && values.phone.length) {
       updateClient(values);
       setShowUpdateClientModal(false);
-      setValues({ name: "", phone: "", number: "" });
+      setValues({ name: "", phone: "" });
     } else {
       setAlert({
         show: true,
@@ -82,16 +81,7 @@ const UpdateClientsModal = () => {
               onChange={onChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formNumber">
-            <Form.Label>Numero</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Numero"
-              name="number"
-              value={values.number}
-              onChange={onChange}
-            />
-          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formPhone">
             <Form.Label>Telefone</Form.Label>
             <Form.Control

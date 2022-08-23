@@ -36,11 +36,6 @@ const ProductsTable = () => {
           Filter: ColumnFilter,
         },
         {
-          Header: "Numero",
-          accessor: "number",
-          Filter: ColumnFilter,
-        },
-        {
           Header: "Preço",
           accessor: "price",
           Filter: ColumnFilter,

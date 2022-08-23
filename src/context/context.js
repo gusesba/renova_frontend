@@ -400,15 +400,19 @@ const AppProvider = ({ children }) => {
               }
             });
             if (controll) {
-              const dias =
-                (new Date() - new Date(response.data.createdAt)) / 86400000;
+              const dateNow = new Date();
+              const timeNow = dateNow.getFullYear() + dateNow.getMonth() / 10;
+              const dateThen = new Date(response.data.createdAt);
+              const timeThen =
+                dateThen.getFullYear() + dateThen.getMonth() / 12;
+              const time = timeNow - timeThen;
               var sellPrice = response.data.price;
-              if (dias > 90) {
+              if (time > 0.6) {
+                sellPrice = response.data.price * 0.5;
+              } else if (time > 0.5) {
                 sellPrice = response.data.price * 0.7;
-              } else if (dias > 60) {
+              } else if (time > 0.4) {
                 sellPrice = response.data.price * 0.8;
-              } else if (dias > 30) {
-                sellPrice = response.data.price * 0.9;
               }
 
               setSellFrontProducts([

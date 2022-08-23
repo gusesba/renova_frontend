@@ -24,7 +24,6 @@ const UpdateProductsModal = () => {
     color: "",
     providerId: 0,
     description: "",
-    number: "",
     createdAt: "",
   });
 
@@ -46,7 +45,7 @@ const UpdateProductsModal = () => {
         size: productRows[0].original.size,
         color: productRows[0].original.color,
         description: productRows[0].original.description,
-        number: productRows[0].original.number,
+
         providerId: productRows[0].original.providerId,
         createdAt: productRows[0].original.createdAt.split("T")[0],
       });
@@ -61,7 +60,6 @@ const UpdateProductsModal = () => {
       values.size &&
       values.color &&
       values.providerId &&
-      values.number &&
       values.createdAt
     ) {
       updateProduct(values);
@@ -169,16 +167,6 @@ const UpdateProductsModal = () => {
             </Form.Group>
           </div>
           <div className="div-large-form">
-            <Form.Group className="mb-3 form-group" controlId="formNumber">
-              <Form.Label>Numero</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Numero"
-                name="number"
-                value={values.number}
-                onChange={onChange}
-              />
-            </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formCreatedAte">
               <Form.Label>Entrada</Form.Label>
               <Form.Control

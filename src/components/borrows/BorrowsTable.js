@@ -69,7 +69,7 @@ const BorrowsTable = () => {
           Filter: ColumnFilter,
         },
         {
-          Header: "Comprador",
+          Header: "Emprestado",
           accessor: "buyer.name",
           Filter: ColumnFilter,
         },

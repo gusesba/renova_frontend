@@ -7,7 +7,7 @@ import { useGlobalContext } from "../../context/context";
 const AddClientsModal = () => {
   const { showAddClientModal, setShowAddClientModal, addClient, setAlert } =
     useGlobalContext();
-  const [values, setValues] = useState({ name: "", number: "", phone: "" });
+  const [values, setValues] = useState({ name: "", phone: "" });
 
   const onChange = (ev) => {
     setValues({
@@ -17,10 +17,10 @@ const AddClientsModal = () => {
   };
 
   const handleSubmit = () => {
-    if (values.name.length && values.phone.length && values.number) {
+    if (values.name.length && values.phone.length) {
       addClient(values);
       setShowAddClientModal(false);
-      setValues({ name: "", phone: "", number: "" });
+      setValues({ name: "", phone: "" });
     } else {
       setAlert({
         show: true,
@@ -50,16 +50,7 @@ const AddClientsModal = () => {
               onChange={onChange}
             />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formNumber">
-            <Form.Label>Numero</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Numero"
-              name="number"
-              value={values.number}
-              onChange={onChange}
-            />
-          </Form.Group>
+
           <Form.Group className="mb-3" controlId="formPhone">
             <Form.Label>Telefone</Form.Label>
             <Form.Control

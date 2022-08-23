@@ -36,11 +36,7 @@ const ClientsTable = () => {
           accessor: "id", // accessor is the "key" in the data
           Filter: ColumnFilter,
         },
-        {
-          Header: "Numero",
-          accessor: "number",
-          Filter: ColumnFilter,
-        },
+
         {
           Header: "Nome",
           accessor: "name",

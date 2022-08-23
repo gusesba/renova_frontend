@@ -88,6 +88,7 @@ const Products = () => {
             className="update-btn"
             onClick={() => openUpdateProductModal()}
           />
+
           <AiFillUpCircle
             className="gotopage-btn"
             onClick={() => goToProductPage()}

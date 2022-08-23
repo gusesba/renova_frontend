@@ -22,7 +22,6 @@ const AddProductsModal = () => {
     color: "",
     providerId: 0,
     description: "",
-    number: "",
   });
 
   const onChange = (ev) => {
@@ -39,8 +38,7 @@ const AddProductsModal = () => {
       values.brand &&
       values.size &&
       values.color &&
-      values.providerId &&
-      values.number
+      values.providerId
     ) {
       addProduct(values);
       setShowAddProductModal(false);
@@ -135,16 +133,6 @@ const AddProductsModal = () => {
             </Form.Group>
           </div>
           <div className="div-large-form">
-            <Form.Group className="mb-3 form-group" controlId="formNumber">
-              <Form.Label>Numero</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Numero"
-                name="number"
-                value={values.number}
-                onChange={onChange}
-              />
-            </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formDescription">
               <Form.Label>Descrição</Form.Label>
               <Form.Control
