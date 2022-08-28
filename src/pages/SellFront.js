@@ -12,6 +12,7 @@ import { GiCardJoker } from "react-icons/gi";
 import ProductsTable from "../components/sellFront/ProductsTable";
 import AddProductModal from "../components/sellFront/addProductModal";
 import EditPriceModal from "../components/sellFront/editPriceModal";
+import AddProductsModal from "../components/products/AddProductsModal";
 
 const SellFront = () => {
   const {
@@ -25,10 +26,34 @@ const SellFront = () => {
     addJoker,
     printRecibo,
     setPageName,
+    setShowAddProductModal,
+    setIsSellFrontProduct,
+    setOptions,
+    clientsData,
+    fetchClients,
   } = useGlobalContext();
   const { id, sell } = useParams();
   const [total, setTotal] = useState(0);
   const [discount, setdiscount] = useState(0);
+
+  useEffect(() => {
+    fetchClients();
+  }, []);
+
+  useEffect(() => {
+    setOptions(
+      clientsData.map((item) => {
+        return {
+          value: item.id,
+          label: ("0000" + item.id).slice(-4) + " - " + item.name,
+          target: {
+            name: "providerId",
+            value: item.id,
+          },
+        };
+      })
+    );
+  }, [clientsData]);
 
   useEffect(() => {
     if (sell === "sell") {
@@ -60,6 +85,7 @@ const SellFront = () => {
   return (
     <main>
       <AddProductModal />
+      <AddProductsModal />
       <EditPriceModal />
       <div className="cards">
         <div className="card-client">
@@ -104,7 +130,13 @@ const SellFront = () => {
             onClick={() => setShowSellFrontModal(true)}
             className="add-btn"
           />
-          <GiCardJoker className="joker-btn" onClick={addJoker} />
+          <GiCardJoker
+            className="joker-btn"
+            onClick={() => {
+              setIsSellFrontProduct(true);
+              setShowAddProductModal(true);
+            }}
+          />
           <AiFillEdit
             className="edit-btn"
             onClick={() => setShowEditPriceModal(true)}

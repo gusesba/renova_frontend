@@ -64,11 +64,12 @@ const AppProvider = ({ children }) => {
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
   const [showEditPriceModal, setShowEditPriceModal] = useState(false);
+  const [isSellFrontProduct, setIsSellFrontProduct] = useState(false);
 
   const [showSelectColumnsModal, setShowSelectColumnsModal] = useState(false);
 
-  const url_server = "https://renovab.herokuapp.com";
-  //const url_server = "http://localhost:5000";
+  //const url_server = "https://renovab.herokuapp.com";
+  const url_server = "http://localhost:5000";
 
   const [alert, setAlert] = useState({
     show: false,
@@ -302,7 +303,11 @@ const AppProvider = ({ children }) => {
             variant: "danger",
           });
         }
-        fetchProducts();
+
+        if (isSellFrontProduct) {
+          fetchProduct(res.data.id, "sell_front");
+          setIsSellFrontProduct(false);
+        } else fetchProducts();
       })
       .catch((err) => console.log(err));
   };
@@ -843,16 +848,6 @@ const AppProvider = ({ children }) => {
               "\n",
             //Barcode
             "3D5200002000110" + padId(productRows[i * 3].original.id) + "\n",
-            //Numero
-            "3" + // rotation
-              "2" + // font size
-              "1" + // width mult
-              "1" + // height mult
-              "000" + // pattern
-              "0210" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
-              productRows[i * 3].original.number + // data
-              "\n",
             //Etq 2
             //Renova
             "3" + // rotation
@@ -911,16 +906,7 @@ const AppProvider = ({ children }) => {
             "3D5200002000245" +
               padId(productRows[i * 3 + 1].original.id) +
               "\n",
-            //Numero
-            "3" + // rotation
-              "2" + // font size
-              "1" + // width mult
-              "1" + // height mult
-              "000" + // pattern
-              "0210" + //row bottom to top - max 200
-              "0245" + // collumn left to right - max 400
-              productRows[i * 3 + 1].original.number + // data
-              "\n",
+
             //Etq 3
             //Renova
             "3" + // rotation
@@ -979,16 +965,7 @@ const AppProvider = ({ children }) => {
             "3D5200002000380" +
               padId(productRows[i * 3 + 2].original.id) +
               "\n",
-            //Numero
-            "3" + // rotation
-              "2" + // font size
-              "1" + // width mult
-              "1" + // height mult
-              "000" + // pattern
-              "0210" + //row bottom to top - max 200
-              "0380" + // collumn left to right - max 400
-              productRows[i * 3 + 2].original.number + // data
-              "\n",
+
             "E\n",
           ];
           await qz.print(config, data).catch(function (e) {
@@ -1064,16 +1041,7 @@ const AppProvider = ({ children }) => {
             "3D5200002000110" +
               padId(productRows[productRows.length - 1].original.id) +
               "\n",
-            //Numero
-            "3" + // rotation
-              "2" + // font size
-              "1" + // width mult
-              "1" + // height mult
-              "000" + // pattern
-              "0210" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
-              productRows[productRows.length - 1].original.number + // data
-              "\n",
+
             "E\n",
           ];
           await qz.print(config, data).catch(function (e) {
@@ -1148,16 +1116,7 @@ const AppProvider = ({ children }) => {
             "3D5200002000110" +
               padId(productRows[productRows.length - 2].original.id) +
               "\n",
-            //Numero
-            "3" + // rotation
-              "2" + // font size
-              "1" + // width mult
-              "1" + // height mult
-              "000" + // pattern
-              "0210" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
-              productRows[productRows.length - 2].original.number + // data
-              "\n",
+
             //Etq 2
             //Renova
             "3" + // rotation
@@ -1218,16 +1177,7 @@ const AppProvider = ({ children }) => {
             "3D5200002000110" +
               padId(productRows[productRows.length - 1].original.id) +
               "\n",
-            //Numero
-            "3" + // rotation
-              "2" + // font size
-              "1" + // width mult
-              "1" + // height mult
-              "000" + // pattern
-              "0210" + //row bottom to top - max 200
-              "0245" + // collumn left to right - max 400
-              productRows[productRows.length - 1].original.number + // data
-              "\n",
+
             "E\n",
           ];
           await qz.print(config, data).catch(function (e) {
@@ -1506,6 +1456,8 @@ const AppProvider = ({ children }) => {
         setDateInit,
         dateFinal,
         setDateFinal,
+        isSellFrontProduct,
+        setIsSellFrontProduct,
       }}
     >
       {children}

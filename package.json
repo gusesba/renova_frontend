@@ -31,7 +31,9 @@
     "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "back": "node ../renova_backend/app.js &",
+    "fullStart": "node ../renova_backend/app.js & react-scripts start"
   },
   "eslintConfig": {
     "extends": [

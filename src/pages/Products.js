@@ -32,6 +32,7 @@ const Products = () => {
     productsColumns,
     setShowSelectColumnsModal,
     openUpdateProductModal,
+    setIsSellFrontProduct,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -43,7 +44,7 @@ const Products = () => {
       clientsData.map((item) => {
         return {
           value: item.id,
-          label: ("0000" + item.number).slice(-4) + " - " + item.name,
+          label: ("0000" + item.id).slice(-4) + " - " + item.name,
           target: {
             name: "providerId",
             value: item.id,
@@ -77,7 +78,10 @@ const Products = () => {
             </label>
           </div>
           <AiFillPlusSquare
-            onClick={() => setShowAddProductModal(true)}
+            onClick={() => {
+              setShowAddProductModal(true);
+              setIsSellFrontProduct(false);
+            }}
             className="add-btn"
           />
           <AiFillDelete
