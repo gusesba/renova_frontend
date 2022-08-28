@@ -813,6 +813,15 @@ const AppProvider = ({ children }) => {
               "0110" + // collumn left to right - max 400
               productRows[i * 3].original.type +
               productRows[i * 3].original.color +
+              "\n",
+            //Marca
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0090" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[i * 3].original.brand + // data
               "\n",
             // Data
@@ -821,7 +830,7 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
+              "0115" + //row bottom to top - max 200
               "0110" + // collumn left to right - max 400
               productRows[i * 3].original.createdAt.split("T")[0] + // data
               "\n",
@@ -831,8 +840,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0115" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0050" + // collumn left to right - max 400
               productRows[i * 3].original.size + // data
               "\n",
             //Preco
@@ -869,6 +878,15 @@ const AppProvider = ({ children }) => {
               "0245" + // collumn left to right - max 400
               productRows[i * 3 + 1].original.type +
               productRows[i * 3 + 1].original.color +
+              "\n",
+            //Marca
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0090" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
               productRows[i * 3 + 1].original.brand + // data
               "\n",
             // Data
@@ -877,7 +895,7 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
+              "0115" + //row bottom to top - max 200
               "0245" + // collumn left to right - max 400
               productRows[i * 3 + 1].original.createdAt.split("T")[0] + // data
               "\n",
@@ -887,8 +905,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0115" + //row bottom to top - max 200
-              "0245" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0185" + // collumn left to right - max 400
               productRows[i * 3 + 1].original.size + // data
               "\n",
             //Preco
@@ -928,6 +946,15 @@ const AppProvider = ({ children }) => {
               "0380" + // collumn left to right - max 400
               productRows[i * 3 + 2].original.type +
               productRows[i * 3 + 2].original.color +
+              "\n",
+            // Marca
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0090" + //row bottom to top - max 200
+              "0380" + // collumn left to right - max 400
               productRows[i * 3 + 2].original.brand + // data
               "\n",
             // Data
@@ -936,7 +963,7 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
+              "0115" + //row bottom to top - max 200
               "0380" + // collumn left to right - max 400
               productRows[i * 3 + 2].original.createdAt.split("T")[0] + // data
               "\n",
@@ -946,8 +973,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0115" + //row bottom to top - max 200
-              "0380" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0320" + // collumn left to right - max 400
               productRows[i * 3 + 2].original.size + // data
               "\n",
             //Preco
@@ -1002,6 +1029,15 @@ const AppProvider = ({ children }) => {
               "0110" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.type +
               productRows[productRows.length - 1].original.color +
+              "\n",
+            // Desc
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0090" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.brand + // data
               "\n",
             // Data
@@ -1010,8 +1046,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
+              "0110" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 0
               productRows[productRows.length - 1].original.createdAt.split(
                 "T"
               )[0] + // data
@@ -1022,8 +1058,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0110" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0050" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.size + // data
               "\n",
             //Preco
@@ -1077,6 +1113,15 @@ const AppProvider = ({ children }) => {
               "0110" + // collumn left to right - max 400
               productRows[productRows.length - 2].original.type +
               productRows[productRows.length - 2].original.color +
+              "\n",
+            // Desc
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0090" + //row bottom to top - max 200
+              "0110" + // collumn left to right - max 400
               productRows[productRows.length - 2].original.brand + // data
               "\n",
             // Data
@@ -1085,8 +1130,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
-              "0110" + // collumn left to right - max 400
+              "0120" + //row bottom to top - max 200
+              "0010" + // collumn left to right - max 400
               productRows[productRows.length - 2].original.createdAt.split(
                 "T"
               )[0] + // data
@@ -1097,8 +1142,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0120" + //row bottom to top - max 200
-              "0010" + // collumn left to right - max 400
+              "0115" + //row bottom to top - max 200
+              "0050" + // collumn left to right - max 400
               productRows[productRows.length - 2].original.size + // data
               "\n",
             //Preco
@@ -1138,6 +1183,15 @@ const AppProvider = ({ children }) => {
               "0245" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.type +
               productRows[productRows.length - 1].original.color +
+              "\n",
+            // Desc
+            "3" + // rotation
+              "2" + // font size
+              "1" + // width mult
+              "1" + // height mult
+              "000" + // pattern
+              "0090" + //row bottom to top - max 200
+              "0245" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.brand + // data
               "\n",
             // Data
@@ -1146,7 +1200,7 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0090" + //row bottom to top - max 200
+              "0115" + //row bottom to top - max 200
               "0245" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.createdAt.split(
                 "T"
@@ -1158,8 +1212,8 @@ const AppProvider = ({ children }) => {
               "1" + // width mult
               "1" + // height mult
               "000" + // pattern
-              "0115" + //row bottom to top - max 200
-              "0245" + // collumn left to right - max 400
+              "0140" + //row bottom to top - max 200
+              "0185" + // collumn left to right - max 400
               productRows[productRows.length - 1].original.size + // data
               "\n",
             //Preco
