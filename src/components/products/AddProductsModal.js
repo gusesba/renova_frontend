@@ -14,6 +14,10 @@ const AddProductsModal = () => {
     options,
   } = useGlobalContext();
 
+  const [optionsType, setOptionsType] = useState([]);
+  const [optionsColor, setOptionsColor] = useState([]);
+  const [optionsSize, setOptionsSize] = useState([]);
+
   const [values, setValues] = useState({
     price: "",
     type: "",
@@ -23,6 +27,158 @@ const AddProductsModal = () => {
     providerId: 0,
     description: "",
   });
+
+  useEffect(() => {
+    setOptionsSize(
+      [
+        "PP",
+        "P",
+        "M",
+        "G",
+        "GG",
+        "EXG",
+        "30",
+        "31",
+        "32",
+        "33",
+        "34",
+        "35",
+        "36",
+        "37",
+        "38",
+        "39",
+        "40",
+        "41",
+        "42",
+        "43",
+        "44",
+        "45",
+        "46",
+        "47",
+        "48",
+        "49",
+        "50",
+        "Outro",
+      ].map((item) => {
+        return {
+          value: item,
+          label: item,
+          target: {
+            name: "size",
+            value: item,
+          },
+        };
+      })
+    );
+    setOptionsColor(
+      [
+        "Azul",
+        "Amarelo",
+        "Preto",
+        "Branco",
+        "Caramelo",
+        "Mostarda",
+        "Estampado",
+        "Colorido",
+        "Vermelho",
+        "Roxo",
+        "Lilas",
+        "Rosa",
+        "Pink",
+        "Laranja",
+        "Verde",
+        "Bege",
+        "Creme",
+        "Cinza",
+        "Chumbo",
+        "Jeans",
+        "Outro",
+      ].map((item) => {
+        return {
+          value: item,
+          label: item,
+          target: {
+            name: "color",
+            value: item,
+          },
+        };
+      })
+    );
+    setOptionsType(
+      [
+        "Calca",
+        "Bermuda",
+        "Shorts",
+        "Pantacourt",
+        "Saia",
+        "Sapato",
+        "Sandalia",
+        "Sapatilha",
+        "Peeptoe",
+        "Tamanco",
+        "Mullet",
+        "Chinelo",
+        "Tenis",
+        "Sapatenis",
+        "Bota",
+        "Calcado",
+        "Boots",
+        "Vestido",
+        "Blusa",
+        "Camiseta",
+        "Regata",
+        "Casaco",
+        "Cinto",
+        "Poncho",
+        "Manta",
+        "Paschmina",
+        "Echarpe",
+        "Brinco",
+        "Anel",
+        "Pulseira",
+        "Colar",
+        "Relogio",
+        "Oculos",
+        "Biquini",
+        "Maio",
+        "Body",
+        "Legging",
+        "Sobretudo",
+        "Blazer",
+        "Cropped",
+        "Top",
+        "Sutia",
+        "Calcinha",
+        "Meia",
+        "Cueca",
+        "Calcao",
+        "Saida",
+        "Chapeu",
+        "Bone",
+        "Viseira",
+        "Touca",
+        "Tiara",
+        "Bolsa",
+        "Carteira",
+        "Necessaire",
+        "Basica",
+        "Pijama",
+        "Camisola",
+        "Roupao",
+        "Kimono",
+        "Outro",
+      ].map((item) => {
+        return {
+          value: item,
+          label: item,
+          target: {
+            name: "type",
+            value: item,
+          },
+        };
+      })
+    );
+  }, []);
 
   const onChange = (ev) => {
     setValues({
@@ -77,15 +233,9 @@ const AddProductsModal = () => {
               <Form.Label>Fornecedor</Form.Label>
               <Select onChange={onChange} options={options} />
             </Form.Group>
-            <Form.Group className="mb-3 form-group" controlId="formtype">
+            <Form.Group className="mb-3 form-group" controlId="formType">
               <Form.Label>Produto</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Produto"
-                name="type"
-                value={values.type}
-                onChange={onChange}
-              />
+              <Select onChange={onChange} options={optionsType} />
             </Form.Group>
           </div>
           <div className="div-large-form">
@@ -101,25 +251,13 @@ const AddProductsModal = () => {
             </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formSize">
               <Form.Label>Tamanho</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Tamanho"
-                name="size"
-                value={values.size}
-                onChange={onChange}
-              />
+              <Select onChange={onChange} options={optionsSize} />
             </Form.Group>
           </div>
           <div className="div-large-form">
             <Form.Group className="mb-3 form-group" controlId="formColor">
               <Form.Label>Cor</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Cor"
-                name="color"
-                value={values.color}
-                onChange={onChange}
-              />
+              <Select onChange={onChange} options={optionsColor} />
             </Form.Group>
             <Form.Group className="mb-3 form-group" controlId="formPrice">
               <Form.Label>Preço</Form.Label>
