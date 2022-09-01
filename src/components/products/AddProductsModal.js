@@ -92,6 +92,12 @@ const AddProductsModal = () => {
         "Cinza",
         "Chumbo",
         "Jeans",
+        "Marrom",
+        "Uva",
+        "Xadrez",
+        "Listras",
+        "Marinho",
+        "Nude",
         "Outro",
       ].map((item) => {
         return {
@@ -166,6 +172,7 @@ const AddProductsModal = () => {
         "Camisola",
         "Roupao",
         "Kimono",
+        "Camisa",
         "Outro",
       ].map((item) => {
         return {
