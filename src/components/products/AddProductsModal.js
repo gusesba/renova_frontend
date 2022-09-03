@@ -58,6 +58,7 @@ const AddProductsModal = () => {
         "48",
         "49",
         "50",
+        "Unico",
         "Outro",
       ].map((item) => {
         return {
@@ -98,6 +99,11 @@ const AddProductsModal = () => {
         "Listras",
         "Marinho",
         "Nude",
+        "Dourado",
+        "Bronze",
+        "Prata",
+        "Bordo",
+
         "Outro",
       ].map((item) => {
         return {
@@ -173,6 +179,9 @@ const AddProductsModal = () => {
         "Roupao",
         "Kimono",
         "Camisa",
+        "Colete",
+        "Conjunto",
+        "Jaqueta",
         "Outro",
       ].map((item) => {
         return {
