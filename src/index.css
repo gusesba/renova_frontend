@@ -66,6 +66,19 @@ main {
   transform: scale(1.2);
 }
 
+.download-btn {
+  font-size: 40px;
+  color: #528af9;
+  margin-left: -3px;
+  transition: 0.2s;
+}
+
+.download-btn:hover {
+  color: #0057f9;
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
 .delete-btn {
   font-size: 40px;
   color: #dd3e3e;

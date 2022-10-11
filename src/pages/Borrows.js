@@ -5,12 +5,14 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import AddBorrowsModal from "../components/borrows/AddBorrowModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context/context";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Borrows = () => {
   const {
@@ -21,7 +23,14 @@ const Borrows = () => {
     deleteBorrow,
     borrowsColumns,
     setShowSelectColumnsModal,
+    borrowsTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: borrowsTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     setPageName("Emprestados");
@@ -49,6 +58,10 @@ const Borrows = () => {
             className="add-btn"
           />
           <AiFillDelete onClick={deleteBorrow} className="delete-btn" />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
+          />
         </div>
         <div>
           <GlobalFilter

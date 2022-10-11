@@ -20,6 +20,7 @@ const DonationsTable = () => {
     setDonationsPageOptions,
     setDonationsFilter,
     setDonationsColumns,
+    donationsTableRef,
   } = useGlobalContext();
   const data = useMemo(() => [...donationsData], [donationsData]);
   useEffect(() => {
@@ -158,7 +159,7 @@ const DonationsTable = () => {
   }, [allColumns]);
 
   return (
-    <Table striped bordered hover {...getTableProps()}>
+    <Table ref={donationsTableRef} striped bordered hover {...getTableProps()}>
       <thead>
         {
           // Loop over the header rows

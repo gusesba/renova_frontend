@@ -7,12 +7,14 @@ import {
   AiOutlineArrowRight,
   AiFillEdit,
   AiFillPrinter,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import { GiCardJoker } from "react-icons/gi";
 import ProductsTable from "../components/sellFront/ProductsTable";
 import AddProductModal from "../components/sellFront/addProductModal";
 import EditPriceModal from "../components/sellFront/editPriceModal";
 import AddProductsModal from "../components/products/AddProductsModal";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const SellFront = () => {
   const {
@@ -31,7 +33,15 @@ const SellFront = () => {
     setOptions,
     clientsData,
     fetchClients,
+    sellFrontTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: sellFrontTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
+
   const { id, sell } = useParams();
   const [total, setTotal] = useState(0);
   const [discount, setdiscount] = useState(0);
@@ -149,6 +159,10 @@ const SellFront = () => {
           <AiOutlineArrowRight
             className="sell-btn"
             onClick={() => finishSell(id, sell)}
+          />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
           />
         </div>
       </div>

@@ -5,12 +5,14 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import AddDevolutionModal from "../components/devolutions/AddDevolutionModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context/context";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Devolutions = () => {
   const {
@@ -21,7 +23,14 @@ const Devolutions = () => {
     deleteDevolution,
     devolutionsColumns,
     setShowSelectColumnsModal,
+    devolutionsTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: devolutionsTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     setPageName("Devolvidos");
@@ -49,6 +58,10 @@ const Devolutions = () => {
             className="add-btn"
           />
           <AiFillDelete onClick={deleteDevolution} className="delete-btn" />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
+          />
         </div>
         <div>
           <GlobalFilter

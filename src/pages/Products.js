@@ -10,12 +10,14 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import { useGlobalContext } from "../context/context";
 import AddProductsModal from "../components/products/AddProductsModal";
 import UpdateProductsModal from "../components/products/UpdateProductsModal";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Products = () => {
   const {
@@ -33,7 +35,14 @@ const Products = () => {
     setShowSelectColumnsModal,
     openUpdateProductModal,
     setIsSellFrontProduct,
+    productTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: productTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     fetchClients();
@@ -100,6 +109,10 @@ const Products = () => {
           <AiFillPrinter
             onClick={() => printEtiqueta()}
             className="print-btn"
+          />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
           />
         </div>
         <div>

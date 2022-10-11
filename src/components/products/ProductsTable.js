@@ -20,6 +20,7 @@ const ProductsTable = () => {
     setProductPageOptions,
     setProductFilter,
     setProductsColumns,
+    productTableRef,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -156,7 +157,7 @@ const ProductsTable = () => {
 
   return (
     <>
-      <Table striped bordered hover {...getTableProps()}>
+      <Table ref={productTableRef} striped bordered hover {...getTableProps()}>
         <thead>
           {
             // Loop over the header rows

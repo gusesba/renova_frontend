@@ -20,6 +20,7 @@ const SellsTable = () => {
     setSellPageOptions,
     setSellFilter,
     setSellsColumns,
+    sellsTableRef,
   } = useGlobalContext();
   const data = useMemo(() => [...sellData], [sellData]);
   useEffect(() => {
@@ -167,7 +168,7 @@ const SellsTable = () => {
   }, [allColumns]);
 
   return (
-    <Table striped bordered hover {...getTableProps()}>
+    <Table ref={sellsTableRef} striped bordered hover {...getTableProps()}>
       <thead>
         {
           // Loop over the header rows

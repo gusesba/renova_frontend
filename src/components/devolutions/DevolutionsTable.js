@@ -20,6 +20,7 @@ const DevolutionsTable = () => {
     setDevolutionsPageOptions,
     setDevolutionsFilter,
     setDevolutionsColumns,
+    devolutionsTableRef,
   } = useGlobalContext();
   const data = useMemo(() => [...devolutionsData], [devolutionsData]);
   useEffect(() => {
@@ -158,7 +159,13 @@ const DevolutionsTable = () => {
   }, [allColumns]);
 
   return (
-    <Table striped bordered hover {...getTableProps()}>
+    <Table
+      ref={devolutionsTableRef}
+      striped
+      bordered
+      hover
+      {...getTableProps()}
+    >
       <thead>
         {
           // Loop over the header rows

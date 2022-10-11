@@ -5,12 +5,14 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import AddDonationModal from "../components/donations/AddDonationModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context/context";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Donations = () => {
   const {
@@ -21,7 +23,14 @@ const Donations = () => {
     deleteDonation,
     donationsColumns,
     setShowSelectColumnsModal,
+    donationsTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: donationsTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     setPageName("Doações");
@@ -49,6 +58,10 @@ const Donations = () => {
             className="add-btn"
           />
           <AiFillDelete onClick={deleteDonation} className="delete-btn" />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
+          />
         </div>
         <div>
           <GlobalFilter

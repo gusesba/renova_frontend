@@ -5,8 +5,12 @@ import Table from "react-bootstrap/Table";
 import { Checkbox } from "../Checkbox";
 
 const ProductsTable = () => {
-  const { sellFrontProducts, setSellFrontProducts, setSellFrontRows } =
-    useGlobalContext();
+  const {
+    sellFrontProducts,
+    setSellFrontProducts,
+    setSellFrontRows,
+    sellFrontTableRef,
+  } = useGlobalContext();
 
   useEffect(() => {
     setSellFrontProducts([]);
@@ -82,7 +86,7 @@ const ProductsTable = () => {
   }, [selectedFlatRows]);
 
   return (
-    <Table striped bordered hover {...getTableProps()}>
+    <Table ref={sellFrontTableRef} striped bordered hover {...getTableProps()}>
       <thead>
         {
           // Loop over the header rows

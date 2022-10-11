@@ -20,6 +20,7 @@ const BorrowsTable = () => {
     setBorrowPageOptions,
     setBorrowFilter,
     setBorrowsColumns,
+    borrowsTableRef,
   } = useGlobalContext();
   const data = useMemo(() => [...borrowData], [borrowData]);
   useEffect(() => {
@@ -162,7 +163,7 @@ const BorrowsTable = () => {
   }, [allColumns]);
 
   return (
-    <Table striped bordered hover {...getTableProps()}>
+    <Table ref={borrowsTableRef} striped bordered hover {...getTableProps()}>
       <thead>
         {
           // Loop over the header rows

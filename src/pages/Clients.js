@@ -9,6 +9,7 @@ import {
   AiOutlineRight,
   AiOutlineArrowDown,
   AiFillMinusCircle,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 
 import { CgHeart } from "react-icons/cg";
@@ -20,6 +21,7 @@ import { useGlobalContext } from "../context/context";
 import { useEffect } from "react";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Clients = () => {
   const {
@@ -33,7 +35,14 @@ const Clients = () => {
     clientsColumns,
     setShowSelectColumnsModal,
     openUpdateClientModal,
+    clientsTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: clientsTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     setPageName("Clientes");
@@ -94,6 +103,10 @@ const Clients = () => {
               goToSellFrontPage("devolution");
             }}
             className="devolution-btn"
+          />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
           />
         </div>
         <div>

@@ -5,12 +5,14 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import AddSellsModal from "../components/sells/AddSellsModal";
 import { useEffect } from "react";
 import { useGlobalContext } from "../context/context";
 import { GlobalFilter } from "../components/GlobalFilter";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Sells = () => {
   const {
@@ -21,7 +23,14 @@ const Sells = () => {
     sellFilter,
     sellsColumns,
     setShowSelectColumnsModal,
+    sellsTableRef,
   } = useGlobalContext();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: sellsTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     setPageName("Vendas");
@@ -49,6 +58,10 @@ const Sells = () => {
             className="add-btn"
           />
           <AiFillDelete onClick={deleteSell} className="delete-btn" />
+          <AiOutlineCloudDownload
+            onClick={onDownload}
+            className="download-btn"
+          />
         </div>
         <div>
           <GlobalFilter

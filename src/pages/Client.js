@@ -8,8 +8,10 @@ import {
   AiOutlineLeft,
   AiOutlineRight,
   AiOutlineArrowDown,
+  AiOutlineCloudDownload,
 } from "react-icons/ai";
 import ColumnSelector from "../components/ColumnSelector";
+import { useDownloadExcel } from "react-export-table-to-excel";
 
 const Client = () => {
   const {
@@ -26,8 +28,15 @@ const Client = () => {
     setDateInit,
     dateFinal,
     setDateFinal,
+    clientTableRef,
   } = useGlobalContext();
   const { id } = useParams();
+
+  const { onDownload } = useDownloadExcel({
+    currentTableRef: clientTableRef.current,
+    filename: "Renova",
+    sheet: "Renova",
+  });
 
   useEffect(() => {
     setPageName("Cliente");
@@ -62,7 +71,7 @@ const Client = () => {
       <div className="client-btn-group">
         <div>
           <div>
-            <label>
+            <label style={{ marginRight: "5px" }}>
               <input
                 className="show-columns-btns"
                 type="button"
@@ -73,6 +82,10 @@ const Client = () => {
               </span>
               <ColumnSelector allColumns={clientColumns} />
             </label>
+            <AiOutlineCloudDownload
+              onClick={onDownload}
+              className="download-btn"
+            />
           </div>
           <div className="search-date-input">
             <Form.Group className="mb-2 mt-2" controlId="formDateInit">

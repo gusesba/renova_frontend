@@ -20,6 +20,7 @@ const ClientsTable = () => {
     setPageOptions,
     setClientFilter,
     setClientsColumns,
+    clientsTableRef,
   } = useGlobalContext();
 
   useEffect(() => {
@@ -127,7 +128,7 @@ const ClientsTable = () => {
 
   return (
     <>
-      <Table striped bordered hover {...getTableProps()}>
+      <Table ref={clientsTableRef} striped bordered hover {...getTableProps()}>
         <thead>
           {
             // Loop over the header rows

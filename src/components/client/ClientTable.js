@@ -23,6 +23,7 @@ const ClientTable = () => {
     setClientColumns,
     dateInit,
     dateFinal,
+    clientTableRef,
   } = useGlobalContext();
   const [tableData, setTableData] = useState([]);
 
@@ -191,6 +192,7 @@ const ClientTable = () => {
   return (
     <>
       <Table
+        ref={clientTableRef}
         style={{ marginTop: "20px" }}
         striped
         bordered

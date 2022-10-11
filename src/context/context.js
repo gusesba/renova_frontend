@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef } from "react";
 import axios from "axios";
 import * as qz from "qz-tray";
 const AppContext = React.createContext();
@@ -21,6 +21,8 @@ const AppProvider = ({ children }) => {
   const [clientIncome, setClientIncome] = useState({});
   const [dateInit, setDateInit] = useState("2020-01-01");
   const [dateFinal, setDateFinal] = useState("2025-01-01");
+  const clientsTableRef = useRef(null);
+  const clientTableRef = useRef(null);
 
   const [productsData, setProductsData] = useState([]);
   const [showAddProductModal, setShowAddProductModal] = useState(false);
@@ -31,6 +33,7 @@ const AppProvider = ({ children }) => {
   const [productFilter, setProductFilter] = useState({});
   const [options, setOptions] = useState([]);
   const [productsColumns, setProductsColumns] = useState([]);
+  const productTableRef = useRef(null);
 
   const [sellData, setSellData] = useState([]);
   const [showAddSellModal, setShowAddSellModal] = useState(false);
@@ -38,6 +41,7 @@ const AppProvider = ({ children }) => {
   const [sellPageOptions, setSellPageOptions] = useState({});
   const [sellFilter, setSellFilter] = useState({});
   const [sellsColumns, setSellsColumns] = useState([]);
+  const sellsTableRef = useRef(null);
 
   const [borrowData, setBorrowData] = useState([]);
   const [showAddBorrowModal, setShowAddBorrowModal] = useState(false);
@@ -45,6 +49,7 @@ const AppProvider = ({ children }) => {
   const [borrowPageOptions, setBorrowPageOptions] = useState({});
   const [borrowFilter, setBorrowFilter] = useState({});
   const [borrowsColumns, setBorrowsColumns] = useState([]);
+  const borrowsTableRef = useRef(null);
 
   const [donationsData, setDonationsData] = useState([]);
   const [showAddDonationModal, setShowAddDonationModal] = useState(false);
@@ -52,6 +57,7 @@ const AppProvider = ({ children }) => {
   const [donationsPageOptions, setDonationsPageOptions] = useState({});
   const [donationsFilter, setDonationsFilter] = useState({});
   const [donationsColumns, setDonationsColumns] = useState([]);
+  const donationsTableRef = useRef(null);
 
   const [devolutionsData, setDevolutionsData] = useState([]);
   const [showAddDevolutionModal, setShowAddDevolutionModal] = useState(false);
@@ -59,12 +65,14 @@ const AppProvider = ({ children }) => {
   const [devolutionsPageOptions, setDevolutionsPageOptions] = useState({});
   const [devolutionsFilter, setDevolutionsFilter] = useState({});
   const [devolutionsColumns, setDevolutionsColumns] = useState([]);
+  const devolutionsTableRef = useRef(null);
 
   const [sellFrontProducts, setSellFrontProducts] = useState([]);
   const [sellFrontRows, setSellFrontRows] = useState([]);
   const [showSellFrontModal, setShowSellFrontModal] = useState(false);
   const [showEditPriceModal, setShowEditPriceModal] = useState(false);
   const [isSellFrontProduct, setIsSellFrontProduct] = useState(false);
+  const sellFrontTableRef = useRef(null);
 
   const [showSelectColumnsModal, setShowSelectColumnsModal] = useState(false);
 
@@ -1512,6 +1520,14 @@ const AppProvider = ({ children }) => {
         setDateFinal,
         isSellFrontProduct,
         setIsSellFrontProduct,
+        productTableRef,
+        clientTableRef,
+        clientsTableRef,
+        borrowsTableRef,
+        devolutionsTableRef,
+        donationsTableRef,
+        sellFrontTableRef,
+        sellsTableRef,
       }}
     >
       {children}
