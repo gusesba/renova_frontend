@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import {
   useTable,
   useRowSelect,
@@ -13,6 +13,8 @@ import { Checkbox } from "../Checkbox";
 import ColumnFilter from "../ColumnFilter";
 
 const ClientsTable = () => {
+  const [impressao, setImpressao] = useState(false);
+
   const {
     clientsData,
     setClientRows,
@@ -82,6 +84,7 @@ const ClientsTable = () => {
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
     nextPage,
     previousPage,
     canNextPage,
@@ -128,6 +131,7 @@ const ClientsTable = () => {
 
   return (
     <>
+      <button onClick={() => setImpressao(!impressao)}>Paginação/Todos</button>
       <Table ref={clientsTableRef} striped bordered hover {...getTableProps()}>
         <thead>
           {
@@ -167,29 +171,55 @@ const ClientsTable = () => {
         <tbody {...getTableBodyProps()}>
           {
             // Loop over the table rows
-            page.map((row) => {
-              // Prepare the row for display
-              prepareRow(row);
-              return (
-                // Apply the row props
-                <tr {...row.getRowProps()}>
-                  {
-                    // Loop over the rows cells
-                    row.cells.map((cell) => {
-                      // Apply the cell props
-                      return (
-                        <td {...cell.getCellProps()}>
-                          {
-                            // Render the cell contents
-                            cell.render("Cell")
-                          }
-                        </td>
-                      );
-                    })
-                  }
-                </tr>
-              );
-            })
+            impressao
+              ? rows.map((row) => {
+                  // Prepare the row for display
+
+                  prepareRow(row);
+                  return (
+                    // Apply the row props
+                    <tr {...row.getRowProps()}>
+                      {
+                        // Loop over the rows cells
+                        row.cells.map((cell) => {
+                          // Apply the cell props
+                          return (
+                            <td {...cell.getCellProps()}>
+                              {
+                                // Render the cell contents
+                                cell.render("Cell")
+                              }
+                            </td>
+                          );
+                        })
+                      }
+                    </tr>
+                  );
+                })
+              : page.map((row) => {
+                  // Prepare the row for display
+
+                  prepareRow(row);
+                  return (
+                    // Apply the row props
+                    <tr {...row.getRowProps()}>
+                      {
+                        // Loop over the rows cells
+                        row.cells.map((cell) => {
+                          // Apply the cell props
+                          return (
+                            <td {...cell.getCellProps()}>
+                              {
+                                // Render the cell contents
+                                cell.render("Cell")
+                              }
+                            </td>
+                          );
+                        })
+                      }
+                    </tr>
+                  );
+                })
           }
         </tbody>
       </Table>

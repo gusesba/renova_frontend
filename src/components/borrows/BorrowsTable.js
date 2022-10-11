@@ -1,4 +1,4 @@
-import { useMemo, useEffect } from "react";
+import { useMemo, useEffect, useState } from "react";
 import {
   useTable,
   useRowSelect,
@@ -13,6 +13,7 @@ import { Checkbox } from "../Checkbox";
 import ColumnFilter from "../ColumnFilter";
 
 const BorrowsTable = () => {
+  const [impressao, setImpressao] = useState(false);
   const {
     borrowData,
     fetchBorrows,
@@ -118,6 +119,7 @@ const BorrowsTable = () => {
     getTableBodyProps,
     headerGroups,
     page,
+    rows,
     nextPage,
     previousPage,
     canNextPage,
@@ -163,69 +165,100 @@ const BorrowsTable = () => {
   }, [allColumns]);
 
   return (
-    <Table ref={borrowsTableRef} striped bordered hover {...getTableProps()}>
-      <thead>
-        {
-          // Loop over the header rows
-          headerGroups.map((headerGroup) => (
-            // Apply the header row props
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {
-                // Loop over the headers in each row
-                headerGroup.headers.map((column) => (
-                  // Apply the header cell props
-                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                    {
-                      // Render the header
-                      column.render("Header")
-                    }
-                    <span>
-                      {column.isSorted
-                        ? column.isSortedDesc
-                          ? " 🔽"
-                          : " 🔼"
-                        : ""}
-                    </span>
-                    <div>
-                      {column.canFilter ? column.render("Filter") : null}{" "}
-                    </div>
-                  </th>
-                ))
-              }
-            </tr>
-          ))
-        }
-      </thead>
-      {/* Apply the table body props */}
-      <tbody {...getTableBodyProps()}>
-        {
-          // Loop over the table rows
-          page.map((row) => {
-            // Prepare the row for display
-            prepareRow(row);
-            return (
-              // Apply the row props
-              <tr {...row.getRowProps()}>
+    <>
+      <button onClick={() => setImpressao(!impressao)}>Paginação/Todos</button>
+      <Table ref={borrowsTableRef} striped bordered hover {...getTableProps()}>
+        <thead>
+          {
+            // Loop over the header rows
+            headerGroups.map((headerGroup) => (
+              // Apply the header row props
+              <tr {...headerGroup.getHeaderGroupProps()}>
                 {
-                  // Loop over the rows cells
-                  row.cells.map((cell) => {
-                    // Apply the cell props
-                    return (
-                      <td {...cell.getCellProps()}>
-                        {
-                          // Render the cell contents
-                          cell.render("Cell")
-                        }
-                      </td>
-                    );
-                  })
+                  // Loop over the headers in each row
+                  headerGroup.headers.map((column) => (
+                    // Apply the header cell props
+                    <th
+                      {...column.getHeaderProps(column.getSortByToggleProps())}
+                    >
+                      {
+                        // Render the header
+                        column.render("Header")
+                      }
+                      <span>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? " 🔽"
+                            : " 🔼"
+                          : ""}
+                      </span>
+                      <div>
+                        {column.canFilter ? column.render("Filter") : null}{" "}
+                      </div>
+                    </th>
+                  ))
                 }
               </tr>
-            );
-          })
-        }
-      </tbody>
-    </Table>
+            ))
+          }
+        </thead>
+        {/* Apply the table body props */}
+        <tbody {...getTableBodyProps()}>
+          {
+            // Loop over the table rows
+            impressao
+              ? rows.map((row) => {
+                  // Prepare the row for display
+
+                  prepareRow(row);
+                  return (
+                    // Apply the row props
+                    <tr {...row.getRowProps()}>
+                      {
+                        // Loop over the rows cells
+                        row.cells.map((cell) => {
+                          // Apply the cell props
+                          return (
+                            <td {...cell.getCellProps()}>
+                              {
+                                // Render the cell contents
+                                cell.render("Cell")
+                              }
+                            </td>
+                          );
+                        })
+                      }
+                    </tr>
+                  );
+                })
+              : page.map((row) => {
+                  // Prepare the row for display
+
+                  prepareRow(row);
+                  return (
+                    // Apply the row props
+                    <tr {...row.getRowProps()}>
+                      {
+                        // Loop over the rows cells
+                        row.cells.map((cell) => {
+                          // Apply the cell props
+                          return (
+                            <td {...cell.getCellProps()}>
+                              {
+                                // Render the cell contents
+                                cell.render("Cell")
+                              }
+                            </td>
+                          );
+                        })
+                      }
+                    </tr>
+                  );
+                })
+          }
+        </tbody>
+      </Table>
+    </>
   );
 };
 
