@@ -771,7 +771,7 @@ const AppProvider = ({ children }) => {
       setSellFrontProducts(
         sellFrontProducts.map((product) => {
           if (product.id === sellFrontRows[0].original.id) {
-            product.sellPrice = price;
+            product.sellPrice = parseFloat(price);
           }
           return product;
         })
