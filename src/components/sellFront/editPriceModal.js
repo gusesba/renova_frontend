@@ -11,7 +11,7 @@ const EditPriceModal = () => {
     editSellFrontProductPrice,
   } = useGlobalContext();
 
-  const [price, setPrice] = useState(12.1);
+  const [price, setPrice] = useState();
 
   const handleSubmit = (e) => {
     editSellFrontProductPrice(price);
