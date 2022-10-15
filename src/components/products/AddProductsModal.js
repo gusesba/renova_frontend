@@ -37,6 +37,11 @@ const AddProductsModal = () => {
         "G",
         "GG",
         "EXG",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
         "30",
         "31",
         "32",
@@ -103,6 +108,8 @@ const AddProductsModal = () => {
         "Bronze",
         "Prata",
         "Bordo",
+        "Animal",
+        "Preto e Branco",
 
         "Outro",
       ].map((item) => {
@@ -182,6 +189,10 @@ const AddProductsModal = () => {
         "Colete",
         "Conjunto",
         "Jaqueta",
+        "Macacao",
+        "Calcinha",
+        "Rasteira",
+        "Macaquinho",
         "Outro",
       ].map((item) => {
         return {
